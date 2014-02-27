@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="50c0171058334d9cbcdd9ace78b1b339" Name="Diagram1">
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_ASSIGNEE" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_ASSIGNMENTS" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_PRODLIB_CLPACMST" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_PRODLIB_CLPCLMST" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_PRODLIB_CLPCUSTD" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_PRODLIB_CLPFNDG" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_PRODLIB_CLPHDOC" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SUB_REQUEST" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SYS_CUSTODIAN" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SYS_LOOKUP" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.FEE" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.LOANTYPE" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.OWNER" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.REPRESENTATIVE" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.REQUESTTYPE" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.STATUS" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_ASSIGNED_TO" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_DATA_ENTRY_BY" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_DOC_TYPE" Width="1.5" PointX="6.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_ENTERED_BY" Width="1.5" PointX="8.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_PREPARED_BY" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_PROCESSED_BY" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_PROCESSOR_NAME" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_RECORDING_STATUS" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_REQUEST_REASON" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_REQUEST_TYPE" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_REQUESTOR_NAME" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_ASM_LOOKUP_STATUS" Width="1.5" PointX="12.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SUB_LOOKUP_FEE" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SUB_LOOKUP_LOAN_TYPE" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SUB_LOOKUP_REPRESENTATIVE" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SUB_LOOKUP_REQUEST_TYPE" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SUB_LOOKUP_STATUS" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Document_CustodyModel.DOCUS_SUB_OWNER" Width="1.5" PointX="6.75" PointY="16.75" IsExpanded="true" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

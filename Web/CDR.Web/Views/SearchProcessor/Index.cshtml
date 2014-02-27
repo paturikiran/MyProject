@@ -1,0 +1,57 @@
+﻿@using CDR.Web.Agents
+@using StructureMap
+@model CDR.Web.Models.DOCUS_SUB_REQUEST
+
+@{
+    Layout = "~/Views/Shared/_cdrLayout.cshtml";
+    var lookups = ObjectFactory.GetInstance<ISubRequestLookupAgent>();
+}
+
+<div class="form-horizontal">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Choose Representative</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="Representative" class="control-label col-xs-2">Representatives</label>
+                <div class="col-xs-3" style="height: 250px">
+                    @Html.ListBox("LstDataRepresentative", new SelectList(lookups.Representative, "LOOKUP_ID", "LOOKUP_VALUE"), new { style = "height:200px" })
+                </div>
+                <div class="col-xs-2">
+                    <button type="submit" class="btn btn-primary" id="activeProcessor">Active Process</button>
+                </div>
+                 <button type="button" class="btn btn-primary" id="exportToExcel" onclick="exportData();">Export Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="subRequestModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Sub Documents</h4>
+            </div>
+            <div class="modal-body">
+                <div id="loadGrid">
+                    <div>
+                        <table id="jqTable" class="scroll"></table>
+                        <div id="jqTablePager" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              @*  <button type="button" class="btn btn-primary" id="exportToExcel" onclick="exportData();">Export Data</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/SearchProcessor.js"></script>
+
+
+

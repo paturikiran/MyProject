@@ -1,0 +1,1885 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Document_CustodyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DOCUS_ASM_ASSIGNEE">
+          <Key>
+            <PropertyRef Name="Assignee_Id" />
+          </Key>
+          <Property Name="Assignee_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Assignee_Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Trustname_Required" Type="bit" Nullable="false" />
+          <Property Name="Sort_Order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_ASSIGNMENTS">
+          <Key>
+            <PropertyRef Name="ASSIGNMENT_ID" />
+          </Key>
+          <Property Name="ASSIGNMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACCOUNT_NUMBER" Type="int" />
+          <Property Name="BORROWER_LAST_NAME" Type="varchar" MaxLength="255" />
+          <Property Name="REQUEST_TYPE_ID" Type="int" />
+          <Property Name="REQUEST_REASON_ID" Type="int" />
+          <Property Name="DOC_TYPE_ID" Type="int" />
+          <Property Name="REQUEST_DATE" Type="datetime" />
+          <Property Name="DATE_ENTERED" Type="datetime" />
+          <Property Name="REQUEST_ENTERED_BY_ID" Type="int" />
+          <Property Name="REQUESTOR_NAME_ID" Type="int" />
+          <Property Name="MERS_INDICATOR" Type="bit" />
+          <Property Name="MERS_UPDATED" Type="bit" />
+          <Property Name="ASSIGNOR" Type="varchar" MaxLength="255" />
+          <Property Name="ASSIGNEE" Type="varchar" MaxLength="255" />
+          <Property Name="ASSIGNED_TO_ID" Type="int" />
+          <Property Name="PROCESSED_BY_ID" Type="int" />
+          <Property Name="ASSIGNED_DATE" Type="datetime" />
+          <Property Name="COLLATERAL_FILE_REQUEST_DATE" Type="datetime" />
+          <Property Name="AOM_IN_COL" Type="bit" />
+          <Property Name="THIRD_PARTY_CONTACT_NAME" Type="varchar" MaxLength="255" />
+          <Property Name="THIRD_PARTY_CONTACT_INFO" Type="varchar" MaxLength="512" />
+          <Property Name="STATUS_ID" Type="int" />
+          <Property Name="TRACKING_NUMBER" Type="varchar" MaxLength="50" />
+          <Property Name="LAST_STATUS_DATE" Type="datetime" />
+          <Property Name="FOLLOW_UP_DATE" Type="datetime" />
+          <Property Name="SALE_DATE" Type="datetime" />
+          <Property Name="DATE_COMPLETE" Type="datetime" />
+          <Property Name="COMPANY_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="COMPANY_ADDRESS" Type="varchar" MaxLength="255" />
+          <Property Name="ATTENTION_TO" Type="varchar" MaxLength="255" />
+          <Property Name="CITY" Type="varchar" MaxLength="255" />
+          <Property Name="STATE" Type="varchar" MaxLength="50" />
+          <Property Name="ZIP" Type="varchar" MaxLength="50" />
+          <Property Name="RUSH" Type="bit" />
+          <Property Name="CUSTODIAN_ID" Type="int" />
+          <Property Name="CUST_REF_NUMBER" Type="varchar" MaxLength="50" />
+          <Property Name="MERS_INFO_NUMBER" Type="varchar" MaxLength="50" />
+          <Property Name="LSCOD1" Type="int" />
+          <Property Name="SBSCOD" Type="int" />
+          <Property Name="RECORDED_STATUS_ID" Type="int" />
+          <Property Name="RECORDED_COUNTY" Type="varchar" MaxLength="255" />
+          <Property Name="RECORDED_DATE" Type="datetime" />
+          <Property Name="RECORDED_DOC_INST_NUM" Type="varchar" MaxLength="50" />
+          <Property Name="RECORDED_BOOK" Type="varchar" MaxLength="50" />
+          <Property Name="RECORDED_PAGE" Type="varchar" MaxLength="50" />
+          <Property Name="DATE_CREATED" Type="datetime" Nullable="false" />
+          <Property Name="DATE_UPDATED" Type="datetime" Nullable="false" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPACMST">
+          <Key>
+            <PropertyRef Name="ACCTNO" />
+          </Key>
+          <Property Name="ACCTNO" Type="int" Nullable="false" />
+          <Property Name="APPLCT" Type="varchar" MaxLength="35" />
+          <Property Name="CALIEN" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CASHDT" Type="int" />
+          <Property Name="CBSTAT" Type="varchar" MaxLength="2" />
+          <Property Name="CLOSCD" Type="int" />
+          <Property Name="COAPPL" Type="varchar" MaxLength="35" />
+          <Property Name="CONDAT" Type="int" />
+          <Property Name="COUNTY" Type="int" />
+          <Property Name="DEALER" Type="int" />
+          <Property Name="INTRAT" Type="numeric" Precision="29" Scale="5" />
+          <Property Name="INVNBR" Type="int" />
+          <Property Name="LONTYP" Type="int" />
+          <Property Name="LSTPAY" Type="int" />
+          <Property Name="MATURE" Type="int" />
+          <Property Name="PADDR1" Type="varchar" MaxLength="35" />
+          <Property Name="PADDR2" Type="varchar" MaxLength="35" />
+          <Property Name="PCITY" Type="varchar" MaxLength="25" />
+          <Property Name="POOLNO" Type="int" />
+          <Property Name="PRDTYP" Type="int" />
+          <Property Name="PRNBAL" Type="numeric" Precision="29" Scale="2" />
+          <Property Name="PROCED" Type="numeric" Precision="29" Scale="2" />
+          <Property Name="PSTATE" Type="varchar" MaxLength="2" />
+          <Property Name="PZIP" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="REGION" Type="int" />
+          <Property Name="REGPAY" Type="numeric" Precision="29" Scale="2" />
+          <Property Name="RSTATE" Type="varchar" MaxLength="2" />
+          <Property Name="SOCSEC" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TINFIN" Type="numeric" Precision="29" Scale="2" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPCLMST">
+          <Key>
+            <PropertyRef Name="ACCTNO" />
+          </Key>
+          <Property Name="ACCTNO" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="APPLCT" Type="nvarchar" MaxLength="35" />
+          <Property Name="CALIEN" Type="numeric" Precision="1" Scale="0" />
+          <Property Name="CASHDT" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="CBSTAT" Type="nvarchar" MaxLength="1" />
+          <Property Name="CLOSCD" Type="numeric" Precision="1" Scale="0" />
+          <Property Name="COAPPL" Type="nvarchar" MaxLength="35" />
+          <Property Name="CONDAT" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="COUNTY" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="DEALER" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="INTRAT" Type="numeric" Precision="7" Scale="5" />
+          <Property Name="INVNBR" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="LONTYP" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="LSTPAY" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="MATURE" Type="numeric" Precision="8" Scale="0" />
+          <Property Name="PADDR1" Type="nvarchar" MaxLength="35" />
+          <Property Name="PADDR2" Type="nvarchar" MaxLength="35" />
+          <Property Name="PCITY" Type="nvarchar" MaxLength="25" />
+          <Property Name="POOLNO" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="PRDTYP" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="PRNBAL" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="PROCED" Type="numeric" Precision="9" Scale="2" />
+          <Property Name="PSTATE" Type="nvarchar" MaxLength="2" />
+          <Property Name="PZIP" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="REGION" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="REGPAY" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="RSTATE" Type="nvarchar" MaxLength="2" />
+          <Property Name="SOCSEC" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="TINFIN" Type="numeric" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPCUSTD">
+          <Key>
+            <PropertyRef Name="CST_ID" />
+          </Key>
+          <Property Name="CST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPLCT" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="CSTSEQ" Type="numeric" Precision="5" Scale="0" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPFNDG">
+          <Key>
+            <PropertyRef Name="ACCTNO" />
+          </Key>
+          <Property Name="ACCTNO" Type="int" Nullable="false" />
+          <Property Name="CLCOWN" Type="varchar" MaxLength="1" />
+          <Property Name="GLPLAN" Type="int" />
+          <Property Name="LSCOD1" Type="int" />
+          <Property Name="MINNBR" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SBSCOD" Type="int" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPHDOC">
+          <Key>
+            <PropertyRef Name="ACCTNO" />
+          </Key>
+          <Property Name="ACCTNO" Type="int" Nullable="false" />
+          <Property Name="CSTSEQ" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="CUSTRF" Type="varchar" MaxLength="30" />
+          <Property Name="IMBOXC" Type="numeric" Precision="12" Scale="0" />
+          <Property Name="IMBOXU" Type="numeric" Precision="12" Scale="0" />
+        </EntityType>
+        <EntityType Name="DOCUS_SUB_REQUEST">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_Received" Type="datetime" />
+          <Property Name="GT_Loan_Number" Type="int" />
+          <Property Name="Borrower_Last_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Representative_Id" Type="int" />
+          <Property Name="Date_Assigned_To_Processor" Type="datetime" />
+          <Property Name="Owner_Id" Type="int" />
+          <Property Name="Requestor" Type="varchar" MaxLength="100" />
+          <Property Name="Request_Type_Id" Type="int" />
+          <Property Name="Fee_Id" Type="int" />
+          <Property Name="Request_Status_Id" Type="int" />
+          <Property Name="Status_Date" Type="datetime" />
+          <Property Name="Reason" Type="varchar" MaxLength="50" />
+          <Property Name="Principal_Loan_Balance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Loan_Balance_2" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="New_Loan_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="New_CLTV" Type="int" />
+          <Property Name="Comments" Type="varchar" MaxLength="255" />
+          <Property Name="HELOC" Type="int" />
+          <Property Name="FICO" Type="int" />
+          <Property Name="Proposed_DTI" Type="int" />
+          <Property Name="Current_DTI" Type="int" />
+          <Property Name="Loan_Type_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="DOCUS_SYS_CUSTODIAN">
+          <Key>
+            <PropertyRef Name="CUSTODIAN_ID" />
+          </Key>
+          <Property Name="CUSTODIAN_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CUSTODIAN_NAME" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CUSTODIAN_COMMENTS" Type="varchar" MaxLength="1024" />
+          <Property Name="DATE_CREATED" Type="datetime" Nullable="false" />
+          <Property Name="DATE_UPDATED" Type="datetime" Nullable="false" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_SYS_LOOKUP">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_SECTION" Type="varchar" MaxLength="255" />
+          <Property Name="LOOKUP_TYPE" Type="varchar" MaxLength="255" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="FEE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="LOANTYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OWNER">
+          <Key>
+            <PropertyRef Name="OWNER_ID" />
+          </Key>
+          <Property Name="OWNER_ID" Type="int" Nullable="false" />
+          <Property Name="OWNER" Type="varchar" MaxLength="50" />
+          <Property Name="SUB_REQUIREMENTS" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="REPRESENTATIVE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="REQUESTTYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="STATUS">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_ASSIGNED_TO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_ASSIGNED_TO">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_DATA_ENTRY_BY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_DATA_ENTRY_BY">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_DOC_TYPE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_DOC_TYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_ENTERED_BY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_ENTERED_BY">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_PREPARED_BY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_PREPARED_BY">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_PROCESSED_BY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_PROCESSED_BY">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_PROCESSOR_NAME' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_PROCESSOR_NAME">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_RECORDING_STATUS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_RECORDING_STATUS">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_REQUEST_REASON' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_REQUEST_REASON">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_REQUEST_TYPE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_REQUEST_TYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_REQUESTOR_NAME' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_REQUESTOR_NAME">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_ASM_LOOKUP_STATUS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_ASM_LOOKUP_STATUS">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_SUB_LOOKUP_FEE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_SUB_LOOKUP_FEE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_SUB_LOOKUP_LOAN_TYPE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_SUB_LOOKUP_LOAN_TYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_SUB_LOOKUP_REPRESENTATIVE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_SUB_LOOKUP_REPRESENTATIVE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_SUB_LOOKUP_REQUEST_TYPE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_SUB_LOOKUP_REQUEST_TYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_SUB_LOOKUP_STATUS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_SUB_LOOKUP_STATUS">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="int" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Document_Custody.dbo.DOCUS_SUB_OWNER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DOCUS_SUB_OWNER">
+          <Key>
+            <PropertyRef Name="OWNER_ID" />
+          </Key>
+          <Property Name="OWNER_ID" Type="int" Nullable="false" />
+          <Property Name="OWNER" Type="varchar" MaxLength="50" />
+          <Property Name="SUB_REQUIREMENTS" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Document_Custody.dbo.DOCUS_SYS_LOOKUP_LSCOD1_DESCRIPTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DOCUS_SYS_LOOKUP_LSCOD1_DESCRIPTION">
+          <Property Name="LSCOD1" Type="int" />
+          <Property Name="LSCOD1Desc" Type="varchar" MaxLength="255" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Document_Custody.dbo.DOCUS_SYS_LOOKUP_SBSCOD_DESCRIPTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DOCUS_SYS_LOOKUP_SBSCOD_DESCRIPTION">
+          <Property Name="SBSCOD" Type="int" />
+          <Property Name="SBSCODDesc" Type="varchar" MaxLength="255" />
+        </EntityType>-->
+        <Function Name="DOCUS_ASM_GET_GTA_FIELDS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ACCOUNT_NUMBER" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DOCUS_ASM_INSERT_ASSIGNMENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ACCOUNT_NUMBER" Type="int" Mode="In" />
+          <Parameter Name="BORROWER_LAST_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="REQUEST_TYPE_ID" Type="int" Mode="In" />
+          <Parameter Name="REQUEST_REASON_ID" Type="int" Mode="In" />
+          <Parameter Name="DOC_TYPE_ID" Type="int" Mode="In" />
+          <Parameter Name="REQUEST_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="DATE_ENTERED" Type="datetime" Mode="In" />
+          <Parameter Name="REQUEST_ENTERED_BY_ID" Type="int" Mode="In" />
+          <Parameter Name="REQUESTOR_NAME_ID" Type="int" Mode="In" />
+          <Parameter Name="MERS_INDICATOR" Type="bit" Mode="In" />
+          <Parameter Name="MERS_UPDATED" Type="bit" Mode="In" />
+          <Parameter Name="ASSIGNOR" Type="varchar" Mode="In" />
+          <Parameter Name="ASSIGNEE" Type="varchar" Mode="In" />
+          <Parameter Name="ASSIGNED_TO_ID" Type="int" Mode="In" />
+          <Parameter Name="PROCESSED_BY_ID" Type="int" Mode="In" />
+          <Parameter Name="ASSIGNED_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="COLLATERAL_FILE_REQUEST_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="AOM_IN_COL" Type="bit" Mode="In" />
+          <Parameter Name="THIRD_PARTY_CONTACT_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="THIRD_PARTY_CONTACT_INFO" Type="varchar" Mode="In" />
+          <Parameter Name="STATUS_ID" Type="int" Mode="In" />
+          <Parameter Name="TRACKING_NUMBER" Type="varchar" Mode="In" />
+          <Parameter Name="LAST_STATUS_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="FOLLOW_UP_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="SALE_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="DATE_COMPLETE" Type="datetime" Mode="In" />
+          <Parameter Name="COMPANY_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="COMPANY_ADDRESS" Type="varchar" Mode="In" />
+          <Parameter Name="ATTENTION_TO" Type="varchar" Mode="In" />
+          <Parameter Name="CITY" Type="varchar" Mode="In" />
+          <Parameter Name="STATE" Type="varchar" Mode="In" />
+          <Parameter Name="ZIP" Type="varchar" Mode="In" />
+          <Parameter Name="RUSH" Type="bit" Mode="In" />
+          <Parameter Name="CUSTODIAN_ID" Type="int" Mode="In" />
+          <Parameter Name="CUST_REF_NUMBER" Type="varchar" Mode="In" />
+          <Parameter Name="MERS_INFO_NUMBER" Type="varchar" Mode="In" />
+          <Parameter Name="LSCOD1" Type="int" Mode="In" />
+          <Parameter Name="SBSCOD" Type="int" Mode="In" />
+          <Parameter Name="RECORDED_STATUS_ID" Type="int" Mode="In" />
+          <Parameter Name="RECORDED_COUNTY" Type="varchar" Mode="In" />
+          <Parameter Name="RECORDED_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="RECORDED_DOC_INST_NUM" Type="varchar" Mode="In" />
+          <Parameter Name="RECORDED_BOOK" Type="varchar" Mode="In" />
+          <Parameter Name="RECORDED_PAGE" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DOCUS_ASM_UPDATE_ASSIGNMENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ASSIGNMENT_ID" Type="int" Mode="In" />
+          <Parameter Name="ACCOUNT_NUMBER" Type="int" Mode="In" />
+          <Parameter Name="BORROWER_LAST_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="REQUEST_TYPE_ID" Type="int" Mode="In" />
+          <Parameter Name="REQUEST_REASON_ID" Type="int" Mode="In" />
+          <Parameter Name="DOC_TYPE_ID" Type="int" Mode="In" />
+          <Parameter Name="REQUEST_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="DATE_ENTERED" Type="datetime" Mode="In" />
+          <Parameter Name="REQUEST_ENTERED_BY_ID" Type="int" Mode="In" />
+          <Parameter Name="REQUESTOR_NAME_ID" Type="int" Mode="In" />
+          <Parameter Name="MERS_INDICATOR" Type="bit" Mode="In" />
+          <Parameter Name="MERS_UPDATED" Type="bit" Mode="In" />
+          <Parameter Name="ASSIGNOR" Type="varchar" Mode="In" />
+          <Parameter Name="ASSIGNEE" Type="varchar" Mode="In" />
+          <Parameter Name="ASSIGNED_TO_ID" Type="int" Mode="In" />
+          <Parameter Name="PROCESSED_BY_ID" Type="int" Mode="In" />
+          <Parameter Name="ASSIGNED_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="COLLATERAL_FILE_REQUEST_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="AOM_IN_COL" Type="bit" Mode="In" />
+          <Parameter Name="THIRD_PARTY_CONTACT_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="THIRD_PARTY_CONTACT_INFO" Type="varchar" Mode="In" />
+          <Parameter Name="STATUS_ID" Type="int" Mode="In" />
+          <Parameter Name="TRACKING_NUMBER" Type="varchar" Mode="In" />
+          <Parameter Name="LAST_STATUS_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="FOLLOW_UP_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="SALE_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="DATE_COMPLETE" Type="datetime" Mode="In" />
+          <Parameter Name="COMPANY_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="COMPANY_ADDRESS" Type="varchar" Mode="In" />
+          <Parameter Name="ATTENTION_TO" Type="varchar" Mode="In" />
+          <Parameter Name="CITY" Type="varchar" Mode="In" />
+          <Parameter Name="STATE" Type="varchar" Mode="In" />
+          <Parameter Name="ZIP" Type="varchar" Mode="In" />
+          <Parameter Name="RUSH" Type="bit" Mode="In" />
+          <Parameter Name="CUSTODIAN_ID" Type="int" Mode="In" />
+          <Parameter Name="CUST_REF_NUMBER" Type="varchar" Mode="In" />
+          <Parameter Name="MERS_INFO_NUMBER" Type="varchar" Mode="In" />
+          <Parameter Name="LSCOD1" Type="int" Mode="In" />
+          <Parameter Name="SBSCOD" Type="int" Mode="In" />
+          <Parameter Name="RECORDED_STATUS_ID" Type="int" Mode="In" />
+          <Parameter Name="RECORDED_COUNTY" Type="varchar" Mode="In" />
+          <Parameter Name="RECORDED_DATE" Type="datetime" Mode="In" />
+          <Parameter Name="RECORDED_DOC_INST_NUM" Type="varchar" Mode="In" />
+          <Parameter Name="RECORDED_BOOK" Type="varchar" Mode="In" />
+          <Parameter Name="RECORDED_PAGE" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DOCUS_SYS_ADD_LOOKUP_VALUE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LOOKUP_SECTION" Type="varchar" Mode="In" />
+          <Parameter Name="LOOKUP_TYPE" Type="varchar" Mode="In" />
+          <Parameter Name="LOOKUP_VALUE" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Document_CustodyModelStoreContainer">
+          <EntitySet Name="DOCUS_ASM_ASSIGNEE" EntityType="Self.DOCUS_ASM_ASSIGNEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_ASM_ASSIGNMENTS" EntityType="Self.DOCUS_ASM_ASSIGNMENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPACMST" EntityType="Self.DOCUS_PRODLIB_CLPACMST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPCLMST" EntityType="Self.DOCUS_PRODLIB_CLPCLMST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPCUSTD" EntityType="Self.DOCUS_PRODLIB_CLPCUSTD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPFNDG" EntityType="Self.DOCUS_PRODLIB_CLPFNDG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPHDOC" EntityType="Self.DOCUS_PRODLIB_CLPHDOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_SUB_REQUEST" EntityType="Self.DOCUS_SUB_REQUEST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_SYS_CUSTODIAN" EntityType="Self.DOCUS_SYS_CUSTODIAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_SYS_LOOKUP" EntityType="Self.DOCUS_SYS_LOOKUP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FEE" EntityType="Self.FEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOANTYPE" EntityType="Self.LOANTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OWNER" EntityType="Self.OWNER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REPRESENTATIVE" EntityType="Self.REPRESENTATIVE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REQUESTTYPE" EntityType="Self.REQUESTTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATUS" EntityType="Self.STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_ASSIGNED_TO" EntityType="Self.DOCUS_ASM_LOOKUP_ASSIGNED_TO" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_ASSIGNED_TO].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_ASSIGNED_TO].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_ASSIGNED_TO].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_ASSIGNED_TO] AS [DOCUS_ASM_LOOKUP_ASSIGNED_TO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE" EntityType="Self.DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE] AS [DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_DATA_ENTRY_BY" EntityType="Self.DOCUS_ASM_LOOKUP_DATA_ENTRY_BY" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_DATA_ENTRY_BY].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_DATA_ENTRY_BY].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_DATA_ENTRY_BY].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_DATA_ENTRY_BY] AS [DOCUS_ASM_LOOKUP_DATA_ENTRY_BY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_DOC_TYPE" EntityType="Self.DOCUS_ASM_LOOKUP_DOC_TYPE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_DOC_TYPE].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_DOC_TYPE].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_DOC_TYPE].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_DOC_TYPE] AS [DOCUS_ASM_LOOKUP_DOC_TYPE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_ENTERED_BY" EntityType="Self.DOCUS_ASM_LOOKUP_ENTERED_BY" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_ENTERED_BY].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_ENTERED_BY].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_ENTERED_BY].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_ENTERED_BY] AS [DOCUS_ASM_LOOKUP_ENTERED_BY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_PREPARED_BY" EntityType="Self.DOCUS_ASM_LOOKUP_PREPARED_BY" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_PREPARED_BY].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_PREPARED_BY].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_PREPARED_BY].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_PREPARED_BY] AS [DOCUS_ASM_LOOKUP_PREPARED_BY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_PROCESSED_BY" EntityType="Self.DOCUS_ASM_LOOKUP_PROCESSED_BY" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_PROCESSED_BY].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_PROCESSED_BY].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_PROCESSED_BY].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_PROCESSED_BY] AS [DOCUS_ASM_LOOKUP_PROCESSED_BY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_PROCESSOR_NAME" EntityType="Self.DOCUS_ASM_LOOKUP_PROCESSOR_NAME" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_PROCESSOR_NAME].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_PROCESSOR_NAME].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_PROCESSOR_NAME].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_PROCESSOR_NAME] AS [DOCUS_ASM_LOOKUP_PROCESSOR_NAME]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_RECORDING_STATUS" EntityType="Self.DOCUS_ASM_LOOKUP_RECORDING_STATUS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_RECORDING_STATUS].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_RECORDING_STATUS].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_RECORDING_STATUS].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_RECORDING_STATUS] AS [DOCUS_ASM_LOOKUP_RECORDING_STATUS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_REQUEST_REASON" EntityType="Self.DOCUS_ASM_LOOKUP_REQUEST_REASON" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_REQUEST_REASON].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_REQUEST_REASON].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_REQUEST_REASON].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_REQUEST_REASON] AS [DOCUS_ASM_LOOKUP_REQUEST_REASON]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_REQUEST_TYPE" EntityType="Self.DOCUS_ASM_LOOKUP_REQUEST_TYPE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_REQUEST_TYPE].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_REQUEST_TYPE].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_REQUEST_TYPE].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_REQUEST_TYPE] AS [DOCUS_ASM_LOOKUP_REQUEST_TYPE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_REQUESTOR_NAME" EntityType="Self.DOCUS_ASM_LOOKUP_REQUESTOR_NAME" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_REQUESTOR_NAME].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_REQUESTOR_NAME].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_REQUESTOR_NAME].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_REQUESTOR_NAME] AS [DOCUS_ASM_LOOKUP_REQUESTOR_NAME]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_ASM_LOOKUP_STATUS" EntityType="Self.DOCUS_ASM_LOOKUP_STATUS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_ASM_LOOKUP_STATUS].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_ASM_LOOKUP_STATUS].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_ASM_LOOKUP_STATUS].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_ASM_LOOKUP_STATUS] AS [DOCUS_ASM_LOOKUP_STATUS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_SUB_LOOKUP_FEE" EntityType="Self.DOCUS_SUB_LOOKUP_FEE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_SUB_LOOKUP_FEE].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_SUB_LOOKUP_FEE].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_SUB_LOOKUP_FEE].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_SUB_LOOKUP_FEE] AS [DOCUS_SUB_LOOKUP_FEE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_SUB_LOOKUP_LOAN_TYPE" EntityType="Self.DOCUS_SUB_LOOKUP_LOAN_TYPE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_SUB_LOOKUP_LOAN_TYPE].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_SUB_LOOKUP_LOAN_TYPE].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_SUB_LOOKUP_LOAN_TYPE].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_SUB_LOOKUP_LOAN_TYPE] AS [DOCUS_SUB_LOOKUP_LOAN_TYPE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_SUB_LOOKUP_REPRESENTATIVE" EntityType="Self.DOCUS_SUB_LOOKUP_REPRESENTATIVE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_SUB_LOOKUP_REPRESENTATIVE].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_SUB_LOOKUP_REPRESENTATIVE].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_SUB_LOOKUP_REPRESENTATIVE].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_SUB_LOOKUP_REPRESENTATIVE] AS [DOCUS_SUB_LOOKUP_REPRESENTATIVE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_SUB_LOOKUP_REQUEST_TYPE" EntityType="Self.DOCUS_SUB_LOOKUP_REQUEST_TYPE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_SUB_LOOKUP_REQUEST_TYPE].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_SUB_LOOKUP_REQUEST_TYPE].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_SUB_LOOKUP_REQUEST_TYPE].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_SUB_LOOKUP_REQUEST_TYPE] AS [DOCUS_SUB_LOOKUP_REQUEST_TYPE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_SUB_LOOKUP_STATUS" EntityType="Self.DOCUS_SUB_LOOKUP_STATUS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_SUB_LOOKUP_STATUS].[LOOKUP_ID] AS [LOOKUP_ID], 
+[DOCUS_SUB_LOOKUP_STATUS].[LOOKUP_ORDER] AS [LOOKUP_ORDER], 
+[DOCUS_SUB_LOOKUP_STATUS].[LOOKUP_VALUE] AS [LOOKUP_VALUE]
+FROM [dbo].[DOCUS_SUB_LOOKUP_STATUS] AS [DOCUS_SUB_LOOKUP_STATUS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DOCUS_SUB_OWNER" EntityType="Self.DOCUS_SUB_OWNER" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DOCUS_SUB_OWNER].[OWNER_ID] AS [OWNER_ID], 
+[DOCUS_SUB_OWNER].[OWNER] AS [OWNER], 
+[DOCUS_SUB_OWNER].[SUB_REQUIREMENTS] AS [SUB_REQUIREMENTS]
+FROM [dbo].[DOCUS_SUB_OWNER] AS [DOCUS_SUB_OWNER]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Document_CustodyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DOCUS_ASM_ASSIGNEE">
+          <Key>
+            <PropertyRef Name="Assignee_Id" />
+          </Key>
+          <Property Name="Assignee_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Assignee_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Trustname_Required" Type="Boolean" Nullable="false" />
+          <Property Name="Sort_Order" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_ASSIGNMENTS">
+          <Key>
+            <PropertyRef Name="ASSIGNMENT_ID" />
+          </Key>
+          <Property Name="ASSIGNMENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACCOUNT_NUMBER" Type="Int32" />
+          <Property Name="BORROWER_LAST_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="REQUEST_TYPE_ID" Type="Int32" />
+          <Property Name="REQUEST_REASON_ID" Type="Int32" />
+          <Property Name="DOC_TYPE_ID" Type="Int32" />
+          <Property Name="REQUEST_DATE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ENTERED" Type="DateTime" Precision="3" />
+          <Property Name="REQUEST_ENTERED_BY_ID" Type="Int32" />
+          <Property Name="REQUESTOR_NAME_ID" Type="Int32" />
+          <Property Name="MERS_INDICATOR" Type="Boolean" />
+          <Property Name="MERS_UPDATED" Type="Boolean" />
+          <Property Name="ASSIGNOR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ASSIGNEE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ASSIGNED_TO_ID" Type="Int32" />
+          <Property Name="PROCESSED_BY_ID" Type="Int32" />
+          <Property Name="ASSIGNED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="COLLATERAL_FILE_REQUEST_DATE" Type="DateTime" Precision="3" />
+          <Property Name="AOM_IN_COL" Type="Boolean" />
+          <Property Name="THIRD_PARTY_CONTACT_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="THIRD_PARTY_CONTACT_INFO" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_ID" Type="Int32" />
+          <Property Name="TRACKING_NUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_STATUS_DATE" Type="DateTime" Precision="3" />
+          <Property Name="FOLLOW_UP_DATE" Type="DateTime" Precision="3" />
+          <Property Name="SALE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_COMPLETE" Type="DateTime" Precision="3" />
+          <Property Name="COMPANY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="COMPANY_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ATTENTION_TO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CITY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RUSH" Type="Boolean" />
+          <Property Name="CUSTODIAN_ID" Type="Int32" />
+          <Property Name="CUST_REF_NUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MERS_INFO_NUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LSCOD1" Type="Int32" />
+          <Property Name="SBSCOD" Type="Int32" />
+          <Property Name="RECORDED_STATUS_ID" Type="Int32" />
+          <Property Name="RECORDED_COUNTY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RECORDED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="RECORDED_DOC_INST_NUM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECORDED_BOOK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECORDED_PAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_CREATED" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATE_UPDATED" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPACMST">
+          <Key>
+            <PropertyRef Name="ACCTNO" />
+          </Key>
+          <Property Name="ACCTNO" Type="Int32" Nullable="false" />
+          <Property Name="APPLCT" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CALIEN" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CASHDT" Type="Int32" />
+          <Property Name="CBSTAT" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CLOSCD" Type="Int32" />
+          <Property Name="COAPPL" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CONDAT" Type="Int32" />
+          <Property Name="COUNTY" Type="Int32" />
+          <Property Name="DEALER" Type="Int32" />
+          <Property Name="INTRAT" Type="Decimal" Precision="29" Scale="5" />
+          <Property Name="INVNBR" Type="Int32" />
+          <Property Name="LONTYP" Type="Int32" />
+          <Property Name="LSTPAY" Type="Int32" />
+          <Property Name="MATURE" Type="Int32" />
+          <Property Name="PADDR1" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="PADDR2" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="PCITY" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="POOLNO" Type="Int32" />
+          <Property Name="PRDTYP" Type="Int32" />
+          <Property Name="PRNBAL" Type="Decimal" Precision="29" Scale="2" />
+          <Property Name="PROCED" Type="Decimal" Precision="29" Scale="2" />
+          <Property Name="PSTATE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="PZIP" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="REGION" Type="Int32" />
+          <Property Name="REGPAY" Type="Decimal" Precision="29" Scale="2" />
+          <Property Name="RSTATE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SOCSEC" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TINFIN" Type="Decimal" Precision="29" Scale="2" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPCLMST">
+          <Key>
+            <PropertyRef Name="ACCTNO" />
+          </Key>
+          <Property Name="ACCTNO" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="APPLCT" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="CALIEN" Type="Decimal" Precision="1" Scale="0" />
+          <Property Name="CASHDT" Type="Decimal" Precision="8" Scale="0" />
+          <Property Name="CBSTAT" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="CLOSCD" Type="Decimal" Precision="1" Scale="0" />
+          <Property Name="COAPPL" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="CONDAT" Type="Decimal" Precision="8" Scale="0" />
+          <Property Name="COUNTY" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="DEALER" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="INTRAT" Type="Decimal" Precision="7" Scale="5" />
+          <Property Name="INVNBR" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="LONTYP" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="LSTPAY" Type="Decimal" Precision="8" Scale="0" />
+          <Property Name="MATURE" Type="Decimal" Precision="8" Scale="0" />
+          <Property Name="PADDR1" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="PADDR2" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="PCITY" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="POOLNO" Type="Decimal" Precision="7" Scale="0" />
+          <Property Name="PRDTYP" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="PRNBAL" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="PROCED" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="PSTATE" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="PZIP" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="REGION" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="REGPAY" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="RSTATE" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="SOCSEC" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="TINFIN" Type="Decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPCUSTD">
+          <Key>
+            <PropertyRef Name="CST_ID" />
+          </Key>
+          <Property Name="CST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPLCT" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CSTSEQ" Type="Decimal" Precision="5" Scale="0" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPFNDG">
+          <Key>
+            <PropertyRef Name="ACCTNO" />
+          </Key>
+          <Property Name="ACCTNO" Type="Int32" Nullable="false" />
+          <Property Name="CLCOWN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="GLPLAN" Type="Int32" />
+          <Property Name="LSCOD1" Type="Int32" />
+          <Property Name="MINNBR" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SBSCOD" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DOCUS_PRODLIB_CLPHDOC">
+          <Key>
+            <PropertyRef Name="ACCTNO" />
+          </Key>
+          <Property Name="ACCTNO" Type="Int32" Nullable="false" />
+          <Property Name="CSTSEQ" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="CUSTRF" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IMBOXC" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="IMBOXU" Type="Decimal" Precision="12" Scale="0" />
+        </EntityType>
+        <EntityType Name="DOCUS_SUB_REQUEST">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_Received" Type="DateTime" Precision="3" />
+          <Property Name="GT_Loan_Number" Type="Int32" />
+          <Property Name="Borrower_Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Representative_Id" Type="Int32" />
+          <Property Name="Date_Assigned_To_Processor" Type="DateTime" Precision="3" />
+          <Property Name="Owner_Id" Type="Int32" />
+          <Property Name="Requestor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Request_Type_Id" Type="Int32" />
+          <Property Name="Fee_Id" Type="Int32" />
+          <Property Name="Request_Status_Id" Type="Int32" />
+          <Property Name="Status_Date" Type="DateTime" Precision="3" />
+          <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Principal_Loan_Balance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Loan_Balance_2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="New_Loan_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="New_CLTV" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HELOC" Type="Int32" />
+          <Property Name="FICO" Type="Int32" />
+          <Property Name="Proposed_DTI" Type="Int32" />
+          <Property Name="Current_DTI" Type="Int32" />
+          <Property Name="Loan_Type_Id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DOCUS_SYS_CUSTODIAN">
+          <Key>
+            <PropertyRef Name="CUSTODIAN_ID" />
+          </Key>
+          <Property Name="CUSTODIAN_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CUSTODIAN_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUSTODIAN_COMMENTS" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_CREATED" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DATE_UPDATED" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_SYS_LOOKUP">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_SECTION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LOOKUP_TYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FEE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LOANTYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OWNER">
+          <Key>
+            <PropertyRef Name="OWNER_ID" />
+          </Key>
+          <Property Name="OWNER_ID" Type="Int32" Nullable="false" />
+          <Property Name="OWNER1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUB_REQUIREMENTS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="REPRESENTATIVE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="REQUESTTYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="STATUS">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_ASSIGNED_TO">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_DATA_ENTRY_BY">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_DOC_TYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_ENTERED_BY">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_PREPARED_BY">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_PROCESSED_BY">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_PROCESSOR_NAME">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_RECORDING_STATUS">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_REQUEST_REASON">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_REQUEST_TYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_REQUESTOR_NAME">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_LOOKUP_STATUS">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_SUB_LOOKUP_FEE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_SUB_LOOKUP_LOAN_TYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DOCUS_SUB_LOOKUP_REPRESENTATIVE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DOCUS_SUB_LOOKUP_REQUEST_TYPE">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DOCUS_SUB_LOOKUP_STATUS">
+          <Key>
+            <PropertyRef Name="LOOKUP_ID" />
+            <PropertyRef Name="LOOKUP_ORDER" />
+          </Key>
+          <Property Name="LOOKUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_ORDER" Type="Int32" Nullable="false" />
+          <Property Name="LOOKUP_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DOCUS_SUB_OWNER">
+          <Key>
+            <PropertyRef Name="OWNER_ID" />
+          </Key>
+          <Property Name="OWNER_ID" Type="Int32" Nullable="false" />
+          <Property Name="OWNER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUB_REQUIREMENTS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DocumentContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DOCUS_ASM_ASSIGNEE" EntityType="Self.DOCUS_ASM_ASSIGNEE" />
+          <EntitySet Name="DOCUS_ASM_ASSIGNMENTS" EntityType="Self.DOCUS_ASM_ASSIGNMENTS" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPACMST" EntityType="Self.DOCUS_PRODLIB_CLPACMST" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPCLMST" EntityType="Self.DOCUS_PRODLIB_CLPCLMST" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPCUSTD" EntityType="Self.DOCUS_PRODLIB_CLPCUSTD" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPFNDG" EntityType="Self.DOCUS_PRODLIB_CLPFNDG" />
+          <EntitySet Name="DOCUS_PRODLIB_CLPHDOC" EntityType="Self.DOCUS_PRODLIB_CLPHDOC" />
+          <EntitySet Name="DOCUS_SUB_REQUEST" EntityType="Self.DOCUS_SUB_REQUEST" />
+          <EntitySet Name="DOCUS_SYS_CUSTODIAN" EntityType="Self.DOCUS_SYS_CUSTODIAN" />
+          <EntitySet Name="DOCUS_SYS_LOOKUP" EntityType="Self.DOCUS_SYS_LOOKUP" />
+          <EntitySet Name="FEEs" EntityType="Self.FEE" />
+          <EntitySet Name="LOANTYPEs" EntityType="Self.LOANTYPE" />
+          <EntitySet Name="OWNERs" EntityType="Self.OWNER" />
+          <EntitySet Name="REPRESENTATIVEs" EntityType="Self.REPRESENTATIVE" />
+          <EntitySet Name="REQUESTTYPEs" EntityType="Self.REQUESTTYPE" />
+          <EntitySet Name="STATUS" EntityType="Self.STATUS" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_ASSIGNED_TO" EntityType="Self.DOCUS_ASM_LOOKUP_ASSIGNED_TO" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE" EntityType="Self.DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_DATA_ENTRY_BY" EntityType="Self.DOCUS_ASM_LOOKUP_DATA_ENTRY_BY" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_DOC_TYPE" EntityType="Self.DOCUS_ASM_LOOKUP_DOC_TYPE" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_ENTERED_BY" EntityType="Self.DOCUS_ASM_LOOKUP_ENTERED_BY" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_PREPARED_BY" EntityType="Self.DOCUS_ASM_LOOKUP_PREPARED_BY" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_PROCESSED_BY" EntityType="Self.DOCUS_ASM_LOOKUP_PROCESSED_BY" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_PROCESSOR_NAME" EntityType="Self.DOCUS_ASM_LOOKUP_PROCESSOR_NAME" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_RECORDING_STATUS" EntityType="Self.DOCUS_ASM_LOOKUP_RECORDING_STATUS" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_REQUEST_REASON" EntityType="Self.DOCUS_ASM_LOOKUP_REQUEST_REASON" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_REQUEST_TYPE" EntityType="Self.DOCUS_ASM_LOOKUP_REQUEST_TYPE" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_REQUESTOR_NAME" EntityType="Self.DOCUS_ASM_LOOKUP_REQUESTOR_NAME" />
+          <EntitySet Name="DOCUS_ASM_LOOKUP_STATUS" EntityType="Self.DOCUS_ASM_LOOKUP_STATUS" />
+          <EntitySet Name="DOCUS_SUB_LOOKUP_FEE" EntityType="Self.DOCUS_SUB_LOOKUP_FEE" />
+          <EntitySet Name="DOCUS_SUB_LOOKUP_LOAN_TYPE" EntityType="Self.DOCUS_SUB_LOOKUP_LOAN_TYPE" />
+          <EntitySet Name="DOCUS_SUB_LOOKUP_REPRESENTATIVE" EntityType="Self.DOCUS_SUB_LOOKUP_REPRESENTATIVE" />
+          <EntitySet Name="DOCUS_SUB_LOOKUP_REQUEST_TYPE" EntityType="Self.DOCUS_SUB_LOOKUP_REQUEST_TYPE" />
+          <EntitySet Name="DOCUS_SUB_LOOKUP_STATUS" EntityType="Self.DOCUS_SUB_LOOKUP_STATUS" />
+          <EntitySet Name="DOCUS_SUB_OWNER" EntityType="Self.DOCUS_SUB_OWNER" />
+          <FunctionImport Name="DOCUS_ASM_GET_GTA_FIELDS" ReturnType="Collection(Document_CustodyModel.DOCUS_ASM_GET_GTA_FIELDS_Result)">
+            <Parameter Name="ACCOUNT_NUMBER" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DOCUS_ASM_INSERT_ASSIGNMENT">
+            <Parameter Name="ACCOUNT_NUMBER" Mode="In" Type="Int32" />
+            <Parameter Name="BORROWER_LAST_NAME" Mode="In" Type="String" />
+            <Parameter Name="REQUEST_TYPE_ID" Mode="In" Type="Int32" />
+            <Parameter Name="REQUEST_REASON_ID" Mode="In" Type="Int32" />
+            <Parameter Name="DOC_TYPE_ID" Mode="In" Type="Int32" />
+            <Parameter Name="REQUEST_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATE_ENTERED" Mode="In" Type="DateTime" />
+            <Parameter Name="REQUEST_ENTERED_BY_ID" Mode="In" Type="Int32" />
+            <Parameter Name="REQUESTOR_NAME_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MERS_INDICATOR" Mode="In" Type="Boolean" />
+            <Parameter Name="MERS_UPDATED" Mode="In" Type="Boolean" />
+            <Parameter Name="ASSIGNOR" Mode="In" Type="String" />
+            <Parameter Name="ASSIGNEE" Mode="In" Type="String" />
+            <Parameter Name="ASSIGNED_TO_ID" Mode="In" Type="Int32" />
+            <Parameter Name="PROCESSED_BY_ID" Mode="In" Type="Int32" />
+            <Parameter Name="ASSIGNED_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="COLLATERAL_FILE_REQUEST_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="AOM_IN_COL" Mode="In" Type="Boolean" />
+            <Parameter Name="THIRD_PARTY_CONTACT_NAME" Mode="In" Type="String" />
+            <Parameter Name="THIRD_PARTY_CONTACT_INFO" Mode="In" Type="String" />
+            <Parameter Name="STATUS_ID" Mode="In" Type="Int32" />
+            <Parameter Name="TRACKING_NUMBER" Mode="In" Type="String" />
+            <Parameter Name="LAST_STATUS_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="FOLLOW_UP_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="SALE_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATE_COMPLETE" Mode="In" Type="DateTime" />
+            <Parameter Name="COMPANY_NAME" Mode="In" Type="String" />
+            <Parameter Name="COMPANY_ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="ATTENTION_TO" Mode="In" Type="String" />
+            <Parameter Name="CITY" Mode="In" Type="String" />
+            <Parameter Name="STATE" Mode="In" Type="String" />
+            <Parameter Name="ZIP" Mode="In" Type="String" />
+            <Parameter Name="RUSH" Mode="In" Type="Boolean" />
+            <Parameter Name="CUSTODIAN_ID" Mode="In" Type="Int32" />
+            <Parameter Name="CUST_REF_NUMBER" Mode="In" Type="String" />
+            <Parameter Name="MERS_INFO_NUMBER" Mode="In" Type="String" />
+            <Parameter Name="LSCOD1" Mode="In" Type="Int32" />
+            <Parameter Name="SBSCOD" Mode="In" Type="Int32" />
+            <Parameter Name="RECORDED_STATUS_ID" Mode="In" Type="Int32" />
+            <Parameter Name="RECORDED_COUNTY" Mode="In" Type="String" />
+            <Parameter Name="RECORDED_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="RECORDED_DOC_INST_NUM" Mode="In" Type="String" />
+            <Parameter Name="RECORDED_BOOK" Mode="In" Type="String" />
+            <Parameter Name="RECORDED_PAGE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DOCUS_ASM_UPDATE_ASSIGNMENT">
+            <Parameter Name="ASSIGNMENT_ID" Mode="In" Type="Int32" />
+            <Parameter Name="ACCOUNT_NUMBER" Mode="In" Type="Int32" />
+            <Parameter Name="BORROWER_LAST_NAME" Mode="In" Type="String" />
+            <Parameter Name="REQUEST_TYPE_ID" Mode="In" Type="Int32" />
+            <Parameter Name="REQUEST_REASON_ID" Mode="In" Type="Int32" />
+            <Parameter Name="DOC_TYPE_ID" Mode="In" Type="Int32" />
+            <Parameter Name="REQUEST_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATE_ENTERED" Mode="In" Type="DateTime" />
+            <Parameter Name="REQUEST_ENTERED_BY_ID" Mode="In" Type="Int32" />
+            <Parameter Name="REQUESTOR_NAME_ID" Mode="In" Type="Int32" />
+            <Parameter Name="MERS_INDICATOR" Mode="In" Type="Boolean" />
+            <Parameter Name="MERS_UPDATED" Mode="In" Type="Boolean" />
+            <Parameter Name="ASSIGNOR" Mode="In" Type="String" />
+            <Parameter Name="ASSIGNEE" Mode="In" Type="String" />
+            <Parameter Name="ASSIGNED_TO_ID" Mode="In" Type="Int32" />
+            <Parameter Name="PROCESSED_BY_ID" Mode="In" Type="Int32" />
+            <Parameter Name="ASSIGNED_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="COLLATERAL_FILE_REQUEST_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="AOM_IN_COL" Mode="In" Type="Boolean" />
+            <Parameter Name="THIRD_PARTY_CONTACT_NAME" Mode="In" Type="String" />
+            <Parameter Name="THIRD_PARTY_CONTACT_INFO" Mode="In" Type="String" />
+            <Parameter Name="STATUS_ID" Mode="In" Type="Int32" />
+            <Parameter Name="TRACKING_NUMBER" Mode="In" Type="String" />
+            <Parameter Name="LAST_STATUS_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="FOLLOW_UP_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="SALE_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="DATE_COMPLETE" Mode="In" Type="DateTime" />
+            <Parameter Name="COMPANY_NAME" Mode="In" Type="String" />
+            <Parameter Name="COMPANY_ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="ATTENTION_TO" Mode="In" Type="String" />
+            <Parameter Name="CITY" Mode="In" Type="String" />
+            <Parameter Name="STATE" Mode="In" Type="String" />
+            <Parameter Name="ZIP" Mode="In" Type="String" />
+            <Parameter Name="RUSH" Mode="In" Type="Boolean" />
+            <Parameter Name="CUSTODIAN_ID" Mode="In" Type="Int32" />
+            <Parameter Name="CUST_REF_NUMBER" Mode="In" Type="String" />
+            <Parameter Name="MERS_INFO_NUMBER" Mode="In" Type="String" />
+            <Parameter Name="LSCOD1" Mode="In" Type="Int32" />
+            <Parameter Name="SBSCOD" Mode="In" Type="Int32" />
+            <Parameter Name="RECORDED_STATUS_ID" Mode="In" Type="Int32" />
+            <Parameter Name="RECORDED_COUNTY" Mode="In" Type="String" />
+            <Parameter Name="RECORDED_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="RECORDED_DOC_INST_NUM" Mode="In" Type="String" />
+            <Parameter Name="RECORDED_BOOK" Mode="In" Type="String" />
+            <Parameter Name="RECORDED_PAGE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DOCUS_SYS_ADD_LOOKUP_VALUE">
+            <Parameter Name="LOOKUP_SECTION" Mode="In" Type="String" />
+            <Parameter Name="LOOKUP_TYPE" Mode="In" Type="String" />
+            <Parameter Name="LOOKUP_VALUE" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="DOCUS_ASM_GET_GTA_FIELDS_Result">
+          <Property Type="Int32" Name="AccountNumber" Nullable="false" />
+          <Property Type="Int32" Name="CustodianId" Nullable="true" />
+          <Property Type="String" Name="BorrowerName" Nullable="true" MaxLength="35" />
+          <Property Type="String" Name="CustodianName" Nullable="true" MaxLength="35" />
+          <Property Type="String" Name="CustRefNumber" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="MersInfoNumber" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="LSCOD1" Nullable="true" />
+          <Property Type="String" Name="AcquiredFrom" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SBSCOD" Nullable="true" />
+          <Property Type="String" Name="ServicingFor" Nullable="true" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Document_CustodyModelStoreContainer" CdmEntityContainer="DocumentContext">
+          <EntitySetMapping Name="DOCUS_ASM_ASSIGNEE">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_ASSIGNEE">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_ASSIGNEE">
+                <ScalarProperty Name="Assignee_Id" ColumnName="Assignee_Id" />
+                <ScalarProperty Name="Assignee_Name" ColumnName="Assignee_Name" />
+                <ScalarProperty Name="Trustname_Required" ColumnName="Trustname_Required" />
+                <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_ASSIGNMENTS">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_ASSIGNMENTS">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_ASSIGNMENTS">
+                <ScalarProperty Name="ASSIGNMENT_ID" ColumnName="ASSIGNMENT_ID" />
+                <ScalarProperty Name="ACCOUNT_NUMBER" ColumnName="ACCOUNT_NUMBER" />
+                <ScalarProperty Name="BORROWER_LAST_NAME" ColumnName="BORROWER_LAST_NAME" />
+                <ScalarProperty Name="REQUEST_TYPE_ID" ColumnName="REQUEST_TYPE_ID" />
+                <ScalarProperty Name="REQUEST_REASON_ID" ColumnName="REQUEST_REASON_ID" />
+                <ScalarProperty Name="DOC_TYPE_ID" ColumnName="DOC_TYPE_ID" />
+                <ScalarProperty Name="REQUEST_DATE" ColumnName="REQUEST_DATE" />
+                <ScalarProperty Name="DATE_ENTERED" ColumnName="DATE_ENTERED" />
+                <ScalarProperty Name="REQUEST_ENTERED_BY_ID" ColumnName="REQUEST_ENTERED_BY_ID" />
+                <ScalarProperty Name="REQUESTOR_NAME_ID" ColumnName="REQUESTOR_NAME_ID" />
+                <ScalarProperty Name="MERS_INDICATOR" ColumnName="MERS_INDICATOR" />
+                <ScalarProperty Name="MERS_UPDATED" ColumnName="MERS_UPDATED" />
+                <ScalarProperty Name="ASSIGNOR" ColumnName="ASSIGNOR" />
+                <ScalarProperty Name="ASSIGNEE" ColumnName="ASSIGNEE" />
+                <ScalarProperty Name="ASSIGNED_TO_ID" ColumnName="ASSIGNED_TO_ID" />
+                <ScalarProperty Name="PROCESSED_BY_ID" ColumnName="PROCESSED_BY_ID" />
+                <ScalarProperty Name="ASSIGNED_DATE" ColumnName="ASSIGNED_DATE" />
+                <ScalarProperty Name="COLLATERAL_FILE_REQUEST_DATE" ColumnName="COLLATERAL_FILE_REQUEST_DATE" />
+                <ScalarProperty Name="AOM_IN_COL" ColumnName="AOM_IN_COL" />
+                <ScalarProperty Name="THIRD_PARTY_CONTACT_NAME" ColumnName="THIRD_PARTY_CONTACT_NAME" />
+                <ScalarProperty Name="THIRD_PARTY_CONTACT_INFO" ColumnName="THIRD_PARTY_CONTACT_INFO" />
+                <ScalarProperty Name="STATUS_ID" ColumnName="STATUS_ID" />
+                <ScalarProperty Name="TRACKING_NUMBER" ColumnName="TRACKING_NUMBER" />
+                <ScalarProperty Name="LAST_STATUS_DATE" ColumnName="LAST_STATUS_DATE" />
+                <ScalarProperty Name="FOLLOW_UP_DATE" ColumnName="FOLLOW_UP_DATE" />
+                <ScalarProperty Name="SALE_DATE" ColumnName="SALE_DATE" />
+                <ScalarProperty Name="DATE_COMPLETE" ColumnName="DATE_COMPLETE" />
+                <ScalarProperty Name="COMPANY_NAME" ColumnName="COMPANY_NAME" />
+                <ScalarProperty Name="COMPANY_ADDRESS" ColumnName="COMPANY_ADDRESS" />
+                <ScalarProperty Name="ATTENTION_TO" ColumnName="ATTENTION_TO" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="RUSH" ColumnName="RUSH" />
+                <ScalarProperty Name="CUSTODIAN_ID" ColumnName="CUSTODIAN_ID" />
+                <ScalarProperty Name="CUST_REF_NUMBER" ColumnName="CUST_REF_NUMBER" />
+                <ScalarProperty Name="MERS_INFO_NUMBER" ColumnName="MERS_INFO_NUMBER" />
+                <ScalarProperty Name="LSCOD1" ColumnName="LSCOD1" />
+                <ScalarProperty Name="SBSCOD" ColumnName="SBSCOD" />
+                <ScalarProperty Name="RECORDED_STATUS_ID" ColumnName="RECORDED_STATUS_ID" />
+                <ScalarProperty Name="RECORDED_COUNTY" ColumnName="RECORDED_COUNTY" />
+                <ScalarProperty Name="RECORDED_DATE" ColumnName="RECORDED_DATE" />
+                <ScalarProperty Name="RECORDED_DOC_INST_NUM" ColumnName="RECORDED_DOC_INST_NUM" />
+                <ScalarProperty Name="RECORDED_BOOK" ColumnName="RECORDED_BOOK" />
+                <ScalarProperty Name="RECORDED_PAGE" ColumnName="RECORDED_PAGE" />
+                <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+                <ScalarProperty Name="DATE_UPDATED" ColumnName="DATE_UPDATED" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_ASSIGNMENTS">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Document_CustodyModel.Store.DOCUS_ASM_INSERT_ASSIGNMENT">
+                  <ScalarProperty Name="RECORDED_PAGE" ParameterName="RECORDED_PAGE" />
+                  <ScalarProperty Name="RECORDED_BOOK" ParameterName="RECORDED_BOOK" />
+                  <ScalarProperty Name="RECORDED_DOC_INST_NUM" ParameterName="RECORDED_DOC_INST_NUM" />
+                  <ScalarProperty Name="RECORDED_DATE" ParameterName="RECORDED_DATE" />
+                  <ScalarProperty Name="RECORDED_COUNTY" ParameterName="RECORDED_COUNTY" />
+                  <ScalarProperty Name="RECORDED_STATUS_ID" ParameterName="RECORDED_STATUS_ID" />
+                  <ScalarProperty Name="SBSCOD" ParameterName="SBSCOD" />
+                  <ScalarProperty Name="LSCOD1" ParameterName="LSCOD1" />
+                  <ScalarProperty Name="MERS_INFO_NUMBER" ParameterName="MERS_INFO_NUMBER" />
+                  <ScalarProperty Name="CUST_REF_NUMBER" ParameterName="CUST_REF_NUMBER" />
+                  <ScalarProperty Name="CUSTODIAN_ID" ParameterName="CUSTODIAN_ID" />
+                  <ScalarProperty Name="RUSH" ParameterName="RUSH" />
+                  <ScalarProperty Name="ZIP" ParameterName="ZIP" />
+                  <ScalarProperty Name="STATE" ParameterName="STATE" />
+                  <ScalarProperty Name="CITY" ParameterName="CITY" />
+                  <ScalarProperty Name="ATTENTION_TO" ParameterName="ATTENTION_TO" />
+                  <ScalarProperty Name="COMPANY_ADDRESS" ParameterName="COMPANY_ADDRESS" />
+                  <ScalarProperty Name="COMPANY_NAME" ParameterName="COMPANY_NAME" />
+                  <ScalarProperty Name="DATE_COMPLETE" ParameterName="DATE_COMPLETE" />
+                  <ScalarProperty Name="SALE_DATE" ParameterName="SALE_DATE" />
+                  <ScalarProperty Name="FOLLOW_UP_DATE" ParameterName="FOLLOW_UP_DATE" />
+                  <ScalarProperty Name="LAST_STATUS_DATE" ParameterName="LAST_STATUS_DATE" />
+                  <ScalarProperty Name="TRACKING_NUMBER" ParameterName="TRACKING_NUMBER" />
+                  <ScalarProperty Name="STATUS_ID" ParameterName="STATUS_ID" />
+                  <ScalarProperty Name="THIRD_PARTY_CONTACT_INFO" ParameterName="THIRD_PARTY_CONTACT_INFO" />
+                  <ScalarProperty Name="THIRD_PARTY_CONTACT_NAME" ParameterName="THIRD_PARTY_CONTACT_NAME" />
+                  <ScalarProperty Name="AOM_IN_COL" ParameterName="AOM_IN_COL" />
+                  <ScalarProperty Name="COLLATERAL_FILE_REQUEST_DATE" ParameterName="COLLATERAL_FILE_REQUEST_DATE" />
+                  <ScalarProperty Name="ASSIGNED_DATE" ParameterName="ASSIGNED_DATE" />
+                  <ScalarProperty Name="PROCESSED_BY_ID" ParameterName="PROCESSED_BY_ID" />
+                  <ScalarProperty Name="ASSIGNED_TO_ID" ParameterName="ASSIGNED_TO_ID" />
+                  <ScalarProperty Name="ASSIGNEE" ParameterName="ASSIGNEE" />
+                  <ScalarProperty Name="ASSIGNOR" ParameterName="ASSIGNOR" />
+                  <ScalarProperty Name="MERS_UPDATED" ParameterName="MERS_UPDATED" />
+                  <ScalarProperty Name="MERS_INDICATOR" ParameterName="MERS_INDICATOR" />
+                  <ScalarProperty Name="REQUESTOR_NAME_ID" ParameterName="REQUESTOR_NAME_ID" />
+                  <ScalarProperty Name="REQUEST_ENTERED_BY_ID" ParameterName="REQUEST_ENTERED_BY_ID" />
+                  <ScalarProperty Name="DATE_ENTERED" ParameterName="DATE_ENTERED" />
+                  <ScalarProperty Name="REQUEST_DATE" ParameterName="REQUEST_DATE" />
+                  <ScalarProperty Name="DOC_TYPE_ID" ParameterName="DOC_TYPE_ID" />
+                  <ScalarProperty Name="REQUEST_REASON_ID" ParameterName="REQUEST_REASON_ID" />
+                  <ScalarProperty Name="REQUEST_TYPE_ID" ParameterName="REQUEST_TYPE_ID" />
+                  <ScalarProperty Name="BORROWER_LAST_NAME" ParameterName="BORROWER_LAST_NAME" />
+                  <ScalarProperty Name="ACCOUNT_NUMBER" ParameterName="ACCOUNT_NUMBER" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="Document_CustodyModel.Store.DOCUS_ASM_UPDATE_ASSIGNMENT">
+                  <ScalarProperty Name="RECORDED_PAGE" ParameterName="RECORDED_PAGE" Version="Current" />
+                  <ScalarProperty Name="RECORDED_BOOK" ParameterName="RECORDED_BOOK" Version="Current" />
+                  <ScalarProperty Name="RECORDED_DOC_INST_NUM" ParameterName="RECORDED_DOC_INST_NUM" Version="Current" />
+                  <ScalarProperty Name="RECORDED_DATE" ParameterName="RECORDED_DATE" Version="Current" />
+                  <ScalarProperty Name="RECORDED_COUNTY" ParameterName="RECORDED_COUNTY" Version="Current" />
+                  <ScalarProperty Name="RECORDED_STATUS_ID" ParameterName="RECORDED_STATUS_ID" Version="Current" />
+                  <ScalarProperty Name="SBSCOD" ParameterName="SBSCOD" Version="Current" />
+                  <ScalarProperty Name="LSCOD1" ParameterName="LSCOD1" Version="Current" />
+                  <ScalarProperty Name="MERS_INFO_NUMBER" ParameterName="MERS_INFO_NUMBER" Version="Current" />
+                  <ScalarProperty Name="CUST_REF_NUMBER" ParameterName="CUST_REF_NUMBER" Version="Current" />
+                  <ScalarProperty Name="CUSTODIAN_ID" ParameterName="CUSTODIAN_ID" Version="Current" />
+                  <ScalarProperty Name="RUSH" ParameterName="RUSH" Version="Current" />
+                  <ScalarProperty Name="ZIP" ParameterName="ZIP" Version="Current" />
+                  <ScalarProperty Name="STATE" ParameterName="STATE" Version="Current" />
+                  <ScalarProperty Name="CITY" ParameterName="CITY" Version="Current" />
+                  <ScalarProperty Name="ATTENTION_TO" ParameterName="ATTENTION_TO" Version="Current" />
+                  <ScalarProperty Name="COMPANY_ADDRESS" ParameterName="COMPANY_ADDRESS" Version="Current" />
+                  <ScalarProperty Name="COMPANY_NAME" ParameterName="COMPANY_NAME" Version="Current" />
+                  <ScalarProperty Name="DATE_COMPLETE" ParameterName="DATE_COMPLETE" Version="Current" />
+                  <ScalarProperty Name="SALE_DATE" ParameterName="SALE_DATE" Version="Current" />
+                  <ScalarProperty Name="FOLLOW_UP_DATE" ParameterName="FOLLOW_UP_DATE" Version="Current" />
+                  <ScalarProperty Name="LAST_STATUS_DATE" ParameterName="LAST_STATUS_DATE" Version="Current" />
+                  <ScalarProperty Name="TRACKING_NUMBER" ParameterName="TRACKING_NUMBER" Version="Current" />
+                  <ScalarProperty Name="STATUS_ID" ParameterName="STATUS_ID" Version="Current" />
+                  <ScalarProperty Name="THIRD_PARTY_CONTACT_INFO" ParameterName="THIRD_PARTY_CONTACT_INFO" Version="Current" />
+                  <ScalarProperty Name="THIRD_PARTY_CONTACT_NAME" ParameterName="THIRD_PARTY_CONTACT_NAME" Version="Current" />
+                  <ScalarProperty Name="AOM_IN_COL" ParameterName="AOM_IN_COL" Version="Current" />
+                  <ScalarProperty Name="COLLATERAL_FILE_REQUEST_DATE" ParameterName="COLLATERAL_FILE_REQUEST_DATE" Version="Current" />
+                  <ScalarProperty Name="ASSIGNED_DATE" ParameterName="ASSIGNED_DATE" Version="Current" />
+                  <ScalarProperty Name="PROCESSED_BY_ID" ParameterName="PROCESSED_BY_ID" Version="Current" />
+                  <ScalarProperty Name="ASSIGNED_TO_ID" ParameterName="ASSIGNED_TO_ID" Version="Current" />
+                  <ScalarProperty Name="ASSIGNEE" ParameterName="ASSIGNEE" Version="Current" />
+                  <ScalarProperty Name="ASSIGNOR" ParameterName="ASSIGNOR" Version="Current" />
+                  <ScalarProperty Name="MERS_UPDATED" ParameterName="MERS_UPDATED" Version="Current" />
+                  <ScalarProperty Name="MERS_INDICATOR" ParameterName="MERS_INDICATOR" Version="Current" />
+                  <ScalarProperty Name="REQUESTOR_NAME_ID" ParameterName="REQUESTOR_NAME_ID" Version="Current" />
+                  <ScalarProperty Name="REQUEST_ENTERED_BY_ID" ParameterName="REQUEST_ENTERED_BY_ID" Version="Current" />
+                  <ScalarProperty Name="DATE_ENTERED" ParameterName="DATE_ENTERED" Version="Current" />
+                  <ScalarProperty Name="REQUEST_DATE" ParameterName="REQUEST_DATE" Version="Current" />
+                  <ScalarProperty Name="DOC_TYPE_ID" ParameterName="DOC_TYPE_ID" Version="Current" />
+                  <ScalarProperty Name="REQUEST_REASON_ID" ParameterName="REQUEST_REASON_ID" Version="Current" />
+                  <ScalarProperty Name="REQUEST_TYPE_ID" ParameterName="REQUEST_TYPE_ID" Version="Current" />
+                  <ScalarProperty Name="BORROWER_LAST_NAME" ParameterName="BORROWER_LAST_NAME" Version="Current" />
+                  <ScalarProperty Name="ACCOUNT_NUMBER" ParameterName="ACCOUNT_NUMBER" Version="Current" />
+                  <ScalarProperty Name="ASSIGNMENT_ID" ParameterName="ASSIGNMENT_ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_PRODLIB_CLPACMST">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_PRODLIB_CLPACMST">
+              <MappingFragment StoreEntitySet="DOCUS_PRODLIB_CLPACMST">
+                <ScalarProperty Name="ACCTNO" ColumnName="ACCTNO" />
+                <ScalarProperty Name="APPLCT" ColumnName="APPLCT" />
+                <ScalarProperty Name="CALIEN" ColumnName="CALIEN" />
+                <ScalarProperty Name="CASHDT" ColumnName="CASHDT" />
+                <ScalarProperty Name="CBSTAT" ColumnName="CBSTAT" />
+                <ScalarProperty Name="CLOSCD" ColumnName="CLOSCD" />
+                <ScalarProperty Name="COAPPL" ColumnName="COAPPL" />
+                <ScalarProperty Name="CONDAT" ColumnName="CONDAT" />
+                <ScalarProperty Name="COUNTY" ColumnName="COUNTY" />
+                <ScalarProperty Name="DEALER" ColumnName="DEALER" />
+                <ScalarProperty Name="INTRAT" ColumnName="INTRAT" />
+                <ScalarProperty Name="INVNBR" ColumnName="INVNBR" />
+                <ScalarProperty Name="LONTYP" ColumnName="LONTYP" />
+                <ScalarProperty Name="LSTPAY" ColumnName="LSTPAY" />
+                <ScalarProperty Name="MATURE" ColumnName="MATURE" />
+                <ScalarProperty Name="PADDR1" ColumnName="PADDR1" />
+                <ScalarProperty Name="PADDR2" ColumnName="PADDR2" />
+                <ScalarProperty Name="PCITY" ColumnName="PCITY" />
+                <ScalarProperty Name="POOLNO" ColumnName="POOLNO" />
+                <ScalarProperty Name="PRDTYP" ColumnName="PRDTYP" />
+                <ScalarProperty Name="PRNBAL" ColumnName="PRNBAL" />
+                <ScalarProperty Name="PROCED" ColumnName="PROCED" />
+                <ScalarProperty Name="PSTATE" ColumnName="PSTATE" />
+                <ScalarProperty Name="PZIP" ColumnName="PZIP" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="REGPAY" ColumnName="REGPAY" />
+                <ScalarProperty Name="RSTATE" ColumnName="RSTATE" />
+                <ScalarProperty Name="SOCSEC" ColumnName="SOCSEC" />
+                <ScalarProperty Name="TINFIN" ColumnName="TINFIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_PRODLIB_CLPCLMST">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_PRODLIB_CLPCLMST">
+              <MappingFragment StoreEntitySet="DOCUS_PRODLIB_CLPCLMST">
+                <ScalarProperty Name="ACCTNO" ColumnName="ACCTNO" />
+                <ScalarProperty Name="APPLCT" ColumnName="APPLCT" />
+                <ScalarProperty Name="CALIEN" ColumnName="CALIEN" />
+                <ScalarProperty Name="CASHDT" ColumnName="CASHDT" />
+                <ScalarProperty Name="CBSTAT" ColumnName="CBSTAT" />
+                <ScalarProperty Name="CLOSCD" ColumnName="CLOSCD" />
+                <ScalarProperty Name="COAPPL" ColumnName="COAPPL" />
+                <ScalarProperty Name="CONDAT" ColumnName="CONDAT" />
+                <ScalarProperty Name="COUNTY" ColumnName="COUNTY" />
+                <ScalarProperty Name="DEALER" ColumnName="DEALER" />
+                <ScalarProperty Name="INTRAT" ColumnName="INTRAT" />
+                <ScalarProperty Name="INVNBR" ColumnName="INVNBR" />
+                <ScalarProperty Name="LONTYP" ColumnName="LONTYP" />
+                <ScalarProperty Name="LSTPAY" ColumnName="LSTPAY" />
+                <ScalarProperty Name="MATURE" ColumnName="MATURE" />
+                <ScalarProperty Name="PADDR1" ColumnName="PADDR1" />
+                <ScalarProperty Name="PADDR2" ColumnName="PADDR2" />
+                <ScalarProperty Name="PCITY" ColumnName="PCITY" />
+                <ScalarProperty Name="POOLNO" ColumnName="POOLNO" />
+                <ScalarProperty Name="PRDTYP" ColumnName="PRDTYP" />
+                <ScalarProperty Name="PRNBAL" ColumnName="PRNBAL" />
+                <ScalarProperty Name="PROCED" ColumnName="PROCED" />
+                <ScalarProperty Name="PSTATE" ColumnName="PSTATE" />
+                <ScalarProperty Name="PZIP" ColumnName="PZIP" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="REGPAY" ColumnName="REGPAY" />
+                <ScalarProperty Name="RSTATE" ColumnName="RSTATE" />
+                <ScalarProperty Name="SOCSEC" ColumnName="SOCSEC" />
+                <ScalarProperty Name="TINFIN" ColumnName="TINFIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_PRODLIB_CLPCUSTD">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_PRODLIB_CLPCUSTD">
+              <MappingFragment StoreEntitySet="DOCUS_PRODLIB_CLPCUSTD">
+                <ScalarProperty Name="CST_ID" ColumnName="CST_ID" />
+                <ScalarProperty Name="APPLCT" ColumnName="APPLCT" />
+                <ScalarProperty Name="CSTSEQ" ColumnName="CSTSEQ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_PRODLIB_CLPFNDG">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_PRODLIB_CLPFNDG">
+              <MappingFragment StoreEntitySet="DOCUS_PRODLIB_CLPFNDG">
+                <ScalarProperty Name="ACCTNO" ColumnName="ACCTNO" />
+                <ScalarProperty Name="CLCOWN" ColumnName="CLCOWN" />
+                <ScalarProperty Name="GLPLAN" ColumnName="GLPLAN" />
+                <ScalarProperty Name="LSCOD1" ColumnName="LSCOD1" />
+                <ScalarProperty Name="MINNBR" ColumnName="MINNBR" />
+                <ScalarProperty Name="SBSCOD" ColumnName="SBSCOD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_PRODLIB_CLPHDOC">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_PRODLIB_CLPHDOC">
+              <MappingFragment StoreEntitySet="DOCUS_PRODLIB_CLPHDOC">
+                <ScalarProperty Name="ACCTNO" ColumnName="ACCTNO" />
+                <ScalarProperty Name="CSTSEQ" ColumnName="CSTSEQ" />
+                <ScalarProperty Name="CUSTRF" ColumnName="CUSTRF" />
+                <ScalarProperty Name="IMBOXC" ColumnName="IMBOXC" />
+                <ScalarProperty Name="IMBOXU" ColumnName="IMBOXU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SUB_REQUEST">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SUB_REQUEST">
+              <MappingFragment StoreEntitySet="DOCUS_SUB_REQUEST">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date_Received" ColumnName="Date_Received" />
+                <ScalarProperty Name="GT_Loan_Number" ColumnName="GT_Loan_Number" />
+                <ScalarProperty Name="Borrower_Last_Name" ColumnName="Borrower_Last_Name" />
+                <ScalarProperty Name="Representative_Id" ColumnName="Representative_Id" />
+                <ScalarProperty Name="Date_Assigned_To_Processor" ColumnName="Date_Assigned_To_Processor" />
+                <ScalarProperty Name="Owner_Id" ColumnName="Owner_Id" />
+                <ScalarProperty Name="Requestor" ColumnName="Requestor" />
+                <ScalarProperty Name="Request_Type_Id" ColumnName="Request_Type_Id" />
+                <ScalarProperty Name="Fee_Id" ColumnName="Fee_Id" />
+                <ScalarProperty Name="Request_Status_Id" ColumnName="Request_Status_Id" />
+                <ScalarProperty Name="Status_Date" ColumnName="Status_Date" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Principal_Loan_Balance" ColumnName="Principal_Loan_Balance" />
+                <ScalarProperty Name="Loan_Balance_2" ColumnName="Loan_Balance_2" />
+                <ScalarProperty Name="New_Loan_Amount" ColumnName="New_Loan_Amount" />
+                <ScalarProperty Name="New_CLTV" ColumnName="New_CLTV" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="HELOC" ColumnName="HELOC" />
+                <ScalarProperty Name="FICO" ColumnName="FICO" />
+                <ScalarProperty Name="Proposed_DTI" ColumnName="Proposed_DTI" />
+                <ScalarProperty Name="Current_DTI" ColumnName="Current_DTI" />
+                <ScalarProperty Name="Loan_Type_Id" ColumnName="Loan_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SYS_CUSTODIAN">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SYS_CUSTODIAN">
+              <MappingFragment StoreEntitySet="DOCUS_SYS_CUSTODIAN">
+                <ScalarProperty Name="CUSTODIAN_ID" ColumnName="CUSTODIAN_ID" />
+                <ScalarProperty Name="CUSTODIAN_NAME" ColumnName="CUSTODIAN_NAME" />
+                <ScalarProperty Name="CUSTODIAN_COMMENTS" ColumnName="CUSTODIAN_COMMENTS" />
+                <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+                <ScalarProperty Name="DATE_UPDATED" ColumnName="DATE_UPDATED" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SYS_LOOKUP">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SYS_LOOKUP">
+              <MappingFragment StoreEntitySet="DOCUS_SYS_LOOKUP">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_SECTION" ColumnName="LOOKUP_SECTION" />
+                <ScalarProperty Name="LOOKUP_TYPE" ColumnName="LOOKUP_TYPE" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FEEs">
+            <EntityTypeMapping TypeName="Document_CustodyModel.FEE">
+              <MappingFragment StoreEntitySet="FEE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOANTYPEs">
+            <EntityTypeMapping TypeName="Document_CustodyModel.LOANTYPE">
+              <MappingFragment StoreEntitySet="LOANTYPE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OWNERs">
+            <EntityTypeMapping TypeName="Document_CustodyModel.OWNER">
+              <MappingFragment StoreEntitySet="OWNER">
+                <ScalarProperty Name="OWNER_ID" ColumnName="OWNER_ID" />
+                <ScalarProperty Name="OWNER1" ColumnName="OWNER" />
+                <ScalarProperty Name="SUB_REQUIREMENTS" ColumnName="SUB_REQUIREMENTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REPRESENTATIVEs">
+            <EntityTypeMapping TypeName="Document_CustodyModel.REPRESENTATIVE">
+              <MappingFragment StoreEntitySet="REPRESENTATIVE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REQUESTTYPEs">
+            <EntityTypeMapping TypeName="Document_CustodyModel.REQUESTTYPE">
+              <MappingFragment StoreEntitySet="REQUESTTYPE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATUS">
+            <EntityTypeMapping TypeName="Document_CustodyModel.STATUS">
+              <MappingFragment StoreEntitySet="STATUS">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_ASSIGNED_TO">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_ASSIGNED_TO">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_ASSIGNED_TO">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_ASSIGNOR_DONOTUSE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_DATA_ENTRY_BY">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_DATA_ENTRY_BY">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_DATA_ENTRY_BY">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_DOC_TYPE">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_DOC_TYPE">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_DOC_TYPE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_ENTERED_BY">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_ENTERED_BY">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_ENTERED_BY">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_PREPARED_BY">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_PREPARED_BY">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_PREPARED_BY">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_PROCESSED_BY">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_PROCESSED_BY">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_PROCESSED_BY">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_PROCESSOR_NAME">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_PROCESSOR_NAME">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_PROCESSOR_NAME">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_RECORDING_STATUS">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_RECORDING_STATUS">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_RECORDING_STATUS">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_REQUEST_REASON">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_REQUEST_REASON">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_REQUEST_REASON">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_REQUEST_TYPE">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_REQUEST_TYPE">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_REQUEST_TYPE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_REQUESTOR_NAME">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_REQUESTOR_NAME">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_REQUESTOR_NAME">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_ASM_LOOKUP_STATUS">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_LOOKUP_STATUS">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_LOOKUP_STATUS">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SUB_LOOKUP_FEE">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SUB_LOOKUP_FEE">
+              <MappingFragment StoreEntitySet="DOCUS_SUB_LOOKUP_FEE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SUB_LOOKUP_LOAN_TYPE">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SUB_LOOKUP_LOAN_TYPE">
+              <MappingFragment StoreEntitySet="DOCUS_SUB_LOOKUP_LOAN_TYPE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SUB_LOOKUP_REPRESENTATIVE">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SUB_LOOKUP_REPRESENTATIVE">
+              <MappingFragment StoreEntitySet="DOCUS_SUB_LOOKUP_REPRESENTATIVE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SUB_LOOKUP_REQUEST_TYPE">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SUB_LOOKUP_REQUEST_TYPE">
+              <MappingFragment StoreEntitySet="DOCUS_SUB_LOOKUP_REQUEST_TYPE">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SUB_LOOKUP_STATUS">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SUB_LOOKUP_STATUS">
+              <MappingFragment StoreEntitySet="DOCUS_SUB_LOOKUP_STATUS">
+                <ScalarProperty Name="LOOKUP_ID" ColumnName="LOOKUP_ID" />
+                <ScalarProperty Name="LOOKUP_ORDER" ColumnName="LOOKUP_ORDER" />
+                <ScalarProperty Name="LOOKUP_VALUE" ColumnName="LOOKUP_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUS_SUB_OWNER">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_SUB_OWNER">
+              <MappingFragment StoreEntitySet="DOCUS_SUB_OWNER">
+                <ScalarProperty Name="OWNER_ID" ColumnName="OWNER_ID" />
+                <ScalarProperty Name="OWNER" ColumnName="OWNER" />
+                <ScalarProperty Name="SUB_REQUIREMENTS" ColumnName="SUB_REQUIREMENTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DOCUS_ASM_GET_GTA_FIELDS" FunctionName="Document_CustodyModel.Store.DOCUS_ASM_GET_GTA_FIELDS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_GET_GTA_FIELDS_Result">
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="CustodianId" ColumnName="CustodianId" />
+                <ScalarProperty Name="BorrowerName" ColumnName="BorrowerName" />
+                <ScalarProperty Name="CustodianName" ColumnName="CustodianName" />
+                <ScalarProperty Name="CustRefNumber" ColumnName="CustRefNumber" />
+                <ScalarProperty Name="MersInfoNumber" ColumnName="MersInfoNumber" />
+                <ScalarProperty Name="LSCOD1" ColumnName="LSCOD1" />
+                <ScalarProperty Name="AcquiredFrom" ColumnName="AcquiredFrom" />
+                <ScalarProperty Name="SBSCOD" ColumnName="SBSCOD" />
+                <ScalarProperty Name="ServicingFor" ColumnName="ServicingFor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DOCUS_ASM_INSERT_ASSIGNMENT" FunctionName="Document_CustodyModel.Store.DOCUS_ASM_INSERT_ASSIGNMENT" />
+          <FunctionImportMapping FunctionImportName="DOCUS_ASM_UPDATE_ASSIGNMENT" FunctionName="Document_CustodyModel.Store.DOCUS_ASM_UPDATE_ASSIGNMENT" />
+          <FunctionImportMapping FunctionImportName="DOCUS_SYS_ADD_LOOKUP_VALUE" FunctionName="Document_CustodyModel.Store.DOCUS_SYS_ADD_LOOKUP_VALUE" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

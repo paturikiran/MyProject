@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CDR.Web.Models.DOCUS_ASM_ASSIGNMENTS>
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-condensed">
+            <tr>
+                <th>Account Number</th>
+                <th>Borrower Name</th>
+                <th>Date Received</th>
+                <th>Processed Status</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.ACCOUNT_NUMBER</td>
+                    <td>@item.BORROWER_LAST_NAME</td>
+                    <td>@item.DATE_CREATED</td>
+                    <td>@item.STATUS_ID</td>
+
+                    <td>
+                        <label>  <a href="#"  onclick="loadModal(@item.ASSIGNMENT_ID, @item.ACCOUNT_NUMBER)">Details</a></label>
+                    </td>
+
+                </tr>
+            }
+        </table>
+    </div>
+
+
+    <div id="detailsModal">
+        <div id="details">
+        </div>
+    </div>
+}
+else
+{
+   
+  <label>No Records found please try agian.</label>
+}

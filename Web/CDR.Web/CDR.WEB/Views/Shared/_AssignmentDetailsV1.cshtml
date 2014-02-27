@@ -1,0 +1,72 @@
+﻿@model CDR.Web.Models.DOCUS_ASM_ASSIGNMENTS
+@using CDR.Web.Agents;
+@using CDR.Web.Helpers;
+
+@using (Ajax.BeginForm("AddOrUpdate", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "result",OnSuccess = "validateForm",OnBegin = "validateForm"}))
+{
+    var modelProperties = ViewData.ModelMetadata.Properties.ToArray();
+    IAssignmentLookupAgent lookUpRepository = null;
+    var lookupProperties = modelProperties.Where(p => p.AdditionalValues.ContainsKey("LookupMethodName") && p.TemplateHint == "DropDownList").ToList();
+    if (lookupProperties.Any())
+    {
+        lookUpRepository = new AssignmentLookupAgent();
+        ViewData["lookupRepository"] = lookUpRepository;
+
+    }
+    for (int i = 0; i <= modelProperties.Count(); i = i + 2)
+    {
+        var prop = modelProperties[i];
+        string elementName = prop.PropertyName;
+        string displayName = prop.DisplayName;
+        string desc = prop.Description;
+        if (displayName == null)
+        {
+            @Html.Hidden(prop.PropertyName);
+        }
+        else
+        {
+            
+    <div class="form-horizontal">
+        <div class="form-group">
+            @if (lookupProperties.Any(p => p.PropertyName == prop.PropertyName))
+            {
+                @Html.Partial("_RenderDropDownList", prop)
+            }
+            else
+            {
+                @Html.Partial("_RenderTextBox", prop)
+            }
+            @if (i + 1 < modelProperties.Count())
+            {
+                var evenProp = modelProperties[i + 1];
+                if (lookupProperties.Any(p => p.PropertyName == evenProp.PropertyName))
+                {
+                @Html.Partial("_RenderDropDownList", evenProp)
+                }
+                else
+                {
+                @Html.Partial("_RenderTextBox", evenProp)
+                }
+            }
+        </div>
+    </div>
+        }
+    }
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="ownerId" class="control-label col-xs-5"></label>
+            <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary" id="create">New Request</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="result"></div>
+}
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/AssignmentDetails.js"></script>

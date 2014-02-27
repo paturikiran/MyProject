@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CDR.Web.Models.DOCUS_ASM_ASSIGNMENTS>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed">
+        <tr>
+            <th>Account Number</th>
+            <th>Borrower Name</th>
+            <th>Date Received</th>
+            <th>Processed Status</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.Account_Number</td>
+                <td>@item.Borrower_Last_Name</td>
+                <td>@item.Date_Entered</td>
+                <td>@item.Status_Id</td>
+
+                <td>
+                    <label><a href="#"  onclick="loadModal(@item.Assignment_Id,@item.Account_Number)">Details</a></label>
+                    <a href="#"  onclick="Edit(@item.Assignment_Id,@item.Account_Number)">Update</a></td>
+
+            </tr>
+        }
+    </table>
+</div>
+
+
+<div id="detailsModal">
+    <div id="details">
+    </div>
+</div>

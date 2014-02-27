@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title = CDR</title>
+    <link href="~/App_Themes/bootstrap.css" rel="stylesheet" />
+    <link href="~/App_Themes/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/App_Themes/jquery-ui.css" rel="stylesheet" />
+    <link href="~/App_Themes/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/App_Themes/global.css" rel="stylesheet" />
+    @*<link href="~/App_Themes/jquery-ui-1.10.4.custom.css" rel="stylesheet" />*@
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+
+
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/i18N/grid.locale-en.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/helpers.js"></script>
+    <script src="~/Scripts/html5shiv.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body id="body">
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CDR</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">SubOrdinations <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Search", "Index", "SubRequestSearchUpdate")</li>
+                        <li>@Html.ActionLink("Enter New Request", "Create", "SubRequestSearchUpdate")</li>
+                        <li>@Html.ActionLink("Search Processors", "Index", "SearchProcessor")</li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assignments <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Search", "Search", "Assignments")</li>
+                        <li>@Html.ActionLink("Enter New Request", "Create", "Assignments")</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+    <div class="container-fluid col-lg-9 col-lg-push-1">
+        @RenderBody()
+    </div>
+    <div id="divModalPoup" style="display:none;height: 20px;width:50px">
+        Loading...
+        <img src="~/Images/progress_bar.gif" />
+    </div>
+
+</body>
+</html>
+

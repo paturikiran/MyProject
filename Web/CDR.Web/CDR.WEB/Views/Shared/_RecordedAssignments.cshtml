@@ -1,0 +1,130 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using System.Security.Cryptography
+@using CDR.Web.Agents
+@using StructureMap
+@model CDR.Web.Models.DOCUS_ASM_ASSIGNMENTS
+@{
+    var lookupData = ObjectFactory.GetInstance<IAssignmentLookupAgent>();
+    var modelProperties = ViewData.ModelMetadata.Properties.ToArray();
+}
+@using (Html.BeginForm("AddOrUpdate", "Assignments", FormMethod.Post, new { encType = "multipart/form-data", id = "assignmentForm", name = "assignment" }))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label  class="control-label col-xs-2">Account Number:</label>
+            <div class="col-xs-2">
+                @Model.ACCOUNT_NUMBER
+            </div>
+            <label  class="control-label col-xs-2">Recording Status:</label>
+            <div class="col-xs-2">
+                @Html.DropDownListFor(m => m.RECORDED_STATUS_ID, new SelectList(lookupData.RecordingStatus, "LOOKUP_ID", "LOOKUP_VALUE"), new { id = "ddlRecordStatus", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">Request Type</label>
+            <div class="col-xs-2">
+                @{
+    var firstOrDefault = lookupData.RequestType.FirstOrDefault(x => x.LOOKUP_ID == Model.REQUEST_TYPE_ID);
+                }
+                @if (firstOrDefault != null)
+                {
+                    @firstOrDefault.LOOKUP_VALUE
+                }
+            </div>
+            <label class="control-label col-xs-2">County Recorded</label>
+            <div class="col-xs-2">
+                @Html.TextBoxFor(m => m.RECORDED_COUNTY, null, new { id = "txtRecordCounty", @class = "form-control change" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">Request Date:</label>
+            <div class="col-xs-2">
+                @if (Model.REQUEST_DATE != null)
+                {
+                    @Model.REQUEST_DATE.Value.ToShortDateString()
+                }
+            </div>
+            <label class="control-label col-xs-2">Date Recorded</label>
+            <div class="col-xs-2">
+                @Html.TextBoxFor(m => m.RECORDED_DATE, null, new { id = "recordedDate", @class = "form-control change" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">Borrower Last Name:</label>
+            <div class="col-xs-2">
+                @Model.BORROWER_LAST_NAME
+            </div>
+            <label class="control-label col-xs-2">Doc#/Inst#</label>
+            <div class="col-xs-2">
+                @Html.TextBoxFor(m => m.RECORDED_DOC_INST_NUM, null, new { id = "installmentNumber", @class = "form-control change" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">Doc Type</label>
+            <div class="col-xs-2">
+
+                @{
+    var doctype = lookupData.DocumentType.FirstOrDefault(x => x.LOOKUP_ID == Model.DOC_TYPE_ID);
+                }
+                @if (doctype != null)
+                {
+                    @doctype.LOOKUP_VALUE
+                }
+            </div>
+
+            <label class="control-label col-xs-2">Book</label>
+            <div class="col-xs-2">
+                @Html.TextBoxFor(m => m.RECORDED_BOOK, null, new { id = "recordeBook", @class = "form-control change" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2">Assignor</label>
+            <div class="col-xs-2">
+                @Model.ASSIGNOR
+                @*@{
+                    var assingor = lookupData.Assi.FirstOrDefault(x => x.LOOKUP_ID == Model.DOC_TYPE_ID);
+                                }
+                                @if (doctype != null)
+                                {
+                                    @doctype.LOOKUP_VALUE
+                                }*@
+            </div>
+
+            <label class="control-label col-xs-2">Page</label>
+            <div class="col-xs-2">
+                @Html.TextBoxFor(m => m.RECORDED_PAGE, null, new { id = "recordedPage", @class = "form-control change" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-2">Assignee</label>
+            <div class="col-xs-2">
+                @Model.ASSIGNEE
+                @*@{
+                    var assingor = lookupData.Assi.FirstOrDefault(x => x.LOOKUP_ID == Model.DOC_TYPE_ID);
+                                }
+                                @if (doctype != null)
+                                {
+                                    @doctype.LOOKUP_VALUE
+                                }*@
+            </div>
+
+        </div>
+    </div>
+    <div class="form-horizontal ">
+        <div class="form-group">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-6">
+                <button type="submit" class="btn btn-primary" id="submitData" onclick="submitAssignment(event)">Save</button>
+                <button type="button" class="btn btn-primary" id="cancel" onclick="cancelChanges()">Cancel</button>
+            </div>
+
+        </div><label id="result"></label>
+    </div>
+    
+    foreach (var item in modelProperties)
+    {
+    @Html.Hidden(item.PropertyName)
+    }
+}
+<script src="~/Scripts/RecordedAssignments.js"></script>

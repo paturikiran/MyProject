@@ -1,0 +1,13 @@
+﻿@model CDR.Web.Models.DOCUS_ASM_ASSIGNMENTS
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_cdrLayout.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-title panel-heading">Assignments New Request</div>
+    <div class="panel-body">@Html.Partial("_AssignmentDetails", Model)</div>
+</div>
+
+<script src="~/Scripts/AssignmentSearchAndCreate.js"></script>
+
+@*<script src="~/Scripts/bootstrap.js"></script>*@

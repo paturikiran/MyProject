@@ -1,0 +1,207 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using CDR.Web.Agents
+@model CDR.Web.Models.DOCUS_ASM_ASSIGNMENTS
+@using (Ajax.BeginForm("AddOrUpdate", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "result" }))
+{
+    var modelProperties = ViewData.ModelMetadata.Properties.ToArray();
+    IAssignmentLookupAgent lookUpRepository = null;
+    var lookupProperties = modelProperties.Where(p => p.AdditionalValues.ContainsKey("LookupMethodName") && p.TemplateHint == "DropDownList").ToList();
+
+    //var lookUpRepository = ViewData["lookupRepository"];
+    if (lookupProperties.Any())
+    {
+        lookUpRepository = new AssignmentLookupAgent();
+        ViewData["lookupRepository"] = ViewData["lookupRepository"] ?? lookUpRepository;
+
+    }
+
+
+    for (var i = 0; i <= modelProperties.Count(); i = i + 2)
+    {
+        var prop = modelProperties[i];
+        var elementName = prop.PropertyName;
+        var displayName = prop.DisplayName;
+        var dataType = prop.DataTypeName;
+        var desc = prop.Description;
+        if (displayName == null)
+        {
+            @Html.Hidden(prop.PropertyName);
+        }
+        else
+        {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="@(elementName)">@displayName</label>
+                    @if (lookupProperties.Any(p => p.PropertyName == prop.PropertyName))
+                    {
+
+                        <div class="col-xs-2">
+                            @if (lookUpRepository != null)
+                            {
+                                var lookupKey = prop.AdditionalValues["LookupMethodName"].ToString();
+                                var propertyInfo = lookUpRepository.GetType().GetProperty(lookupKey);
+                                var lookUpData = propertyInfo.GetValue(lookUpRepository, null) as IEnumerable<object>;
+                                @Html.DropDownList(elementName, new SelectList(lookUpData, "LOOKUP_ID", "LOOKUP_VALUE"), new { title = desc, id = "ddl" + elementName, @class = "form-control" })
+                            }
+                        </div>
+                        <a href="#" id="@elementName" onclick="addLookUp(this)">+</a> @*<div class="col-xs-2">@Html.ValidationMessage(prop.PropertyName)</div>*@
+                    }
+                    else if (!desc.IsEmpty())
+                    {
+                        <div class="col-xs-2">
+
+                         <label>Yes</label>   @Html.RadioButton(elementName, true, new { title = desc, id = elementName })
+                            <label>No</label>  @Html.RadioButton(elementName, false, new { title = desc, id = elementName })
+
+                        </div>
+                    }
+                    else
+                    {
+                        @*<label class="control-label col-xs-2" for="@(elementName)">@displayName</label>*@
+                        <div class="col-xs-2">
+                            @Html.TextBox(elementName, null, new { title = desc, id = elementName, @class = dataType == "Date" ? "form-control datepicker" : "form-control" })
+                        </div>
+                    }
+                    <div class="col-xs-2">@Html.ValidationMessage(prop.PropertyName)</div>
+
+                    @*for *@
+                    @if (i + 1 < modelProperties.Count())
+                    {
+                        var evenProp = modelProperties[i + 1];
+                        var evenelementName = evenProp.PropertyName;
+                        var evendisplayName = evenProp.DisplayName;
+                        var evenDataType = evenProp.DataTypeName;
+                        var evendesc = evenProp.Description;
+                        <label class="control-label col-xs-2" for="@(evenelementName)">@evendisplayName</label>
+                        if (lookupProperties.Any(p => p.PropertyName == evenProp.PropertyName))
+                        {
+
+                            <div class="col-xs-2">
+                                @if (lookUpRepository != null)
+                                {
+                                    var lookupKey = evenProp.AdditionalValues["LookupMethodName"].ToString();
+                                    var propertyInfo = lookUpRepository.GetType().GetProperty(lookupKey);
+                                    var lookUpData = propertyInfo.GetValue(lookUpRepository, null) as IEnumerable<object>;
+                                    @Html.DropDownList(evenelementName, new SelectList(lookUpData, "LOOKUP_ID", "LOOKUP_VALUE"), new { title = desc, id = evenelementName, @class = "form-control" })
+                                }
+                            </div>
+                        }
+                        else if (!evendesc.IsEmpty())
+                        { <div class="col-xs-2">
+                              <label>Yes</label> @Html.RadioButton(evenelementName, true, new { title = desc, id = elementName })
+                              <lable>No</lable> @Html.RadioButton(evenelementName, false, new { title = desc, id = elementName })
+                        </div>
+                        }
+
+                        else
+                        {
+                            <div class="col-xs-2">
+                                @Html.TextBox(evenelementName, null, new { title = desc, id = evenelementName, @class = dataType == "Date" ? "form-control datepicker" : "form-control" })
+                            </div>
+                        }
+
+                        <div class="col-xs-2">@Html.ValidationMessage(evenProp.PropertyName)</div>
+                    }
+
+                </div>
+            </div>
+        }
+    }
+    <div class="col-lg-8" style="margin-left: 16%">
+        <div id="custodianDetailsPanel" class="panel panel-default">
+            <div class="panel-heading">Custodian Details</div>
+            <div class="panel-body form-horizontal" id="custodianDetails">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-xs-3">Custodians</label>
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control" id="txtCustodian" />
+                        </div>
+                        <label class="control-label col-xs-3">Acquired from</label>
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control" id="txtAcquiredFrom" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-xs-3">Custodian Ref Number</label>
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control" id="txtCustodianRef" />
+                        </div>
+                        <label class="control-label col-xs-3">Servicing For</label>
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control" id="txtServicingFor" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-xs-3">MERS Info Number</label>
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control" id="txtMersInfoNumber" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal ">
+        <div class="form-group">
+            <label for="create" class="control-label col-xs-5"></label>
+            <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary" id="create">@ViewData["TransactionType"]</button><div id="result"></div>
+            </div>
+        </div>
+    </div>
+    <div id="addLookUpModal" class="modal">
+        <div class="modal-dialog" style="width: 50%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add Look Up Value</h4>
+                    <div id="">
+                        <div class="form-horizontal">
+                            @*<div class="form-group">
+                                    <label class="control-label col-xs-3">LookUp Section</label>
+                                    <div class="col-xs-3">
+                                      <input type="text"/>
+                                    </div>
+                                </div>*@
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Look Up Type</label>
+                                <div class="col-xs-3">
+                                    <input type="text" id="txtLookupType" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Look Up Value</label>
+                                <div class="col-xs-3">
+                                    <input type="text" id="txtValue" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3"></label>
+                                <div class="col-xs-3">
+                                    <button type="submit" id="btnSubmit" class="btn">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/AssignmentDetails.js"></script>

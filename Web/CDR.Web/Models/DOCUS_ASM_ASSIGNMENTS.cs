@@ -17,8 +17,8 @@ namespace CDR.Web.Models
     public class DOCUS_ASM_ASSIGNMENTS : IAssignments
     {
         private IApiRepository<DOCUS_ASM_ASSIGNMENTS> apiInstance;
-        private DateTime? _dateEntered = DateTime.Now;
-        private DateTime? _dateAssigned = DateTime.Now;
+       // private DateTime? _dateEntered = DateTime.Now.Date;
+       // private DateTime? _dateAssigned = DateTime.Now.Date;
         public DOCUS_ASM_ASSIGNMENTS()
         {
             apiInstance = new ApiRepository<DOCUS_ASM_ASSIGNMENTS>();
@@ -39,32 +39,27 @@ namespace CDR.Web.Models
         [CustomDropDown(LookupMethodName = "RequestReason", AddLookupData = false, LookupType = "Request Reason")]
         public int? REQUEST_REASON_ID { get; set; }
 
-        [Display(Name = "Doc Type")]
-        [CustomDropDown(LookupMethodName = "DocumentType", AddLookupData = false, LookupType = "Doc Type")]
-        public int? DOC_TYPE_ID { get; set; }
+
 
         [Display(Name = "Request Date")]
         [CustomTextBox(IsDateType = true, IsMultiline = false)]
         public DateTime? REQUEST_DATE { get; set; }
 
         [Display(Name = "Date Entered")]
-        [CustomTextBox(IsDateType = true, IsMultiline = false)]
-        public DateTime? DATE_ENTERED { get { return _dateEntered; } set { _dateEntered = value; } }
+        [CustomTextBox(IsDateType = true, IsMultiline = false,IsReadonly = true)]
+        public DateTime? DATE_ENTERED { get; set; }
 
-        [Display(Name = "Entered By")]
-        [CustomDropDown(LookupMethodName = "EnteredBy", AddLookupData = false, LookupType = "Entered By")]
-        public int? REQUEST_ENTERED_BY_ID { get; set; }
+        //  public DateTime? DATE_ENTERED { get { return _dateEntered; } set { _dateEntered = value; } }
 
-        [Display(Name = "Requestor Name")]
-        [CustomDropDown(LookupMethodName = "RequestorName", AddLookupData = true, LookupType = "Requestor Name")]
-        public int? REQUESTOR_NAME_ID { get; set; }
+        
 
-        [Display(Name = "MERS", Description = "MERS")]
-        public bool? MERS_INDICATOR { get; set; }
+        [Display(Name = "Doc Type")]
+        [CustomDropDown(LookupMethodName = "DocumentType", AddLookupData = false, LookupType = "Doc Type")]
+        public int? DOC_TYPE_ID { get; set; }
 
-        [Display(Name = "MERS Updated", Description = "MERS Updated")]
-        public bool? MERS_UPDATED { get; set; }
-
+        [Display(Name = "Assigned To")]
+        [CustomDropDown(LookupMethodName = "AssignedTo", AddLookupData = true, LookupType = "Assigned To")]
+        public int? ASSIGNED_TO_ID { get; set; }
         [Display(Name = "Assignor")]
         [CustomTextBox(IsDateType = false, IsMultiline = true)]
         public string ASSIGNOR { get; set; }
@@ -73,9 +68,19 @@ namespace CDR.Web.Models
         [CustomTextBox(IsDateType = false, IsMultiline = true)]
         public string ASSIGNEE { get; set; }
 
-        [Display(Name = "Assigned To")]
-        [CustomDropDown(LookupMethodName = "AssignedTo", AddLookupData = true, LookupType = "Assigned To")]
-        public int? ASSIGNED_TO_ID { get; set; }
+        [Display(Name = "MERS", Description = "MERS")]
+        public bool? MERS_INDICATOR { get; set; }
+
+        [Display(Name = "MERS Updated", Description = "MERS Updated")]
+        public bool? MERS_UPDATED { get; set; }
+
+        [Display(Name = "Entered By")]
+        [CustomDropDown(LookupMethodName = "EnteredBy", AddLookupData = false, LookupType = "Entered By")]
+        public int? REQUEST_ENTERED_BY_ID { get; set; }
+
+        [Display(Name = "Requestor Name")]
+        [CustomDropDown(LookupMethodName = "RequestorName", AddLookupData = true, LookupType = "Requestor Name")]
+        public int? REQUESTOR_NAME_ID { get; set; }
 
         [Display(Name = "Processed By")]
         [CustomDropDown(LookupMethodName = "ProcessedBy", AddLookupData = false, LookupType = "Processed By")]
@@ -181,7 +186,7 @@ namespace CDR.Web.Models
         public string TransactionType { get; set; }
 
         public string Status { get; set; }
-
+        public string DocumentType { get; set; }
 
         public bool IsNewRecordedAssignemnt { get; set; }
 
@@ -213,9 +218,21 @@ namespace CDR.Web.Models
             var statusLookup = ObjectFactory.GetInstance<IAssignmentLookupAgent>();
             if (assignments.STATUS_ID != null)
             {
-                var firstOrDefault = statusLookup.Status.FirstOrDefault(x => x.LOOKUP_ID.Equals(assignments.STATUS_ID));
+                var firstOrDefault = statusLookup.Status.FirstOrDefault(x => x.LOOKUP_ID.Equals(assignments.STATUS_ID) && assignments.STATUS_ID!=0);
                 if (firstOrDefault != null)
                     assignments.Status = firstOrDefault.LOOKUP_VALUE;
+            }
+            if (assignments.DOC_TYPE_ID != null)
+            {
+                var firstOrDefault = statusLookup.DocumentType.FirstOrDefault(x => x.LOOKUP_ID.Equals(assignments.DOC_TYPE_ID) && assignments.DOC_TYPE_ID!=0);
+                if (firstOrDefault != null)
+                    assignments.DocumentType = firstOrDefault.LOOKUP_VALUE;
+            }
+            if (assignments.DATE_ENTERED!=null)
+            {
+                assignments.DATE_ENTERED = assignments.DATE_ENTERED.Value.ToShortDateString().Equals("1/1/0001")
+                    ? DateTime.Now.Date
+                    : assignments.DATE_ENTERED;
             }
             return assignments;
         }

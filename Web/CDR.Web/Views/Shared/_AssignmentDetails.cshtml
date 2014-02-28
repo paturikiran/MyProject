@@ -40,7 +40,7 @@
                         var lookupType = prop.AdditionalValues["LookupType"].ToString();
                         var propertyInfo = lookUpRepository.GetType().GetProperty(lookupKey);
                         var lookUpData = propertyInfo.GetValue(lookUpRepository, null) as IEnumerable<object>;
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             @Html.DropDownList(elementName, new SelectList(lookUpData, "LOOKUP_ID", "LOOKUP_VALUE"), new { title = desc, id = "ddl" + lookupKey, @class = "form-control" })
                             @Html.ValidationMessage(prop.PropertyName)
                         </div>
@@ -56,7 +56,7 @@
                 {
                     if (!desc.IsEmpty())
                     {
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             @if (desc != "CheckBox")
                             {
                                 <label>Yes</label>
@@ -79,16 +79,16 @@
                         var isMultiLine = prop.AdditionalValues.Count > 0 && Convert.ToBoolean(prop.AdditionalValues["IsMultiline"].ToString());
                         if (!isMultiLine)
                         {
-                            <div class="col-xs-2">
+                            <div class="col-xs-3">
                                 @*@Html.TextBox(elementName, isDateType ? prop.Model ?? DateTime.Now.ToShortDateString() : prop.Model, new { title = desc, id = elementName, @class = isDateType ? "form-control datepicker" : "form-control" })*@
-                                @Html.TextBox(elementName, prop.Model, new { title = desc, id = elementName, @class = isDateType ? "form-control datepicker" : "form-control" })
+                                @Html.TextBox(elementName, isDateType?Convert.ToDateTime(prop.Model).ToShortDateString()?? DateTime.Today.ToShortDateString():prop.Model, new { title = desc, id = elementName, @class = isDateType ? "form-control datepicker" : "form-control" })
                                 @Html.ValidationMessage(prop.PropertyName)
                             </div>
                         }
                         else
                         {
-                            <div class="col-xs-2">
-                                @Html.TextArea(elementName, null, new { title = desc, id = elementName, @class = "form-control", rows = "1" })
+                            <div class="col-xs-3">
+                                @Html.TextArea(elementName, null, new { title = desc, id = elementName, @class = "form-control", rows = "2" })
                                 @Html.ValidationMessage(prop.PropertyName)
                             </div>
                         }
@@ -117,7 +117,7 @@
                             var lookupType = evenProp.AdditionalValues["LookupType"].ToString();
                             var propertyInfo = lookUpRepository.GetType().GetProperty(lookupKey);
                             var lookUpData = propertyInfo.GetValue(lookUpRepository, null) as IEnumerable<object>;
-                            <div class="col-xs-2">
+                            <div class="col-xs-3">
                                 @Html.DropDownList(evenelementName, new SelectList(lookUpData, "LOOKUP_ID", "LOOKUP_VALUE"), new { title = desc, id = "ddl" + lookupKey, @class = "form-control" })
                             </div>
                             if (displayAddLookupLink)
@@ -130,7 +130,7 @@
                     {
                         if (!evendesc.IsEmpty())
                         {
-                            <div class="col-xs-2">
+                            <div class="col-xs-3">
                                 @if (evendesc != "CheckBox")
                                 { <label>Yes</label> @Html.RadioButton(evenelementName, true, new { title = desc, id = evenelementName })
                                     <label>No</label>
@@ -149,18 +149,25 @@
                         {
                             var isDateType = evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsDateType"].ToString());
                             var isMultiLine = evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsMultiline"].ToString());
+                            var isReadOnly =evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsReadOnly"].ToString());
                             if (!isMultiLine)
                             {
-                                <div class="col-xs-2">
+                                <div class="col-xs-3">
+                                    @if (evenelementName != "DATE_ENTERED")
+                                    {
+                                         @Html.TextBox(evenelementName, isDateType ? Convert.ToDateTime(evenProp.Model).ToShortDateString() ?? DateTime.Today.ToShortDateString() : evenProp.Model, new {title = desc, id = evenelementName, @class = isDateType ? "form-control datepicker" : "form-control"})
+                                    }
                                     @*@Html.TextBox(evenelementName, isDateType ? evenProp.Model ?? DateTime.Now.ToShortDateString() : evenProp.Model, new { title = desc, id = evenelementName, @class = isDateType ? "form-control datepicker" : "form-control" })*@
-                                    @Html.TextBox(evenelementName, evenProp.Model, new { title = desc, id = evenelementName, @class = isDateType ? "form-control datepicker" : "form-control" })
-                                    @Html.ValidationMessage(evenProp.PropertyName)
+                                    else
+                                    {
+                                        @Html.TextBox(evenelementName, isDateType ? evenProp.Model==null? DateTime.Now.ToShortDateString():Convert.ToDateTime(evenProp.Model).ToShortDateString():evenProp.Model, new {title = desc, id = evenelementName, disabled=true,@class = isDateType ? "form-control datepicker" : "form-control"})
+                                    } @Html.ValidationMessage(evenProp.PropertyName)
                                 </div>
                             }
                             else
                             {
-                                <div class="col-xs-2">
-                                    @Html.TextArea(evenelementName, null, new { title = desc, id = evenelementName, @class = "form-control", rows = "1" })
+                                <div class="col-xs-3">
+                                    @Html.TextArea(evenelementName, null, new { title = desc, id = evenelementName, @class = "form-control", rows = "2" })
                                     @Html.ValidationMessage(evenProp.PropertyName)
                                 </div>
                             }
@@ -182,11 +189,11 @@
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-xs-2">Custodian</label>
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <input type="text" class="form-control" id="txtCustodian" readonly="true" />
                     </div>
                     <label class="control-label col-xs-2">Acquired from</label>
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <input type="text" class="form-control" id="txtAcquiredFrom" readonly="true" />
                     </div>
                 </div>
@@ -195,11 +202,11 @@
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-xs-2">Custodian Ref Number</label>
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <input type="text" class="form-control" id="txtCustodianRef" readonly="true" />
                     </div>
                     <label class="control-label col-xs-2">Servicing For</label>
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <input type="text" class="form-control" id="txtServicingFor" readyonly="true" />
                     </div>
                 </div>
@@ -207,7 +214,7 @@
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-xs-2">MERS Info Number</label>
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <input type="text" class="form-control" id="txtMersInfoNumber" readonly="true" />
                     </div>
 
@@ -216,9 +223,8 @@
 
         </div>
     </div>
-
-
-
+    
+    
     <div class="form-horizontal ">
         <div class="form-group">
             <label for="create" class="control-label col-xs-5"></label>
@@ -263,9 +269,9 @@
     </div>
 </div>
 @*<script src="~/Scripts/bootstrap.js"></script>*@
-@*<script src="~/Scripts/AssignmentDetails.js"></script>*@
+@*<script src="~/Scripts/AssignmentDetails.js"></script>
 <script src="~/Scripts/jquery-1.8.2.min.js"></script>
-<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>*@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

@@ -11,8 +11,9 @@ namespace CDR.Web.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+            ViewData["AssignmentId"] = id;
             return View();
         }
 

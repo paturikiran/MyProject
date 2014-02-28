@@ -4,3 +4,7 @@
 }
 
 <h2>Home</h2>
+<div>@if (ViewData["AssignmentId"] != null)
+     {
+         <label class="label-info">Assignment for the record @ViewData["AssignmentId"].ToString() saved successfully </label>
+     }</div>

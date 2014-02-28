@@ -76,10 +76,12 @@ namespace CDR.Web.Controllers
                     case "New Request":
                         var response= _assignment.Create(assignment);
                         result = Json(new {data = response ? "Record Created Successuflly" : "Error Occurred",IsSuccess=result});
+                        //RedirectToAction("Index", "Home",new{ id = assignment.ACCOUNT_NUMBER});
                         break;
                     default:
                         var update= _assignment.Update(assignment);
                         result= Json(new { data = update ? "Record Updated Successuflly" : "Error Occurred",IsSuccess= result });
+                        //RedirectToAction("Index", "Home", new { id = assignment.ACCOUNT_NUMBER });
                         break;
                 }
             }
@@ -109,7 +111,14 @@ namespace CDR.Web.Controllers
             var obj = new DOCUS_ASM_ASSIGNMENTS();
             obj.UPDATED_BY = "abcd";
             obj.CREATED_BY = "bcde";
-            obj.DATE_CREATED = DateTime.Now;
+            var defaultDate = DateTime.Now.Date;
+            obj.DATE_ENTERED = defaultDate;
+            obj.REQUEST_DATE = defaultDate;
+            obj.DATE_CREATED = defaultDate;
+            obj.COLLATERAL_FILE_REQUEST_DATE = defaultDate;
+            obj.LAST_STATUS_DATE = defaultDate;
+            obj.FOLLOW_UP_DATE = defaultDate;
+            obj.SALE_DATE = defaultDate;
             obj.DATE_UPDATED = DateTime.Now;
             return obj;
         }

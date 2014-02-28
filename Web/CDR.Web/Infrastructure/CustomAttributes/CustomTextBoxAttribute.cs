@@ -22,6 +22,7 @@ namespace CDR.Web.Infrastructure.CustomAttributes
 
         public bool IsMultiline { get; set; }
 
+        public bool IsReadonly { get; set; }
         public DateTime? DefaultDate { get; set; }
 
 
@@ -33,6 +34,7 @@ namespace CDR.Web.Infrastructure.CustomAttributes
         {
             metadata.AdditionalValues.Add("IsDateType", this.IsDateType);
             metadata.AdditionalValues.Add("IsMultiline", this.IsMultiline);
+            metadata.AdditionalValues.Add("IsReadOnly",this.IsReadonly);
         }
     }
 

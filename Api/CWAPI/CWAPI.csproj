@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AsmAssignmentNotesController.cs" />
     <Compile Include="Controllers\AsmAssignmentsController.cs" />
     <Compile Include="Controllers\AsmLookupAssignedToController.cs" />
     <Compile Include="Controllers\AsmLookupEnteredByController.cs" />
@@ -158,6 +159,9 @@
       <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DOCUS_ASM_ASSIGNMENTS.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_ASSIGNMENT_NOTES.cs">
       <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DOCUS_ASM_GET_GTA_FIELDS_Result.cs">
@@ -295,6 +299,7 @@
     <Compile Include="Repository\IRepo\IDocSubRequestRepository.cs" />
     <Compile Include="Repository\IRepo\IDocSysCustodianRepository.cs" />
     <Compile Include="Repository\IRepo\ICreateLookup.cs" />
+    <Compile Include="Repository\IRepo\INotes.cs" />
     <Compile Include="Repository\Repo\CreateLookup.cs" />
     <Compile Include="Repository\Repo\DocAsmAssignmentsRepository.cs" />
     <Compile Include="Repository\Repo\DocAsmLookupAssignedToRepository.cs" />
@@ -315,6 +320,7 @@
     <Compile Include="Repository\Repo\DocSubRequestRepository.cs" />
     <Compile Include="Repository\Repo\DocSysCustodianRepository.cs" />
     <Compile Include="Models\Lookup.cs" />
+    <Compile Include="Repository\Repo\NotesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />

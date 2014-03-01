@@ -14,5 +14,6 @@ namespace CDR.Web.Api
         bool Update(T obj, string requestUrl);
 
         bool Insert(T obj, string requestUrl);
+        int Create(T obj, string requestUrl);
     }
 }

@@ -31,10 +31,22 @@ namespace CDR.Web.Api
             return response.IsSuccessStatusCode;
         }
 
-        public bool Insert(T obj,string requestUrl)
+        public bool Insert(T obj, string requestUrl)
         {
             HttpResponseMessage response = ApiConnection.ApiConnect().PostAsJsonAsync(requestUrl, obj).Result;
             return response.IsSuccessStatusCode;
+        }
+
+       
+        public int Create(T obj, string requestUrl)
+        {
+            HttpResponseMessage response = ApiConnection.ApiConnect().PostAsJsonAsync(requestUrl, obj).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var returnType = response.Content.ReadAsAsync<int>().Result;
+                return returnType;
+            }
+            return 0;
         }
     }
 }

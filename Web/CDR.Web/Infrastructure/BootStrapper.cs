@@ -35,6 +35,7 @@ namespace CDR.Web.Infrastructure
                 expression.For<ISubRequestLookupAgent>().Use<SubRequestLookupAgent>();
                 expression.For<ICustodianDetails>().Use<CustodianDetails>();
                 expression.For<ILookupModel>().Use<LookupModel>();
+                expression.For<INotes>().Use<AssignmentNotes>();
 
             });
             DependencyResolver.SetResolver(new SMDependencyResolver(ObjectFactory.Container));

@@ -187,6 +187,7 @@ namespace CDR.Web.Models
 
         public string Status { get; set; }
         public string DocumentType { get; set; }
+        public string Notes { get; set; }
 
         public bool IsNewRecordedAssignemnt { get; set; }
 
@@ -207,10 +208,10 @@ namespace CDR.Web.Models
             return apiInstance.Update(assignment, url);
         }
 
-        public bool Create(DOCUS_ASM_ASSIGNMENTS assginment)
+        public int Create(DOCUS_ASM_ASSIGNMENTS assginment)
         {
             var url = Constants.CREATEASSIGNMENT;
-            return apiInstance.Insert(assginment, url);
+            return apiInstance.Create(assginment, url);
         }
 
         private DOCUS_ASM_ASSIGNMENTS TranslateASsignments(DOCUS_ASM_ASSIGNMENTS assignments)
@@ -228,11 +229,9 @@ namespace CDR.Web.Models
                 if (firstOrDefault != null)
                     assignments.DocumentType = firstOrDefault.LOOKUP_VALUE;
             }
-            if (assignments.DATE_ENTERED!=null)
+            if (assignments.DATE_ENTERED==null)
             {
-                assignments.DATE_ENTERED = assignments.DATE_ENTERED.Value.ToShortDateString().Equals("1/1/0001")
-                    ? DateTime.Now.Date
-                    : assignments.DATE_ENTERED;
+                assignments.DATE_ENTERED = DateTime.Now.Date;
             }
             return assignments;
         }

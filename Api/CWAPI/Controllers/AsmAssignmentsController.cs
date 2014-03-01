@@ -29,10 +29,9 @@ namespace CWAPI.Controllers
         }
 
         [HttpPost]
-        public void Insert(DOCUS_ASM_ASSIGNMENTS assignmentsRequest)
+        public int Insert(DOCUS_ASM_ASSIGNMENTS assignmentsRequest)
         {
-            _repoObj.Insert(assignmentsRequest);
-
+           return _repoObj.Insert(assignmentsRequest);
         }
 
         [HttpPut]

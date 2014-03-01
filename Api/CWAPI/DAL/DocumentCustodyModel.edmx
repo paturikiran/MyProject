@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Document_CustodyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Document_CustodyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DOCUS_ASM_ASSIGNEE">
           <Key>
             <PropertyRef Name="Assignee_Id" />
@@ -13,6 +13,15 @@
           <Property Name="Assignee_Name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Trustname_Required" Type="bit" Nullable="false" />
           <Property Name="Sort_Order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUS_ASM_ASSIGNMENT_NOTES">
+          <Key>
+            <PropertyRef Name="ASSIGNMENT_NOTES_ID" />
+          </Key>
+          <Property Name="ASSIGNMENT_NOTES_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASSIGNMENT_ID" Type="int" Nullable="false" />
+          <Property Name="NOTE" Type="varchar" MaxLength="512" />
+          <Property Name="NOTE_DATE" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="DOCUS_ASM_ASSIGNMENTS">
           <Key>
@@ -458,18 +467,6 @@ warning 6002: The table/view 'Document_Custody.dbo.DOCUS_SUB_OWNER' does not hav
           <Property Name="OWNER" Type="varchar" MaxLength="50" />
           <Property Name="SUB_REQUIREMENTS" Type="varchar" MaxLength="10" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Document_Custody.dbo.DOCUS_SYS_LOOKUP_LSCOD1_DESCRIPTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="DOCUS_SYS_LOOKUP_LSCOD1_DESCRIPTION">
-          <Property Name="LSCOD1" Type="int" />
-          <Property Name="LSCOD1Desc" Type="varchar" MaxLength="255" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Document_Custody.dbo.DOCUS_SYS_LOOKUP_SBSCOD_DESCRIPTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="DOCUS_SYS_LOOKUP_SBSCOD_DESCRIPTION">
-          <Property Name="SBSCOD" Type="int" />
-          <Property Name="SBSCODDesc" Type="varchar" MaxLength="255" />
-        </EntityType>-->
         <Function Name="DOCUS_ASM_GET_GTA_FIELDS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ACCOUNT_NUMBER" Type="int" Mode="In" />
         </Function>
@@ -518,6 +515,10 @@ warning 6013: The table/view 'Document_Custody.dbo.DOCUS_SYS_LOOKUP_SBSCOD_DESCR
           <Parameter Name="RECORDED_DOC_INST_NUM" Type="varchar" Mode="In" />
           <Parameter Name="RECORDED_BOOK" Type="varchar" Mode="In" />
           <Parameter Name="RECORDED_PAGE" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DOCUS_ASM_INSERT_ASSIGNMENT_NOTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ASSIGNMENT_ID" Type="int" Mode="In" />
+          <Parameter Name="NOTE" Type="varchar" Mode="In" />
         </Function>
         <Function Name="DOCUS_ASM_UPDATE_ASSIGNMENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ASSIGNMENT_ID" Type="int" Mode="In" />
@@ -573,6 +574,7 @@ warning 6013: The table/view 'Document_Custody.dbo.DOCUS_SYS_LOOKUP_SBSCOD_DESCR
         </Function>
         <EntityContainer Name="Document_CustodyModelStoreContainer">
           <EntitySet Name="DOCUS_ASM_ASSIGNEE" EntityType="Self.DOCUS_ASM_ASSIGNEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUS_ASM_ASSIGNMENT_NOTES" EntityType="Self.DOCUS_ASM_ASSIGNMENT_NOTES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DOCUS_ASM_ASSIGNMENTS" EntityType="Self.DOCUS_ASM_ASSIGNMENTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DOCUS_PRODLIB_CLPACMST" EntityType="Self.DOCUS_PRODLIB_CLPACMST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DOCUS_PRODLIB_CLPCLMST" EntityType="Self.DOCUS_PRODLIB_CLPCLMST" Schema="dbo" store:Type="Tables" />
@@ -722,8 +724,7 @@ FROM [dbo].[DOCUS_SUB_LOOKUP_STATUS] AS [DOCUS_SUB_LOOKUP_STATUS]</DefiningQuery
 FROM [dbo].[DOCUS_SUB_OWNER] AS [DOCUS_SUB_OWNER]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Document_CustodyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1179,7 +1180,7 @@ FROM [dbo].[DOCUS_SUB_OWNER] AS [DOCUS_SUB_OWNER]</DefiningQuery>
           <EntitySet Name="DOCUS_SUB_LOOKUP_STATUS" EntityType="Self.DOCUS_SUB_LOOKUP_STATUS" />
           <EntitySet Name="DOCUS_SUB_OWNER" EntityType="Self.DOCUS_SUB_OWNER" />
           <FunctionImport Name="DOCUS_ASM_GET_GTA_FIELDS" ReturnType="Collection(Document_CustodyModel.DOCUS_ASM_GET_GTA_FIELDS_Result)">
-            <Parameter Name="ACCOUNT_NUMBER" Mode="In" Type="Int32" />
+          <Parameter Name="ACCOUNT_NUMBER" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DOCUS_ASM_INSERT_ASSIGNMENT">
             <Parameter Name="ACCOUNT_NUMBER" Mode="In" Type="Int32" />
@@ -1279,6 +1280,11 @@ FROM [dbo].[DOCUS_SUB_OWNER] AS [DOCUS_SUB_OWNER]</DefiningQuery>
             <Parameter Name="LOOKUP_TYPE" Mode="In" Type="String" />
             <Parameter Name="LOOKUP_VALUE" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="DOCUS_ASM_ASSIGNMENT_NOTES" EntityType="Document_CustodyModel.DOCUS_ASM_ASSIGNMENT_NOTES" />
+          <FunctionImport Name="DOCUS_ASM_INSERT_ASSIGNMENT_NOTE">
+            <Parameter Name="ASSIGNMENT_ID" Mode="In" Type="Int32" />
+            <Parameter Name="NOTE" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="DOCUS_ASM_GET_GTA_FIELDS_Result">
           <Property Type="Int32" Name="AccountNumber" Nullable="false" />
@@ -1292,6 +1298,15 @@ FROM [dbo].[DOCUS_SUB_OWNER] AS [DOCUS_SUB_OWNER]</DefiningQuery>
           <Property Type="Int32" Name="SBSCOD" Nullable="true" />
           <Property Type="String" Name="ServicingFor" Nullable="true" MaxLength="255" />
         </ComplexType>
+        <EntityType Name="DOCUS_ASM_ASSIGNMENT_NOTES">
+          <Key>
+            <PropertyRef Name="ASSIGNMENT_NOTES_ID" />
+          </Key>
+          <Property Name="ASSIGNMENT_NOTES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASSIGNMENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="NOTE" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="NOTE_DATE" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1364,52 +1379,6 @@ FROM [dbo].[DOCUS_SUB_OWNER] AS [DOCUS_SUB_OWNER]</DefiningQuery>
             </EntityTypeMapping>
             <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_ASSIGNMENTS">
               <ModificationFunctionMapping>
-                <InsertFunction FunctionName="Document_CustodyModel.Store.DOCUS_ASM_INSERT_ASSIGNMENT">
-                  <ScalarProperty Name="RECORDED_PAGE" ParameterName="RECORDED_PAGE" />
-                  <ScalarProperty Name="RECORDED_BOOK" ParameterName="RECORDED_BOOK" />
-                  <ScalarProperty Name="RECORDED_DOC_INST_NUM" ParameterName="RECORDED_DOC_INST_NUM" />
-                  <ScalarProperty Name="RECORDED_DATE" ParameterName="RECORDED_DATE" />
-                  <ScalarProperty Name="RECORDED_COUNTY" ParameterName="RECORDED_COUNTY" />
-                  <ScalarProperty Name="RECORDED_STATUS_ID" ParameterName="RECORDED_STATUS_ID" />
-                  <ScalarProperty Name="SBSCOD" ParameterName="SBSCOD" />
-                  <ScalarProperty Name="LSCOD1" ParameterName="LSCOD1" />
-                  <ScalarProperty Name="MERS_INFO_NUMBER" ParameterName="MERS_INFO_NUMBER" />
-                  <ScalarProperty Name="CUST_REF_NUMBER" ParameterName="CUST_REF_NUMBER" />
-                  <ScalarProperty Name="CUSTODIAN_ID" ParameterName="CUSTODIAN_ID" />
-                  <ScalarProperty Name="RUSH" ParameterName="RUSH" />
-                  <ScalarProperty Name="ZIP" ParameterName="ZIP" />
-                  <ScalarProperty Name="STATE" ParameterName="STATE" />
-                  <ScalarProperty Name="CITY" ParameterName="CITY" />
-                  <ScalarProperty Name="ATTENTION_TO" ParameterName="ATTENTION_TO" />
-                  <ScalarProperty Name="COMPANY_ADDRESS" ParameterName="COMPANY_ADDRESS" />
-                  <ScalarProperty Name="COMPANY_NAME" ParameterName="COMPANY_NAME" />
-                  <ScalarProperty Name="DATE_COMPLETE" ParameterName="DATE_COMPLETE" />
-                  <ScalarProperty Name="SALE_DATE" ParameterName="SALE_DATE" />
-                  <ScalarProperty Name="FOLLOW_UP_DATE" ParameterName="FOLLOW_UP_DATE" />
-                  <ScalarProperty Name="LAST_STATUS_DATE" ParameterName="LAST_STATUS_DATE" />
-                  <ScalarProperty Name="TRACKING_NUMBER" ParameterName="TRACKING_NUMBER" />
-                  <ScalarProperty Name="STATUS_ID" ParameterName="STATUS_ID" />
-                  <ScalarProperty Name="THIRD_PARTY_CONTACT_INFO" ParameterName="THIRD_PARTY_CONTACT_INFO" />
-                  <ScalarProperty Name="THIRD_PARTY_CONTACT_NAME" ParameterName="THIRD_PARTY_CONTACT_NAME" />
-                  <ScalarProperty Name="AOM_IN_COL" ParameterName="AOM_IN_COL" />
-                  <ScalarProperty Name="COLLATERAL_FILE_REQUEST_DATE" ParameterName="COLLATERAL_FILE_REQUEST_DATE" />
-                  <ScalarProperty Name="ASSIGNED_DATE" ParameterName="ASSIGNED_DATE" />
-                  <ScalarProperty Name="PROCESSED_BY_ID" ParameterName="PROCESSED_BY_ID" />
-                  <ScalarProperty Name="ASSIGNED_TO_ID" ParameterName="ASSIGNED_TO_ID" />
-                  <ScalarProperty Name="ASSIGNEE" ParameterName="ASSIGNEE" />
-                  <ScalarProperty Name="ASSIGNOR" ParameterName="ASSIGNOR" />
-                  <ScalarProperty Name="MERS_UPDATED" ParameterName="MERS_UPDATED" />
-                  <ScalarProperty Name="MERS_INDICATOR" ParameterName="MERS_INDICATOR" />
-                  <ScalarProperty Name="REQUESTOR_NAME_ID" ParameterName="REQUESTOR_NAME_ID" />
-                  <ScalarProperty Name="REQUEST_ENTERED_BY_ID" ParameterName="REQUEST_ENTERED_BY_ID" />
-                  <ScalarProperty Name="DATE_ENTERED" ParameterName="DATE_ENTERED" />
-                  <ScalarProperty Name="REQUEST_DATE" ParameterName="REQUEST_DATE" />
-                  <ScalarProperty Name="DOC_TYPE_ID" ParameterName="DOC_TYPE_ID" />
-                  <ScalarProperty Name="REQUEST_REASON_ID" ParameterName="REQUEST_REASON_ID" />
-                  <ScalarProperty Name="REQUEST_TYPE_ID" ParameterName="REQUEST_TYPE_ID" />
-                  <ScalarProperty Name="BORROWER_LAST_NAME" ParameterName="BORROWER_LAST_NAME" />
-                  <ScalarProperty Name="ACCOUNT_NUMBER" ParameterName="ACCOUNT_NUMBER" />
-                </InsertFunction>
                 <UpdateFunction FunctionName="Document_CustodyModel.Store.DOCUS_ASM_UPDATE_ASSIGNMENT">
                   <ScalarProperty Name="RECORDED_PAGE" ParameterName="RECORDED_PAGE" Version="Current" />
                   <ScalarProperty Name="RECORDED_BOOK" ParameterName="RECORDED_BOOK" Version="Current" />
@@ -1457,6 +1426,52 @@ FROM [dbo].[DOCUS_SUB_OWNER] AS [DOCUS_SUB_OWNER]</DefiningQuery>
                   <ScalarProperty Name="ACCOUNT_NUMBER" ParameterName="ACCOUNT_NUMBER" Version="Current" />
                   <ScalarProperty Name="ASSIGNMENT_ID" ParameterName="ASSIGNMENT_ID" Version="Current" />
                 </UpdateFunction>
+                <InsertFunction FunctionName="Document_CustodyModel.Store.DOCUS_ASM_INSERT_ASSIGNMENT">
+                  <ScalarProperty Name="RECORDED_PAGE" ParameterName="RECORDED_PAGE" />
+                  <ScalarProperty Name="RECORDED_BOOK" ParameterName="RECORDED_BOOK" />
+                  <ScalarProperty Name="RECORDED_DOC_INST_NUM" ParameterName="RECORDED_DOC_INST_NUM" />
+                  <ScalarProperty Name="RECORDED_DATE" ParameterName="RECORDED_DATE" />
+                  <ScalarProperty Name="RECORDED_COUNTY" ParameterName="RECORDED_COUNTY" />
+                  <ScalarProperty Name="RECORDED_STATUS_ID" ParameterName="RECORDED_STATUS_ID" />
+                  <ScalarProperty Name="SBSCOD" ParameterName="SBSCOD" />
+                  <ScalarProperty Name="LSCOD1" ParameterName="LSCOD1" />
+                  <ScalarProperty Name="MERS_INFO_NUMBER" ParameterName="MERS_INFO_NUMBER" />
+                  <ScalarProperty Name="CUST_REF_NUMBER" ParameterName="CUST_REF_NUMBER" />
+                  <ScalarProperty Name="CUSTODIAN_ID" ParameterName="CUSTODIAN_ID" />
+                  <ScalarProperty Name="RUSH" ParameterName="RUSH" />
+                  <ScalarProperty Name="ZIP" ParameterName="ZIP" />
+                  <ScalarProperty Name="STATE" ParameterName="STATE" />
+                  <ScalarProperty Name="CITY" ParameterName="CITY" />
+                  <ScalarProperty Name="ATTENTION_TO" ParameterName="ATTENTION_TO" />
+                  <ScalarProperty Name="COMPANY_ADDRESS" ParameterName="COMPANY_ADDRESS" />
+                  <ScalarProperty Name="COMPANY_NAME" ParameterName="COMPANY_NAME" />
+                  <ScalarProperty Name="DATE_COMPLETE" ParameterName="DATE_COMPLETE" />
+                  <ScalarProperty Name="SALE_DATE" ParameterName="SALE_DATE" />
+                  <ScalarProperty Name="FOLLOW_UP_DATE" ParameterName="FOLLOW_UP_DATE" />
+                  <ScalarProperty Name="LAST_STATUS_DATE" ParameterName="LAST_STATUS_DATE" />
+                  <ScalarProperty Name="TRACKING_NUMBER" ParameterName="TRACKING_NUMBER" />
+                  <ScalarProperty Name="STATUS_ID" ParameterName="STATUS_ID" />
+                  <ScalarProperty Name="THIRD_PARTY_CONTACT_INFO" ParameterName="THIRD_PARTY_CONTACT_INFO" />
+                  <ScalarProperty Name="THIRD_PARTY_CONTACT_NAME" ParameterName="THIRD_PARTY_CONTACT_NAME" />
+                  <ScalarProperty Name="AOM_IN_COL" ParameterName="AOM_IN_COL" />
+                  <ScalarProperty Name="COLLATERAL_FILE_REQUEST_DATE" ParameterName="COLLATERAL_FILE_REQUEST_DATE" />
+                  <ScalarProperty Name="ASSIGNED_DATE" ParameterName="ASSIGNED_DATE" />
+                  <ScalarProperty Name="PROCESSED_BY_ID" ParameterName="PROCESSED_BY_ID" />
+                  <ScalarProperty Name="ASSIGNED_TO_ID" ParameterName="ASSIGNED_TO_ID" />
+                  <ScalarProperty Name="ASSIGNEE" ParameterName="ASSIGNEE" />
+                  <ScalarProperty Name="ASSIGNOR" ParameterName="ASSIGNOR" />
+                  <ScalarProperty Name="MERS_UPDATED" ParameterName="MERS_UPDATED" />
+                  <ScalarProperty Name="MERS_INDICATOR" ParameterName="MERS_INDICATOR" />
+                  <ScalarProperty Name="REQUESTOR_NAME_ID" ParameterName="REQUESTOR_NAME_ID" />
+                  <ScalarProperty Name="REQUEST_ENTERED_BY_ID" ParameterName="REQUEST_ENTERED_BY_ID" />
+                  <ScalarProperty Name="DATE_ENTERED" ParameterName="DATE_ENTERED" />
+                  <ScalarProperty Name="REQUEST_DATE" ParameterName="REQUEST_DATE" />
+                  <ScalarProperty Name="DOC_TYPE_ID" ParameterName="DOC_TYPE_ID" />
+                  <ScalarProperty Name="REQUEST_REASON_ID" ParameterName="REQUEST_REASON_ID" />
+                  <ScalarProperty Name="REQUEST_TYPE_ID" ParameterName="REQUEST_TYPE_ID" />
+                  <ScalarProperty Name="BORROWER_LAST_NAME" ParameterName="BORROWER_LAST_NAME" />
+                  <ScalarProperty Name="ACCOUNT_NUMBER" ParameterName="ACCOUNT_NUMBER" />
+                </InsertFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1859,6 +1874,25 @@ FROM [dbo].[DOCUS_SUB_OWNER] AS [DOCUS_SUB_OWNER]</DefiningQuery>
           <FunctionImportMapping FunctionImportName="DOCUS_ASM_INSERT_ASSIGNMENT" FunctionName="Document_CustodyModel.Store.DOCUS_ASM_INSERT_ASSIGNMENT" />
           <FunctionImportMapping FunctionImportName="DOCUS_ASM_UPDATE_ASSIGNMENT" FunctionName="Document_CustodyModel.Store.DOCUS_ASM_UPDATE_ASSIGNMENT" />
           <FunctionImportMapping FunctionImportName="DOCUS_SYS_ADD_LOOKUP_VALUE" FunctionName="Document_CustodyModel.Store.DOCUS_SYS_ADD_LOOKUP_VALUE" />
+          <EntitySetMapping Name="DOCUS_ASM_ASSIGNMENT_NOTES">
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_ASSIGNMENT_NOTES">
+              <MappingFragment StoreEntitySet="DOCUS_ASM_ASSIGNMENT_NOTES">
+                <ScalarProperty Name="NOTE_DATE" ColumnName="NOTE_DATE" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+                <ScalarProperty Name="ASSIGNMENT_ID" ColumnName="ASSIGNMENT_ID" />
+                <ScalarProperty Name="ASSIGNMENT_NOTES_ID" ColumnName="ASSIGNMENT_NOTES_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="Document_CustodyModel.DOCUS_ASM_ASSIGNMENT_NOTES">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Document_CustodyModel.Store.DOCUS_ASM_INSERT_ASSIGNMENT_NOTE">
+                  <ScalarProperty Name="NOTE" ParameterName="NOTE" />
+                  <ScalarProperty Name="ASSIGNMENT_ID" ParameterName="ASSIGNMENT_ID" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DOCUS_ASM_INSERT_ASSIGNMENT_NOTE" FunctionName="Document_CustodyModel.Store.DOCUS_ASM_INSERT_ASSIGNMENT_NOTE" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

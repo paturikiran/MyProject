@@ -63,6 +63,7 @@ namespace CWAPI.DAL
         public DbSet<DOCUS_SUB_LOOKUP_REQUEST_TYPE> DOCUS_SUB_LOOKUP_REQUEST_TYPE { get; set; }
         public DbSet<DOCUS_SUB_LOOKUP_STATUS> DOCUS_SUB_LOOKUP_STATUS { get; set; }
         public DbSet<DOCUS_SUB_OWNER> DOCUS_SUB_OWNER { get; set; }
+        public DbSet<DOCUS_ASM_ASSIGNMENT_NOTES> DOCUS_ASM_ASSIGNMENT_NOTES { get; set; }
     
         public virtual ObjectResult<DOCUS_ASM_GET_GTA_FIELDS_Result> DOCUS_ASM_GET_GTA_FIELDS(Nullable<int> aCCOUNT_NUMBER)
         {
@@ -454,6 +455,19 @@ namespace CWAPI.DAL
                 new ObjectParameter("LOOKUP_VALUE", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DOCUS_SYS_ADD_LOOKUP_VALUE", lOOKUP_SECTIONParameter, lOOKUP_TYPEParameter, lOOKUP_VALUEParameter);
+        }
+    
+        public virtual int DOCUS_ASM_INSERT_ASSIGNMENT_NOTE(Nullable<int> aSSIGNMENT_ID, string nOTE)
+        {
+            var aSSIGNMENT_IDParameter = aSSIGNMENT_ID.HasValue ?
+                new ObjectParameter("ASSIGNMENT_ID", aSSIGNMENT_ID) :
+                new ObjectParameter("ASSIGNMENT_ID", typeof(int));
+    
+            var nOTEParameter = nOTE != null ?
+                new ObjectParameter("NOTE", nOTE) :
+                new ObjectParameter("NOTE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DOCUS_ASM_INSERT_ASSIGNMENT_NOTE", aSSIGNMENT_IDParameter, nOTEParameter);
         }
     }
 }

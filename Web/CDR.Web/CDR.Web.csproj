@@ -209,6 +209,7 @@
     <Compile Include="Infrastructure\CustomAttributes\DropDownAttribute.cs" />
     <Compile Include="Infrastructure\SMDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AssignmentNotes.cs" />
     <Compile Include="Models\CustodianDetails.cs" />
     <Compile Include="Models\DOCUS_ASM_ASSIGNMENTS.cs" />
     <Compile Include="Models\DOCUS_ASM_LOOKUP_ASSIGNED_TO.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Models\DOCUS_SYS_CUSTODIAN.cs" />
     <Compile Include="Models\IAssignments.cs" />
     <Compile Include="Models\ICustodianDetails.cs" />
+    <Compile Include="Models\INotes.cs" />
     <Compile Include="Models\ISubRequest.cs" />
     <Compile Include="Api\ApiRepository.cs" />
     <Compile Include="Api\IApiRepository.cs" />
@@ -392,6 +394,7 @@
     <Content Include="Views\Shared\_html5shiv.cshtml" />
     <Content Include="Views\Shared\_validationSummary.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Notes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

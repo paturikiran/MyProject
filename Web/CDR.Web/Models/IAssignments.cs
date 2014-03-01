@@ -11,6 +11,6 @@ namespace CDR.Web.Models
         //IEnumerable<DOCUS_SUB_REQUEST> GetSubRequestByRepresentative(int representativeId);
         IEnumerable<DOCUS_ASM_ASSIGNMENTS> GetAssignments(int Id);
         bool Update(DOCUS_ASM_ASSIGNMENTS assignment);
-        bool Create(DOCUS_ASM_ASSIGNMENTS assginment);
+        int Create(DOCUS_ASM_ASSIGNMENTS assginment);
     }
 }

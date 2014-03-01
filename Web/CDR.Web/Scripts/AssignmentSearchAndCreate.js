@@ -7,8 +7,8 @@
     //loadGridData();
     // $('#loadGrid').hide();
     $("#custodianDetailsPanel").hide();
-    $("body").on('blur', "#ACCOUNT_NUMBER", GetCustodianDetails);
-    
+    $("body").on('blur', "#ACCOUNT_NUMBER", GetCustodianAndNotesDetails);
+
 
 });
 
@@ -70,34 +70,46 @@ var bindDateRules = function () {
 };
 
 var getAssignments = function () {
-    // showProgressBar();
+
     var id = $('#accountNumber').val();
-    $("#jqGrid").setGridParam({ datatype: 'json' }).trigger('reloadGrid', [{ page: 1 }]);
-    var url = "GetAssignmentsById/";
-    $.ajax({
-        url: url + id,
-        contentType: 'application/html;charset=utf-8',
-        type: 'GET',
-        dataType: 'html'
-    }).success(function (result) {
-        $('#records').html(result);
-        //   hideProgressBar();
-    })
-        .error(function (xhr, status) {
-            alert(status);
-            //  hideProgressBar();
-        });
+    if (id != '') {
+        $("#jqGrid").setGridParam({ datatype: 'json' }).trigger('reloadGrid', [{ page: 1 }]);
+        var url = "GetAssignmentsById/";
+        $.ajax({
+            url: url + id,
+            contentType: 'application/html;charset=utf-8',
+            type: 'GET',
+            dataType: 'html'
+        }).success(function (result) {
+            $('#records').html(result);
+            //   hideProgressBar();
+        })
+            .error(function (xhr, status) {
+                alert(status);
+                //  hideProgressBar();
+            });
+    }
 };
 
 var testGridData = function () {
-    $('#loadGrid').show();
-    loadGridData();
     var accountNumber = $('#accountNumber').val();
-    $("#jqTable").setGridParam({ datatype: 'json', url: 'LoadjqData', mtype: 'POST', postData: { accountNumber: accountNumber } }).trigger('reloadGrid');
+    if (accountNumber != '') {
+        displayDetails(false);
+        $('#loadGrid').show();
+        loadGridData();
+        $("#jqTable").setGridParam({ datatype: 'json', url: 'LoadjqData', mtype: 'POST', postData: { accountNumber: accountNumber } }).trigger('reloadGrid');
+    }
 
 };
 
-var GridColumns = ["Id", "Account Number", "Borrower Name", "Date Received", "Status","Doc Type", "Assignor", "Assignee", "", "", ""];
+var displayDetails = function (show) {
+    if (!show)
+        $('#details').hide();
+    else
+        $('#details').show();
+};
+
+var GridColumns = ["Id", "Account Number", "Borrower Name", "Date Received", "Status", "Doc Type", "Assignor", "Assignee", "", "", ""];
 var GridColumnData = [
     { name: "ASSIGNMENT_ID", hidden: true },
     { name: "ACCOUNT_NUMBER", width: 100, align: "left" },
@@ -164,7 +176,7 @@ var loadGridData = function () {
                         }
                       ).css({ "margin-left": "5px", float: "left" })
                        .addClass("ui-pg-div ui-inline-custom")
-                        .append('<a href="href="javascript:void(0)"">View Details</a>')
+                        .append('<a style="font-weight:bold;color:blue" href="href="javascript:void(0)"">View Details</a>')
                        //.append('<span class="ui-icon ui-icon-document"><label>Details</label></span>')
                        .appendTo($(this).children("div"));
                 });
@@ -195,7 +207,7 @@ var loadGridData = function () {
                       }
                     ).css({ "margin-left": "5px", float: "left" })
                      .addClass("ui-pg-div ui-inline-custom")
-                      .append('<a href="javascript:void(0)">Recorded Assignments</a>')
+                      .append('<a style="font-weight:bold;color:blue" href="javascript:void(0)">Recorded Assignments</a>')
                      //.append('<span class="ui-icon ui-icon-document"><label>Details</label></span>')
                      .appendTo($(this).children("div"));
                 });
@@ -226,7 +238,7 @@ var loadGridData = function () {
                       }
                     ).css({ "margin-left": "5px", float: "left" })
                      .addClass("ui-pg-div ui-inline-custom")
-                      .append('<a href="javascript:void(0)">New Rec Assig</a>')
+                      .append('<a style="font-weight:bold;color:blue" href="javascript:void(0)">New Rec Assig</a>')
                      //.append('<span class="ui-icon ui-icon-document"><label>Details</label></span>')
                      .appendTo($(this).children("div"));
                 });
@@ -256,30 +268,43 @@ var getColumnIndexByName = function (grid, columnName) {
     return -1;
 };
 
-var GetCustodianDetails = function () {
+var GetCustodianAndNotesDetails = function () {
 
     var accountNumber = $("#ACCOUNT_NUMBER").val();
+    var assignmentId = $("#ASSIGNMENT_ID").val();
     var transacitonType = $("#TransactionType").val();
     if (accountNumber != '') {
         showLoading(true);
         $("#custodianDetailsPanel").show();
         //var url = transacitonType == "Update" ? "Assignments/GetCustodianDetails" : "GetCustodianDetails";
-        var url = "GetCustodianDetails";
+        var url = "GetCustodianAndNotesDetails";
         $.ajax({
             url: url,
             datatype: "json",
             type: "POST",
-            data: { accountNumber: accountNumber }
+            data: { accountNumber: accountNumber, assignmentId: assignmentId }
         }).success(function (result) {
             showLoading(false);
-            $('#CUSTODIAN_ID').val(result.data.CustodianId);
-            $("#txtCustodian").val(result.data.CustodianName);
-            $("#BORROWER_LAST_NAME").val(result.data.BorrowerName);
-            $("#txtCustodianRef").val(result.data.CustRefNumber);
-            $("#txtMersInfoNumber").val(result.data.MersInfoNumber);
-            $("#txtAcquiredFrom").val(result.data.AcquiredFrom);
-            $("#txtServicingFor").val(result.data.ServicingFor);
+            if (result.custodianDetails) {
+                $('#CUSTODIAN_ID').val(result.custodianDetails.CustodianId);
+                $("#txtCustodian").val(result.custodianDetails.CustodianName);
+                $("#BORROWER_LAST_NAME").val(result.custodianDetails.BorrowerName);
+                $("#txtCustodianRef").val(result.custodianDetails.CustRefNumber);
+                $("#txtMersInfoNumber").val(result.custodianDetails.MersInfoNumber);
+                $("#txtAcquiredFrom").val(result.custodianDetails.AcquiredFrom);
+                $("#txtServicingFor").val(result.custodianDetails.ServicingFor);
+            }
+            if (result.notes && result.notes.length > 0) {
+                var notesList = result.notes;
+                var existingNotes = '';
+                $.each(notesList, function (index, item) {
+                    var ctrl = $('#txtExistingNotes');
+                    ctrl.val(ctrl.val() + item + '\n');
+                });
+
+            }
         })
+
             .error(function (xhr, status) {
                 showLoading(false);
             });
@@ -297,9 +322,10 @@ var getAssignmentDetails = function (id, type) {
         type: 'GET',
         dataType: 'html'
     }).success(function (result) {
+        displayDetails(true);
         showLoading(false);
         $('#details').html(result);
-        GetCustodianDetails();
+        GetCustodianAndNotesDetails();
         $('#custodianDetailsPanel').show();
     }).error(function (xhr, status) {
         showLoading(false);
@@ -363,14 +389,17 @@ var submitAssignment = function (event) {
     var selectedValue = $("#ddlStatus option:selected").text();
     var accountNumber = $('#ACCOUNT_NUMBER').val();
     var trackingNumber = $('#TRACKING_NUMBER').val();
+    $('#Notes').val($('#txtNotes').val());
     if (selectedValue == "Complete - Shipped") {
         submitForm = trackingNumber != '';
     }
 
-    if (submitForm) {
+    var url = $('#assignmentForm').attr("action");
+    var formData = $('#assignmentForm').serialize();
+
+    if (submitForm && accountNumber != '' && $('#assignmentForm').valid()) {
         showLoading(true);
-        var url = $('#assignmentForm').attr("action");
-        var formData = $('#assignmentForm').serialize();
+
         $.ajax({
             url: url,
             type: "POST",
@@ -388,9 +417,28 @@ var submitAssignment = function (event) {
         });
     }
     else {
-        $('#TRACKING_NUMBER').addClass('form-control input-validation-error');
-        $('#TRACKING_NUMBER').attr('data-val-required', "Tracking Number Required").after('<span for="TRACKING_NUMBER" generated="true" style="color: #e80c4d;font-weight: bold;">Tracking Number Requried</span>');
+        if (!submitForm) {
+            if ($('#TRACKING_NUMBER').attr('data-val-required') != "Tracking Number Required") {
+                $('#TRACKING_NUMBER').addClass('form-control input-validation-error');
+                $('#TRACKING_NUMBER').attr('data-val-required', "Tracking Number Required").after('<span for="TRACKING_NUMBER" generated="true" style="color: #e80c4d;font-weight: bold;">Tracking Number Requried</span>');
+            }
+        }
+        if (accountNumber == '') {
+            if ($('#ACCOUNT_NUMBER').attr('data-val-required') != "Account Number Required") {
+                $('#ACCOUNT_NUMBER').addClass('form-control input-validation-error');
+                $('#ACCOUNT_NUMBER').attr('data-val-required', "Account Number Required").after('<span for="ACCOUNT_NUMBER" generated="true" style="color: #e80c4d;font-weight: bold;">Account Number Requried</span>');
+            }
+        }
     }
+};
+
+var addValidator = function (control, message) {
+    control.addClass('form-control input-validation-error');
+    control.attr('data-val-required', message);
+};
+
+var removeValidator = function (control) {
+    control.removeClass('form-control input-validation-error');
 };
 
 var showLoading = function (show) {

@@ -39,5 +39,8 @@ namespace CDR.Web
         public const string ASMREQUESTREASONLOOKUPURL = "AsmLookupRequestReason/";
         public const string ASMREQUESTTYPELOOKUPURL = "AsmLookupRequestType/";
         public const string ASMSTATUSLOOKUPURL = "AsmLookupStatus/";
+
+        public const string GETNOTES = "AsmAssignmentNotes/?assignmentId=";
+        public const string CREATENOTES = "AsmAssignmentNotes";
     }
 }

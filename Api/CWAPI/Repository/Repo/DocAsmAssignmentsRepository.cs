@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using CWAPI.DAL;
 using CWAPI.Repository.IRepo;
@@ -38,6 +40,16 @@ namespace CWAPI.Repository.Repo
 
                 _context.DOCUS_ASM_ASSIGNMENTS.Add(assignmentRequest);
                 _context.SaveChanges();
+                var docusAsmAssignments = _context.DOCUS_ASM_ASSIGNMENTS.Where(
+                    reqId => reqId.ACCOUNT_NUMBER == assignmentRequest.ACCOUNT_NUMBER)
+                    .OrderByDescending(x => x.ASSIGNMENT_ID)
+                    .FirstOrDefault();
+                if (docusAsmAssignments != null)
+                {
+                    var result =
+                        docusAsmAssignments.ASSIGNMENT_ID;
+                    return result;
+                }
             }
             catch (DbEntityValidationException e)
             {

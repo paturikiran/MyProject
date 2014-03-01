@@ -5,7 +5,7 @@
   string desc = prop.Description;
 }
 <label  class="control-label col-xs-3" for="@(elementName)">@displayName</label>
-<div class="col-xs-2">
+<div class="col-xs-3">
     @Html.TextBox(elementName,prop.Model, new { title = desc, id = elementName,@class = prop.DataTypeName=="Date"?"form-control datepicker": "form-control" })
     @Html.ValidationMessage(prop.PropertyName)
 </div>

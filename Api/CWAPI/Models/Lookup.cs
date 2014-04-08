@@ -10,5 +10,7 @@ namespace CWAPI.Models
         public string Section { get; set; }
         public string Value { get; set; }
         public string Type { get; set; }
+        public string Transaction { get; set; }
+        public int? Id { get; set; }
     }
 }

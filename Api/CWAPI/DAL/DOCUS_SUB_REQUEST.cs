@@ -14,28 +14,28 @@ namespace CWAPI.DAL
     
     public partial class DOCUS_SUB_REQUEST
     {
-        public int ID { get; set; }
-        public Nullable<System.DateTime> Date_Received { get; set; }
-        public Nullable<int> GT_Loan_Number { get; set; }
-        public string Borrower_Last_Name { get; set; }
-        public Nullable<int> Representative_Id { get; set; }
-        public Nullable<System.DateTime> Date_Assigned_To_Processor { get; set; }
-        public Nullable<int> Owner_Id { get; set; }
-        public string Requestor { get; set; }
-        public Nullable<int> Request_Type_Id { get; set; }
-        public Nullable<int> Fee_Id { get; set; }
-        public Nullable<int> Request_Status_Id { get; set; }
-        public Nullable<System.DateTime> Status_Date { get; set; }
-        public string Reason { get; set; }
-        public Nullable<decimal> Principal_Loan_Balance { get; set; }
-        public Nullable<decimal> Loan_Balance_2 { get; set; }
-        public Nullable<decimal> New_Loan_Amount { get; set; }
-        public Nullable<int> New_CLTV { get; set; }
-        public string Comments { get; set; }
+        public int REQUEST_ID { get; set; }
+        public Nullable<System.DateTime> DATE_RECEIVED { get; set; }
+        public Nullable<int> GT_LOAN_NUMBER { get; set; }
+        public string BORROWER_LAST_NAME { get; set; }
+        public Nullable<int> REPRESENTATIVE_ID { get; set; }
+        public Nullable<System.DateTime> DATE_ASSIGNED_TO_PROCESSOR { get; set; }
+        public Nullable<int> OWNER_ID { get; set; }
+        public string REQUESTOR { get; set; }
+        public Nullable<int> REQUEST_TYPE_ID { get; set; }
+        public Nullable<int> FEE_ID { get; set; }
+        public Nullable<int> REQUEST_STATUS_ID { get; set; }
+        public Nullable<System.DateTime> STATUS_DATE { get; set; }
+        public Nullable<int> REASON_ID { get; set; }
+        public Nullable<decimal> PRINCIPAL_LOAN_BALANCE { get; set; }
+        public Nullable<decimal> LOAN_BALANCE_2 { get; set; }
+        public Nullable<decimal> NEW_LOAN_AMOUNT { get; set; }
+        public Nullable<int> NEW_CLTV { get; set; }
+        public string COMMENTS { get; set; }
         public Nullable<int> HELOC { get; set; }
         public Nullable<int> FICO { get; set; }
-        public Nullable<int> Proposed_DTI { get; set; }
-        public Nullable<int> Current_DTI { get; set; }
-        public Nullable<int> Loan_Type_Id { get; set; }
+        public Nullable<int> PROPOSED_DTI { get; set; }
+        public Nullable<int> CURRENT_DTI { get; set; }
+        public Nullable<int> LOAN_TYPE_ID { get; set; }
     }
 }

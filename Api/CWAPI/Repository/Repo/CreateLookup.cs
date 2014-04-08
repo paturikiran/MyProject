@@ -16,5 +16,10 @@ namespace CWAPI.Repository.Repo
         {
             return _context.DOCUS_SYS_ADD_LOOKUP_VALUE(model.Section,model.Type,model.Value);
         }
+
+        public int Delete(LookupModel model)
+        {
+            return _context.DOCUS_SYS_DELETE_LOOKUP_SOFT(model.Id);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace CWAPI.Repository.Repo
         public IEnumerable<DOCUS_SUB_REQUEST> Get(int id)
         {
             if (_context.DOCUS_SUB_REQUEST != null)
-                return _context.DOCUS_SUB_REQUEST.Where(reqId => reqId.GT_Loan_Number == id);
+                return _context.DOCUS_SUB_REQUEST.Where(reqId => reqId.GT_LOAN_NUMBER == id);
             return null;
         }
 

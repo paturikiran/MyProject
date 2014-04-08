@@ -22,9 +22,16 @@ namespace CWAPI.Controllers
             _lookup = new CreateLookup();
         }
 
-        public int Create(LookupModel  lookup)
+
+        public int Create(LookupModel lookup)
         {
             return _lookup.Create(lookup);
+        }
+
+        [HttpPut]
+        public int Update(LookupModel lookup)
+        {
+            return _lookup.Delete(lookup);
         }
     }
 }

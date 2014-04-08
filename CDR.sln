@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A3570A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDR.ErrorLogger", "ErrorLogger\CDR.ErrorLogger.csproj", "{43F85DA7-A950-4067-8153-ED714D9DEE5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{10D73A15-4C15-4F9E-B09A-CA1D931127E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10D73A15-4C15-4F9E-B09A-CA1D931127E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10D73A15-4C15-4F9E-B09A-CA1D931127E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43F85DA7-A950-4067-8153-ED714D9DEE5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43F85DA7-A950-4067-8153-ED714D9DEE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43F85DA7-A950-4067-8153-ED714D9DEE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43F85DA7-A950-4067-8153-ED714D9DEE5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

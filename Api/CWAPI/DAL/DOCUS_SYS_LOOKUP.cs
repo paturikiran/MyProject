@@ -19,5 +19,6 @@ namespace CWAPI.DAL
         public string LOOKUP_TYPE { get; set; }
         public Nullable<int> LOOKUP_ORDER { get; set; }
         public string LOOKUP_VALUE { get; set; }
+        public Nullable<bool> ACTIVE { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace CDR.Web.Models.LookupModels
     public interface ILookupModel
     {
         bool Create(LookupModel model);
+        bool Update(LookupModel model);
        
     }
 }

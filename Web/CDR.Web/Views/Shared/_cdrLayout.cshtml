@@ -40,27 +40,51 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CDR</a>
+            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "navbar-brand" })
+
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">SubOrdinations <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Search", "Index", "SubRequestSearchUpdate")</li>
-                        <li>@Html.ActionLink("Enter New Request", "Create", "SubRequestSearchUpdate")</li>
-                        <li>@Html.ActionLink("Search Processors", "Index", "SearchProcessor")</li>
-                    </ul>
-                </li>
+                @if (User.IsInRole("IsSubordinations") || User.IsInRole("IsAdmin"))
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">SubOrdinations <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Search", "Index", "SubRequestSearchUpdate")</li>
+                            <li>@Html.ActionLink("Enter New Request", "Create", "SubRequestSearchUpdate")</li>
+                            <li>@Html.ActionLink("Search Processors", "Index", "SearchProcessor")</li>
+                        </ul>
+                    </li>
+                }
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assignments <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Search", "Search", "Assignments")</li>
                         <li>@Html.ActionLink("Enter New Request", "Create", "Assignments")</li>
+                         <li class="dropdown-submenu"> <a tabindex="-1" href="#">Reports</a> 
+                              <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Daily Status Report", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.DailyStatusReport },null )</li>
+                        <li>@Html.ActionLink("Completed Report", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.CompletedAssignments }, null)</li>
+                        <li>@Html.ActionLink("Incoming Assignments", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.IncomingAssignments }, null)</li>
+                        <li>@Html.ActionLink("Outstanding Assignments", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.OutStandingAssignments }, null)</li>
+                        <li>@Html.ActionLink("Outstanding By AssignedTo", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.OutStandingByAssignedTo }, null)</li>
+
+                        <li>@Html.ActionLink("Pending", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.Pending }, null)</li>
+                        <li>@Html.ActionLink("Prepared By Is Blank", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.PreparedByIsBlank }, null)</li>
+                        <li>@Html.ActionLink("Processed", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.Processed }, null)</li>
+                        <li>@Html.ActionLink("Total All Pending", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.TotalPendingAllMonths }, null)</li>
+
+
+                    </ul>
+                         </li>
+                      
                     </ul>
                 </li>
+
+               
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -68,7 +92,7 @@
     <div class="container-fluid col-lg-11">
         @RenderBody()
     </div>
-    <div id="divModalPoup" style="display:none;height: 20px;width:50px">
+    <div id="divModalPoup" style="display: none; height: 20px; width: 50px">
         Loading...
         <img src="~/Images/progress_bar.gif" />
     </div>

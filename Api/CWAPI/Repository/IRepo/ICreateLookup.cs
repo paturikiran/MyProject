@@ -12,6 +12,6 @@ namespace CWAPI.Repository.IRepo
     interface ICreateLookup
     {
         int Create(LookupModel  model);
-        
+        int Delete(LookupModel model);
     }
 }

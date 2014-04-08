@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -126,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AsmAssignmentNotesController.cs" />
     <Compile Include="Controllers\AsmAssignmentsController.cs" />
     <Compile Include="Controllers\AsmLookupAssignedToController.cs" />
@@ -138,8 +142,11 @@
     <Compile Include="Controllers\AsmLookupRequestReasonController.cs" />
     <Compile Include="Controllers\AsmLookupRequestTypeController.cs" />
     <Compile Include="Controllers\AsmLookupStatusController.cs" />
+    <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\GTAResultsController.cs" />
     <Compile Include="Controllers\LookupController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="CustomRepository\Repository.cs" />
     <Compile Include="DAL\DocumentCustodyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -206,6 +213,33 @@
     <Compile Include="DAL\DOCUS_ASM_LOOKUP_STATUS.cs">
       <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_COMPLETED_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_DAILY_STATUS_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_INCOMING_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_OUTSTANDING_BY_ASSIGNED_TO_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_OUTSTANDING_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_PENDING_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_PREPARED_BY_IS_BLANK_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_PROCESSED_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DOCUS_ASM_RPT_TOTAL_PENDING_ALL_MONTHS_Result.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DOCUS_PRODLIB_CLPACMST.cs">
       <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
     </Compile>
@@ -245,6 +279,9 @@
     <Compile Include="DAL\DOCUS_SYS_CUSTODIAN.cs">
       <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DOCUS_SYS_EMP_VALIDATION.cs">
+      <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DOCUS_SYS_LOOKUP.cs">
       <DependentUpon>DocumentCustodyModel.tt</DependentUpon>
     </Compile>
@@ -279,7 +316,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Reports\CompletedAssignmentParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepo\IAuthorizationRoles.cs" />
     <Compile Include="Repository\IRepo\IDocAsmAssignmentsRepository.cs" />
     <Compile Include="Repository\IRepo\IDocAsmLookupAssignedToRepository.cs" />
     <Compile Include="Repository\IRepo\IDocAsmLookupDocTypeRepository.cs" />
@@ -300,6 +339,8 @@
     <Compile Include="Repository\IRepo\IDocSysCustodianRepository.cs" />
     <Compile Include="Repository\IRepo\ICreateLookup.cs" />
     <Compile Include="Repository\IRepo\INotes.cs" />
+    <Compile Include="Repository\IRepo\IReports.cs" />
+    <Compile Include="Repository\Repo\AuthorizationRoles.cs" />
     <Compile Include="Repository\Repo\CreateLookup.cs" />
     <Compile Include="Repository\Repo\DocAsmAssignmentsRepository.cs" />
     <Compile Include="Repository\Repo\DocAsmLookupAssignedToRepository.cs" />
@@ -321,6 +362,7 @@
     <Compile Include="Repository\Repo\DocSysCustodianRepository.cs" />
     <Compile Include="Models\Lookup.cs" />
     <Compile Include="Repository\Repo\NotesRepository.cs" />
+    <Compile Include="Repository\Repo\Reports.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -469,9 +511,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>55635</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:59984/</IISUrl>
+          <IISUrl>http://localhost:3232/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

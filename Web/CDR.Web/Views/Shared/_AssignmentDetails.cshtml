@@ -4,6 +4,14 @@
 @model CDR.Web.Models.DOCUS_ASM_ASSIGNMENTS
 @using (Html.BeginForm("AddOrUpdate", "Assignments", FormMethod.Post, new { encType = "multipart/form-data", id = "assignmentForm", name = "assignment" }))
 {
+    @Html.Hidden("hdnRole", User.IsInRole("IsAdmin"))
+    <div id="divNoCustodianDetailsFound">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-xs-4 col-lg-push-2" style="color: #e80c4d; font-weight: bold;">Account number doesn't exists in the GTA Database</label>
+            </div>
+        </div>
+    </div>
     var modelProperties = ViewData.ModelMetadata.Properties.ToArray();
     IAssignmentLookupAgent lookUpRepository = null;
     var lookupProperties = modelProperties.Where(p => p.AdditionalValues.ContainsKey("LookupMethodName") && p.TemplateHint == "DropDownList").ToList();
@@ -18,7 +26,7 @@
 
     foreach (var item in hiddenprop)
     {
-        @Html.Hidden(item.PropertyName)
+    @Html.Hidden(item.PropertyName)
     }
     for (var i = 0; i < displayProp.Count(); i = i + 2)
     {
@@ -28,168 +36,174 @@
         var dataType = prop.DataTypeName;
         var desc = prop.Description;
 
-        <div class="form-horizontal">
-            <div class="form-group">
-                <label class="control-label col-xs-2" for="@elementName">@displayName</label>
-                @if (lookupProperties.Any(p => p.PropertyName == prop.PropertyName))
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="@elementName">@displayName</label>
+            @if (lookupProperties.Any(p => p.PropertyName == prop.PropertyName))
+            {
+                if (lookUpRepository != null)
                 {
-                    if (lookUpRepository != null)
+                    var lookupKey = prop.AdditionalValues["LookupMethodName"].ToString();
+                    bool displayAddLookupLink = Convert.ToBoolean(prop.AdditionalValues["AddLookupData"].ToString());
+                    var lookupType = prop.AdditionalValues["LookupType"].ToString();
+                    var propertyInfo = lookUpRepository.GetType().GetProperty(lookupKey);
+                    var lookUpData = propertyInfo.GetValue(lookUpRepository, null) as IEnumerable<object>;
+                <div class="col-xs-3">
+                    @Html.DropDownList(elementName, new SelectList(lookUpData, "LOOKUP_ID", "LOOKUP_VALUE"), new { title = desc, id = "ddl" + lookupKey, @class = "form-control" })
+                    @Html.ValidationMessage(prop.PropertyName)
+                </div>
+                    //Add display roles here
+                    if (displayAddLookupLink)
                     {
-                        var lookupKey = prop.AdditionalValues["LookupMethodName"].ToString();
-                        bool displayAddLookupLink = Convert.ToBoolean(prop.AdditionalValues["AddLookupData"].ToString());
-                        var lookupType = prop.AdditionalValues["LookupType"].ToString();
-                        var propertyInfo = lookUpRepository.GetType().GetProperty(lookupKey);
-                        var lookUpData = propertyInfo.GetValue(lookUpRepository, null) as IEnumerable<object>;
-                        <div class="col-xs-3">
-                            @Html.DropDownList(elementName, new SelectList(lookUpData, "LOOKUP_ID", "LOOKUP_VALUE"), new { title = desc, id = "ddl" + lookupKey, @class = "form-control" })
-                            @Html.ValidationMessage(prop.PropertyName)
-                        </div>
-
-                        if (displayAddLookupLink)
-                        {<div>
-                            <a href="#" id="@lookupKey" lookuptype="@lookupType" onclick="addLookUp(this) ">+</a>
-                        </div>
-                        }
+                <div>
+                    @if (User.IsInRole("IsAdmin") || lookupKey == "RequestorName")
+                    {
+                    <a href="#" id="@lookupKey" lookuptype="@lookupType"  onclick="addLookUp(this,'add') ">+</a>}
+                    @if (User.IsInRole("IsAdmin"))
+                    { <a href="#" id="@lookupKey" lookuptype="@lookupType"  onclick="addLookUp(this,'Delete') ">X</a>}
+                </div>
                     }
+                }
+            }
+            else
+            {
+                if (!desc.IsEmpty())
+                {
+                <div class="col-xs-3">
+                    @if (desc != "CheckBox")
+                    {
+                        <label>Yes</label>
+                        @Html.RadioButton(elementName, true, new { title = desc, id = elementName })
+                        <label>No</label>
+                        @Html.RadioButton(elementName, false, new { title = desc, id = elementName })
+                        <div class="col-xs-2">@Html.ValidationMessage(prop.PropertyName)</div>
+                    }
+                    else
+                    {
+                        @Html.CheckBox(elementName, new { title = desc, id = elementName })
+                        @Html.ValidationMessage(prop.PropertyName)
+                    }
+                </div>
                 }
                 else
                 {
-                    if (!desc.IsEmpty())
+                    /*<label class="control-label col-xs-2" for="@(elementName)">@displayName</label>*/
+                    var isDateType = prop.AdditionalValues.Count > 0 && Convert.ToBoolean(prop.AdditionalValues["IsDateType"].ToString());
+                    var isMultiLine = prop.AdditionalValues.Count > 0 && Convert.ToBoolean(prop.AdditionalValues["IsMultiline"].ToString());
+                    if (!isMultiLine)
                     {
-                        <div class="col-xs-3">
-                            @if (desc != "CheckBox")
-                            {
-                                <label>Yes</label>
-                                @Html.RadioButton(elementName, true, new { title = desc, id = elementName })
-                                <label>No</label>
-                                @Html.RadioButton(elementName, false, new { title = desc, id = elementName })
-                                <div class="col-xs-2">@Html.ValidationMessage(prop.PropertyName)</div>
-                            }
-                            else
-                            {
-                                @Html.CheckBox(elementName, new { title = desc, id = elementName })
-                                @Html.ValidationMessage(prop.PropertyName)
-                            }
-                        </div>
+                <div class="col-xs-3">
+
+                    @Html.TextBox(elementName,  prop.Model, new { title = desc, id = elementName, @class = isDateType ? "form-control datepicker" : "form-control" })
+                    @Html.ValidationMessage(prop.PropertyName)
+
+                </div>
                     }
                     else
                     {
-                        /*<label class="control-label col-xs-2" for="@(elementName)">@displayName</label>*/
-                        var isDateType = prop.AdditionalValues.Count > 0 && Convert.ToBoolean(prop.AdditionalValues["IsDateType"].ToString());
-                        var isMultiLine = prop.AdditionalValues.Count > 0 && Convert.ToBoolean(prop.AdditionalValues["IsMultiline"].ToString());
+                <div class="col-xs-3">
+                    @Html.TextArea(elementName, null, new { title = desc, id = elementName, @class = "form-control", rows = "2" })
+                    @Html.ValidationMessage(prop.PropertyName)
+                </div>
+                    }
+
+                }
+            }
+
+
+            @*for *@
+            @if (i + 1 < displayProp.Count())
+            {
+                var evenProp = displayProp[i + 1];
+                var evenelementName = evenProp.PropertyName;
+                var evendisplayName = evenProp.DisplayName;
+                var evenDataType = evenProp.DataTypeName;
+                var evendesc = evenProp.Description;
+
+
+                <label class="control-label col-xs-2" for="@evenelementName">@evendisplayName</label>
+                if (lookupProperties.Any(p => p.PropertyName == evenProp.PropertyName))
+                {
+                    if (lookUpRepository != null)
+                    {
+                        var lookupKey = evenProp.AdditionalValues["LookupMethodName"].ToString();
+                        bool displayAddLookupLink = Convert.ToBoolean(evenProp.AdditionalValues["AddLookupData"].ToString());
+                        var lookupType = evenProp.AdditionalValues["LookupType"].ToString();
+                        var propertyInfo = lookUpRepository.GetType().GetProperty(lookupKey);
+                        var lookUpData = propertyInfo.GetValue(lookUpRepository, null) as IEnumerable<object>;
+                <div class="col-xs-3">
+                    @Html.DropDownList(evenelementName, new SelectList(lookUpData, "LOOKUP_ID", "LOOKUP_VALUE"), new { title = desc, id = "ddl" + lookupKey, @class = "form-control" })
+                </div>
+                        //Here also
+
+                        if (displayAddLookupLink)
+                        {
+                            if (User.IsInRole("IsAdmin")||lookupKey=="RequestorName"){
+                <a href="#" id="@lookupKey" lookuptype="@lookupType"  onclick=" addLookUp(this,'add') ">+</a>}
+                            if (User.IsInRole("IsAdmin"))
+                            {<a href="#" id="@lookupKey" lookuptype="@lookupType"   onclick=" addLookUp(this,'Delete') ">X</a>}/*<div class="col-xs-2">@Html.ValidationMessage(prop.PropertyName)</div>*/
+                        }
+                    }
+
+                }
+                else
+                {
+                    if (!evendesc.IsEmpty())
+                    {
+                <div class="col-xs-3">
+                    @if (evendesc != "CheckBox")
+                    { <label>Yes</label> @Html.RadioButton(evenelementName, true, new { title = desc, id = evenelementName })
+                        <label>No</label>
+                        @Html.RadioButton(evenelementName, false, new { title = desc, id = evenelementName })
+                        @Html.ValidationMessage(evenProp.PropertyName)
+                    }
+                    else
+                    {
+                        @Html.CheckBox(evenelementName, new { title = desc, id = evenelementName })
+                        @Html.ValidationMessage(evenProp.PropertyName)
+                    }
+                </div>
+                    }
+
+                    else
+                    {
+                        var isDateType = evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsDateType"].ToString());
+                        var isMultiLine = evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsMultiline"].ToString());
+                        var isReadOnly = evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsReadOnly"].ToString());
                         if (!isMultiLine)
                         {
-                            <div class="col-xs-3">
-                                @*@Html.TextBox(elementName, isDateType ? prop.Model ?? DateTime.Now.ToShortDateString() : prop.Model, new { title = desc, id = elementName, @class = isDateType ? "form-control datepicker" : "form-control" })*@
-                                @Html.TextBox(elementName, isDateType ? Convert.ToDateTime(prop.Model).ToShortDateString() ?? DateTime.Today.ToShortDateString() : prop.Model, new { title = desc, id = elementName, @class = isDateType ? "form-control datepicker" : "form-control" })
-                                @Html.ValidationMessage(prop.PropertyName)
-                            </div>
+                <div class="col-xs-3">
+
+                    @Html.TextBox(evenelementName, evenProp.Model, new { title = desc, id = evenelementName, @class = isDateType ? "form-control datepicker" : "form-control" })
+                    @Html.ValidationMessage(evenProp.PropertyName)
+                </div>
                         }
                         else
                         {
-                            <div class="col-xs-3">
-                                @Html.TextArea(elementName, null, new { title = desc, id = elementName, @class = "form-control", rows = "2" })
-                                @Html.ValidationMessage(prop.PropertyName)
-                            </div>
+                <div class="col-xs-3">
+                    @Html.TextArea(evenelementName, null, new { title = desc, id = evenelementName, @class = "form-control", rows = "2" })
+                    @Html.ValidationMessage(evenProp.PropertyName)
+                </div>
                         }
-
                     }
                 }
 
-
-                @*for *@
-                @if (i + 1 < displayProp.Count())
-                {
-                    var evenProp = displayProp[i + 1];
-                    var evenelementName = evenProp.PropertyName;
-                    var evendisplayName = evenProp.DisplayName;
-                    var evenDataType = evenProp.DataTypeName;
-                    var evendesc = evenProp.Description;
+            }
 
 
-                    <label class="control-label col-xs-2" for="@evenelementName">@evendisplayName</label>
-                    if (lookupProperties.Any(p => p.PropertyName == evenProp.PropertyName))
-                    {
-                        if (lookUpRepository != null)
-                        {
-                            var lookupKey = evenProp.AdditionalValues["LookupMethodName"].ToString();
-                            bool displayAddLookupLink = Convert.ToBoolean(evenProp.AdditionalValues["AddLookupData"].ToString());
-                            var lookupType = evenProp.AdditionalValues["LookupType"].ToString();
-                            var propertyInfo = lookUpRepository.GetType().GetProperty(lookupKey);
-                            var lookUpData = propertyInfo.GetValue(lookUpRepository, null) as IEnumerable<object>;
-                            <div class="col-xs-3">
-                                @Html.DropDownList(evenelementName, new SelectList(lookUpData, "LOOKUP_ID", "LOOKUP_VALUE"), new { title = desc, id = "ddl" + lookupKey, @class = "form-control" })
-                            </div>
-                            if (displayAddLookupLink)
-                            {
-                                <a href="#" id="@lookupKey" lookuptype="@lookupType" onclick=" addLookUp(this) ">+</a> /*<div class="col-xs-2">@Html.ValidationMessage(prop.PropertyName)</div>*/
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (!evendesc.IsEmpty())
-                        {
-                            <div class="col-xs-3">
-                                @if (evendesc != "CheckBox")
-                                { <label>Yes</label> @Html.RadioButton(evenelementName, true, new { title = desc, id = evenelementName })
-                                    <label>No</label>
-                                    @Html.RadioButton(evenelementName, false, new { title = desc, id = evenelementName })
-                                    @Html.ValidationMessage(evenProp.PropertyName)
-                                }
-                                else
-                                {
-                                    @Html.CheckBox(evenelementName, new { title = desc, id = evenelementName })
-                                    @Html.ValidationMessage(evenProp.PropertyName)
-                                }
-                            </div>
-                        }
-
-                        else
-                        {
-                            var isDateType = evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsDateType"].ToString());
-                            var isMultiLine = evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsMultiline"].ToString());
-                            var isReadOnly = evenProp.AdditionalValues.Count > 0 && Convert.ToBoolean(evenProp.AdditionalValues["IsReadOnly"].ToString());
-                            if (!isMultiLine)
-                            {
-                                <div class="col-xs-3">
-                                    @if (evenelementName != "DATE_ENTERED")
-                                    {
-                                        @Html.TextBox(evenelementName, isDateType ? Convert.ToDateTime(evenProp.Model).ToShortDateString() ?? DateTime.Today.ToShortDateString() : evenProp.Model, new { title = desc, id = evenelementName, @class = isDateType ? "form-control datepicker" : "form-control" })
-                                    }
-                                    @*@Html.TextBox(evenelementName, isDateType ? evenProp.Model ?? DateTime.Now.ToShortDateString() : evenProp.Model, new { title = desc, id = evenelementName, @class = isDateType ? "form-control datepicker" : "form-control" })*@
-                                    else
-                                    {
-                                        @Html.TextBox(evenelementName, Convert.ToDateTime(evenProp.Model).ToShortDateString(), new { title = desc, id = evenelementName, disabled = true, @class = "form-control" })
-                                    } @Html.ValidationMessage(evenProp.PropertyName)
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="col-xs-3">
-                                    @Html.TextArea(evenelementName, null, new { title = desc, id = evenelementName, @class = "form-control", rows = "2" })
-                                    @Html.ValidationMessage(evenProp.PropertyName)
-                                </div>
-                            }
-                        }
-                    }
-
-                }
-
-
-            </div>
         </div>
+    </div>
     }
 
-   <div class="form-horizontal">
+    <div class="form-horizontal">
         <div class="form-group">
             <label class="control-label col-xs-2">Notes</label>
             <div class="col-xs-3">
-                <textarea type="text" class="form-control" id="txtNotes" ></textarea>
+                <textarea type="text" class="form-control" id="txtNotes"></textarea>
             </div>
             <label class="control-label col-xs-2">Previous Notes</label>
             <div class="col-xs-3">
-                <textarea   class="form-control" id="txtExistingNotes" readonly="true" ></textarea>
+                <textarea class="form-control" id="txtExistingNotes" readonly="true"></textarea>
             </div>
         </div>
     </div>
@@ -219,7 +233,7 @@
                     </div>
                     <label class="control-label col-xs-2">Servicing For</label>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" id="txtServicingFor" readyonly="true" />
+                        <input type="text" class="form-control" id="txtServicingFor" readonly="true" />
                     </div>
                 </div>
             </div>
@@ -266,6 +280,14 @@
                 <input type="text" id="txtLookupType" disabled="disabled" class="form-control" />
             </div>
         </div>
+
+        <div class="form-group" id="divLookupId">
+            <label class="control-label col-xs-3">Look Up Id</label>
+            <div class="col-xs-3">
+                <input type="text" id="txtLookupId" disabled="disabled" class="form-control" />
+                <input type="text" id="txtOperation" disabled="disabled" class="form-control" />
+            </div>
+        </div>
         <div class="form-group">
             <label class="control-label col-xs-3" id="lbllookupName">Look Up Value</label>
             <div class="col-xs-4">
@@ -280,6 +302,8 @@
         </div>
     </div>
 </div>
+
+
 @*<script src="~/Scripts/bootstrap.js"></script>*@
 @*<script src="~/Scripts/AssignmentDetails.js"></script>
     <script src="~/Scripts/jquery-1.8.2.min.js"></script>
@@ -289,3 +313,13 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
 
+<script>
+    $(document).ready(function () {
+        $('body').find('.datepicker').each(function (index, item) {
+            if ($(item).val() == '1/1/0001') {
+                $(item).val('');
+            }
+
+        });
+    });
+</script>

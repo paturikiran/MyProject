@@ -8,9 +8,9 @@ var code = new CodeGenerationTools(this);
 var ef = new MetadataTools(this);
 var typeMapper = new TypeMapper(code, ef, textTransform.Errors);
 var loader = new EdmMetadataLoader(textTransform.Host, textTransform.Errors);
-var itemCollection = loader.CreateEdmItemCollection(inputFile);
+var itemCollection = loader.CreateEdmItemCollection(inputFile); 
 var modelNamespace = loader.GetModelNamespace(inputFile);
-var codeStringGenerator = new CodeStringGenerator(code, typeMapper, ef);
+var codeStringGenerator = new CodeStringGenerator(code, typeMapper, ef); 
 
 var container = itemCollection.OfType<EntityContainer>().FirstOrDefault();
 if (container == null)

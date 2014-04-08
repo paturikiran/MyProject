@@ -18,6 +18,9 @@ namespace CWAPI.Controllers
         [HttpGet]
         public IEnumerable<DOCUS_ASM_LOOKUP_DOC_TYPE> GetDocAsmLookupDocType()
         {
+            //var repo = new CustomRepository.Repository();
+            //repo.CreateContextInstance();
+
             return _repoObj.GetAll();
         }
 

@@ -28,33 +28,31 @@ namespace CDR.Web.Models
         [Required(ErrorMessage = "Account Number Requried")]
         public int? ACCOUNT_NUMBER { get; set; }
 
+       
+
+        [Display(Name = "Request Type")]
+        [CustomDropDown(LookupMethodName = "RequestType", AddLookupData = true, LookupType = "Request Type")]
+        public int? REQUEST_TYPE_ID { get; set; }
+
         [Display(Name = "Borrower Last Name")]
         public string BORROWER_LAST_NAME { get; set; }
 
-        [Display(Name = "Request Type")]
-        [CustomDropDown(LookupMethodName = "RequestType", AddLookupData = false, LookupType = "Request Type")]
-        public int? REQUEST_TYPE_ID { get; set; }
-
         [Display(Name = "Request Reason")]
-        [CustomDropDown(LookupMethodName = "RequestReason", AddLookupData = false, LookupType = "Request Reason")]
+        [CustomDropDown(LookupMethodName = "RequestReason", AddLookupData = true, LookupType = "Request Reason")]
         public int? REQUEST_REASON_ID { get; set; }
 
 
 
         [Display(Name = "Request Date")]
         [CustomTextBox(IsDateType = true, IsMultiline = false)]
-        public DateTime? REQUEST_DATE { get; set; }
+        public string REQUEST_DATE { get; set; }
 
-        [Display(Name = "Date Entered")]
-        [CustomTextBox(IsDateType = true, IsMultiline = false,IsReadonly = true)]
-        public DateTime? DATE_ENTERED { get; set; }
-
-        //  public DateTime? DATE_ENTERED { get { return _dateEntered; } set { _dateEntered = value; } }
-
-        
+        [Display(Name = "Collateral File Request Date")]
+        [CustomTextBox(IsDateType = true, IsMultiline = false)]
+        public string COLLATERAL_FILE_REQUEST_DATE { get; set; }
 
         [Display(Name = "Doc Type")]
-        [CustomDropDown(LookupMethodName = "DocumentType", AddLookupData = false, LookupType = "Doc Type")]
+        [CustomDropDown(LookupMethodName = "DocumentType", AddLookupData = true, LookupType = "Doc Type")]
         public int? DOC_TYPE_ID { get; set; }
 
         [Display(Name = "Assigned To")]
@@ -88,11 +86,11 @@ namespace CDR.Web.Models
 
         [Display(Name = "Assigned Date")]
         [CustomTextBox(IsDateType = false, IsMultiline = false)]
-        public DateTime? ASSIGNED_DATE { get; set; }
+        public string ASSIGNED_DATE { get; set; }
 
-        [Display(Name = "Collateral File Request Date")]
-        [CustomTextBox(IsDateType = true, IsMultiline = false)]
-        public DateTime? COLLATERAL_FILE_REQUEST_DATE { get; set; }
+        [Display(Name = "Date Entered")]
+        [CustomTextBox(IsDateType = false, IsMultiline = false, IsReadonly = true)]
+        public string DATE_ENTERED { get; set; } 
 
         [Display(Name = "AOMInCOL", Description = "AOM In Collerateral file")]
         public bool? AOM_IN_COL { get; set; }
@@ -106,24 +104,24 @@ namespace CDR.Web.Models
         public string THIRD_PARTY_CONTACT_INFO { get; set; }
 
         [Display(Name = "Status ")]
-        [CustomDropDown(LookupMethodName = "Status", AddLookupData = false, LookupType = "Status")]
+        [CustomDropDown(LookupMethodName = "Status", AddLookupData = true, LookupType = "Status")]
         public int? STATUS_ID { get; set; }
+        
+        [Display(Name = "Last Status Date")]
+        [CustomTextBox(IsDateType = false, IsMultiline = false)]
+        public string LAST_STATUS_DATE { get; set; }
 
         [Display(Name = "Tracking Number")]
         [CustomTextBox(IsDateType = false, IsMultiline = false)]
         public string TRACKING_NUMBER { get; set; }
 
-        [Display(Name = "Last Status Date")]
-        [CustomTextBox(IsDateType = true, IsMultiline = false)]
-        public DateTime? LAST_STATUS_DATE { get; set; }
-
         [Display(Name = "Follow Up Date")]
         [CustomTextBox(IsDateType = true, IsMultiline = false)]
-        public DateTime? FOLLOW_UP_DATE { get; set; }
+        public string FOLLOW_UP_DATE { get; set; }
 
         [Display(Name = "Sale Date")]
         [CustomTextBox(IsDateType = true, IsMultiline = false)]
-        public DateTime? SALE_DATE { get; set; }
+        public string SALE_DATE { get; set; }
 
         [Display(Name = "Attention To")]
         [CustomTextBox(IsDateType = false, IsMultiline = false)]
@@ -229,10 +227,51 @@ namespace CDR.Web.Models
                 if (firstOrDefault != null)
                     assignments.DocumentType = firstOrDefault.LOOKUP_VALUE;
             }
-            if (assignments.DATE_ENTERED==null)
+            if (assignments.DATE_ENTERED!=null)
             {
-                assignments.DATE_ENTERED = DateTime.Now.Date;
+                DateTime dateentered;
+                DateTime.TryParse(assignments.DATE_ENTERED,out dateentered);
+                assignments.DATE_ENTERED = dateentered.ToShortDateString();
             }
+
+            if(!string.IsNullOrEmpty(assignments.REQUEST_DATE))
+            {
+                DateTime date;
+                DateTime.TryParse(assignments.REQUEST_DATE,out date);
+                assignments.REQUEST_DATE = date.ToShortDateString();
+            }
+            if(!string.IsNullOrEmpty(assignments.COLLATERAL_FILE_REQUEST_DATE))
+            {
+                DateTime date;
+                DateTime.TryParse(assignments.COLLATERAL_FILE_REQUEST_DATE,out date);
+                assignments.COLLATERAL_FILE_REQUEST_DATE = date.ToShortDateString();
+            }
+            if (!string.IsNullOrEmpty(assignments.LAST_STATUS_DATE))
+            {
+                DateTime date;
+                DateTime.TryParse(assignments.LAST_STATUS_DATE, out date);
+                assignments.LAST_STATUS_DATE = date.ToShortDateString();
+            }
+
+            if(!string.IsNullOrEmpty(assignments.ASSIGNED_DATE))
+            {
+                DateTime date;
+                DateTime.TryParse(assignments.ASSIGNED_DATE,out date);
+                assignments.ASSIGNED_DATE = date.ToShortDateString();
+            }
+            if (!string.IsNullOrEmpty(assignments.FOLLOW_UP_DATE))
+            {
+                DateTime date;
+                DateTime.TryParse(assignments.FOLLOW_UP_DATE, out date);
+                assignments.FOLLOW_UP_DATE = date.ToShortDateString();
+            }
+            if (!string.IsNullOrEmpty(assignments.SALE_DATE))
+            {
+                DateTime date;
+                DateTime.TryParse(assignments.SALE_DATE, out date);
+                assignments.SALE_DATE = date.ToShortDateString();
+            }
+
             return assignments;
         }
     }

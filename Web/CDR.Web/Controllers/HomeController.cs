@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CDR.Web.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,14 +7,14 @@ using System.Web.Mvc;
 
 namespace CDR.Web.Controllers
 {
+    
     public class HomeController : Controller
     {
         //
         // GET: /Home/
-
         public ActionResult Index(int? id)
         {
-            ViewData["AssignmentId"] = id;
+           ViewData["AssignmentId"] = id;
             return View();
         }
 

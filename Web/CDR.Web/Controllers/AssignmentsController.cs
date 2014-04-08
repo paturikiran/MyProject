@@ -76,11 +76,12 @@ namespace CDR.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                assignment.DATE_ENTERED = DateTime.Now;
+
                 var notesTobeSaved = new AssignmentNotes();
                 var notesResponse = true;
                 if (!assignment.Notes.IsNullOrWhiteSpace())
                 {
+
                     notesTobeSaved.ASSIGNMENT_ID = assignment.ASSIGNMENT_ID;
                     notesTobeSaved.NOTE = assignment.Notes;
                 }
@@ -88,6 +89,7 @@ namespace CDR.Web.Controllers
                 switch (assignment.TransactionType)
                 {
                     case "New Request":
+                        // assignment.DATE_ENTERED = DateTime.Now.To
                         var response = _assignment.Create(assignment);
                         if (!assignment.Notes.IsNullOrWhiteSpace())
                         {
@@ -142,14 +144,17 @@ namespace CDR.Web.Controllers
             obj.UPDATED_BY = "abcd";
             obj.CREATED_BY = "bcde";
             var defaultDate = DateTime.Now.Date;
-            obj.DATE_ENTERED = defaultDate;
-            obj.REQUEST_DATE = defaultDate;
-            obj.DATE_CREATED = defaultDate;
-            obj.COLLATERAL_FILE_REQUEST_DATE = defaultDate;
-            obj.LAST_STATUS_DATE = defaultDate;
-            obj.FOLLOW_UP_DATE = defaultDate;
-            obj.SALE_DATE = defaultDate;
-            obj.DATE_UPDATED = DateTime.Now;
+            obj.DATE_ENTERED = defaultDate.ToShortDateString();
+            //obj.LAST_STATUS_DATE = defaultDate.ToShortDateString();
+            // obj.REQUEST_DATE = defaultDate.ToShortDateString();
+            //obj.DATE_CREATED = defaultDate;
+            //obj.COLLATERAL_FILE_REQUEST_DATE = defaultDate.ToShortDateString();
+            //obj.LAST_STATUS_DATE = defaultDate.ToShortDateString();
+            //obj.FOLLOW_UP_DATE = defaultDate.ToShortDateString();
+            //obj.SALE_DATE = defaultDate.ToShortDateString();
+            //obj.DATE_UPDATED = defaultDate;
+            obj.MERS_INDICATOR = false;
+            obj.MERS_UPDATED = false;
             return obj;
         }
 
@@ -176,7 +181,15 @@ namespace CDR.Web.Controllers
         public JsonResult AddLookUpValue(LookupModel model)
         {
             model.Section = "ASM";
-            var result = _lookupModel.Create(model);
+            bool result;
+            if (model.Transaction.Equals("Delete"))
+            {
+                result = _lookupModel.Update(model);
+            }
+            else
+            {
+                result = _lookupModel.Create(model);
+            }
             IEnumerable<AssignmentLookup> lookupData = new List<AssignmentLookup>();
 
             if (!result) return Json(new { data = lookupData, IsSuccess = false });
@@ -184,6 +197,18 @@ namespace CDR.Web.Controllers
             {
                 case "Requestor Name":
                     lookupData = _assignmentLookup.RequestorName;
+                    break;
+                case "Request Type":
+                    lookupData = _assignmentLookup.RequestType;
+                    break;
+                case "Request Reason":
+                    lookupData = _assignmentLookup.RequestReason;
+                    break;
+                case "Doc Type":
+                    lookupData = _assignmentLookup.DocumentType;
+                    break;
+                case "Status":
+                    lookupData = _assignmentLookup.Status;
                     break;
                 case "Assigned To":
                     lookupData = _assignmentLookup.AssignedTo;
@@ -199,9 +224,16 @@ namespace CDR.Web.Controllers
                bool _search, string searchField, string searchOper, string searchString, int accountNumber)
         {
             var results = _assignment.GetAssignments(accountNumber);
+
             var totalRecords = results.Count();
             var totalPages = (int)Math.Ceiling((double)totalRecords / (double)rows);
-
+            if (sidx == "DATE_ENTERED" && sord != null)
+            {
+                if (sord == "asc")
+                    results = results.OrderBy(x => x.DATE_ENTERED);
+                else
+                    results = results.OrderByDescending(x => x.DATE_ENTERED);
+            }
             var jsonData = new
             {
                 total = totalPages,
@@ -211,6 +243,11 @@ namespace CDR.Web.Controllers
             };
 
             return Json(jsonData);
+        }
+
+        public ActionResult Reports()
+        {
+            return View();
         }
 
     }

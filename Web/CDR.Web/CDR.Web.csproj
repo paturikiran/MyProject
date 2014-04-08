@@ -15,7 +15,7 @@
     <AssemblyName>CDR.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
@@ -187,12 +190,15 @@
     <Compile Include="Agents\ISubRequestLookupAgent.cs" />
     <Compile Include="Agents\SubRequestLookupAgent.cs" />
     <Compile Include="Api\ApiConnection.cs" />
+    <Compile Include="Api\ApiReportsRepository.cs" />
+    <Compile Include="Api\IApiReportsRepository.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\BootStrapper.cs" />
@@ -207,10 +213,15 @@
     </Compile>
     <Compile Include="Infrastructure\CustomAttributes\CustomTextBoxAttribute.cs" />
     <Compile Include="Infrastructure\CustomAttributes\DropDownAttribute.cs" />
+    <Compile Include="Infrastructure\CustomAuthorization.cs" />
+    <Compile Include="Infrastructure\CustomRoleProvider.cs" />
     <Compile Include="Infrastructure\SMDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AssignmentNotes.cs" />
+    <Compile Include="Models\AssignmentsDailyStatusReport.cs" />
+    <Compile Include="Models\CompletedAssignmentReport.cs" />
     <Compile Include="Models\CustodianDetails.cs" />
+    <Compile Include="Models\CustomRoles.cs" />
     <Compile Include="Models\DOCUS_ASM_ASSIGNMENTS.cs" />
     <Compile Include="Models\DOCUS_ASM_LOOKUP_ASSIGNED_TO.cs" />
     <Compile Include="Models\DOCUS_ASM_LOOKUP_DOC_TYPE.cs" />
@@ -234,18 +245,23 @@
     <Compile Include="Models\IAssignments.cs" />
     <Compile Include="Models\ICustodianDetails.cs" />
     <Compile Include="Models\INotes.cs" />
+    <Compile Include="Models\IReports.cs" />
     <Compile Include="Models\ISubRequest.cs" />
     <Compile Include="Api\ApiRepository.cs" />
     <Compile Include="Api\IApiRepository.cs" />
+    <Compile Include="Models\IUserRoles.cs" />
     <Compile Include="Models\LookupModels\AssignmentLookup.cs" />
     <Compile Include="Models\LookupModels\IAssignmentLookup.cs" />
     <Compile Include="Models\LookupModels\ILookupModel.cs" />
     <Compile Include="Models\LookupModels\ISubRequestLookup.cs" />
     <Compile Include="Models\LookupModels\LookupModel.cs" />
     <Compile Include="Models\LookupModels\SubRequestLookup.cs" />
+    <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Representative.cs" />
     <Compile Include="Models\SubReqSearchUpdateViewModel.cs" />
+    <Compile Include="Models\UserRoles.cs" />
     <Compile Include="Models\ViewModels\AssignmentViewModel.cs" />
+    <Compile Include="Models\ViewModels\ReportsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +328,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\CDR.Web.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\progress_bar.gif" />
     <Content Include="Scripts\Assignment.js" />
@@ -320,6 +337,7 @@
     <Content Include="Scripts\AssignmentSearchAndCreate.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Report.js" />
     <Content Include="Scripts\helpers.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\i18N\grid.locale-en.js" />
@@ -342,7 +360,9 @@
     <Content Include="Scripts\SearchProcessor.js" />
     <Content Include="Scripts\SubRequest.js" />
     <Content Include="Scripts\SubRequestDetails.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -366,11 +386,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\_cdrLayout.cshtml" />
     <Content Include="Views\SubForm\Index.cshtml" />
     <Content Include="Views\SubRequestSearchUpdate\Index.cshtml" />
-    <Content Include="Views\Shared\subRequestSearchResults.cshtml" />
     <Content Include="Views\SubRequestSearchUpdate\Create.cshtml" />
     <Content Include="Views\Shared\_SubRequestSearchResults.cshtml" />
     <Content Include="Views\Shared\_SubRequestDetails.cshtml" />
@@ -395,6 +416,9 @@
     <Content Include="Views\Shared\_validationSummary.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Notes.cshtml" />
+    <Content Include="Views\Assignments\Reports.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Shared\_AssignmentsDailyStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -420,7 +444,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20129</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:20100/</IISUrl>
+          <IISUrl>http://localhost:90/CDR.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

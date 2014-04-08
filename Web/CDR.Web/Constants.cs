@@ -25,6 +25,7 @@ namespace CDR.Web
         public const string GETCFODETAILSBYID = "api/CFOCheckIn/AcctNo?=";
         public const string GETCUSTODIANDETAILS = "GTAResults/?accountNumber=";
         public const string ADDLOOKUP = "Lookup/Create";
+        public const string DELETELOOKUP = "Lookup/Update";
 
 
 
@@ -42,5 +43,22 @@ namespace CDR.Web
 
         public const string GETNOTES = "AsmAssignmentNotes/?assignmentId=";
         public const string CREATENOTES = "AsmAssignmentNotes";
+
+        public const string ROLES = "Authorization/GetAutorization"; 
+        public const string DAILYSTATUSREPORT ="Reports/GetDailyStatusReport";
+        public const string GENERALASSIGNMENTSREPORT = "Reports/GetCompletedReport";
+
+        public enum ReportType
+        {
+            DailyStatusReport,
+            CompletedAssignments,
+            IncomingAssignments,
+            OutStandingAssignments,
+            OutStandingByAssignedTo,
+            Pending,
+            PreparedByIsBlank,
+            Processed,
+            TotalPendingAllMonths
+        }
     }
 }

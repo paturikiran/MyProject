@@ -20,8 +20,9 @@ namespace CDR.Web.Models.LookupModels
         public IEnumerable<AssignmentLookup> Get(string url)
         {
             var result = _apiInstance.Get(url).ToList();
-            result.Add(new AssignmentLookup() { LOOKUP_VALUE = "Please Select", LOOKUP_ORDER = 0 });
-            return result.OrderBy(x => x.LOOKUP_ORDER);
+            var orderedResult = result.OrderBy(x => x.LOOKUP_VALUE).ToList();
+            orderedResult.Insert(0,new AssignmentLookup() { LOOKUP_VALUE = "Please Select", LOOKUP_ORDER = 0 });
+            return orderedResult;
         }
     }
 }

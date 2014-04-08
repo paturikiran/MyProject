@@ -92,7 +92,10 @@ namespace CWAPI.Repository.Repo
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
-                
+            }
+            catch(Exception e)
+            {
+                throw e;
             }
 
 

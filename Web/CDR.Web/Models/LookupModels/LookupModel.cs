@@ -17,10 +17,20 @@ namespace CDR.Web.Models.LookupModels
         public string Section { get; set; }
         public string Value { get; set; }
         public string Type { get; set; }
+        public string Transaction { get; set; }
+        public int? Id { get; set; }
+
 
         public bool Create(LookupModel model)
         {
             return _apiInstance.Insert(model, Constants.ADDLOOKUP);
         }
+
+        public bool Update(LookupModel model)
+        {
+            return _apiInstance.Update(model, Constants.DELETELOOKUP);
+        }
+
+        
     }
 }

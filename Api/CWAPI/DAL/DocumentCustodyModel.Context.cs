@@ -10,6 +10,7 @@
 namespace CWAPI.DAL
 {
     using System;
+    using System.Collections.Specialized;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Objects;
@@ -18,9 +19,16 @@ namespace CWAPI.DAL
     
     public partial class DocumentContext : DbContext
     {
+        //public DocumentContext()
+        //    : base("name=DocumentContext")
+        //{
+        //}
+
         public DocumentContext()
-            : base("name=DocumentContext")
         {
+           // NameValueCollection section = (NameValueCollection)ConfigurationManager.GetSection("log4net");
+            //string connectionString = section["DocumentContext"];
+            //string userPassword = section["userPassword"];
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -35,7 +43,6 @@ namespace CWAPI.DAL
         public DbSet<DOCUS_PRODLIB_CLPCUSTD> DOCUS_PRODLIB_CLPCUSTD { get; set; }
         public DbSet<DOCUS_PRODLIB_CLPFNDG> DOCUS_PRODLIB_CLPFNDG { get; set; }
         public DbSet<DOCUS_PRODLIB_CLPHDOC> DOCUS_PRODLIB_CLPHDOC { get; set; }
-        public DbSet<DOCUS_SUB_REQUEST> DOCUS_SUB_REQUEST { get; set; }
         public DbSet<DOCUS_SYS_CUSTODIAN> DOCUS_SYS_CUSTODIAN { get; set; }
         public DbSet<DOCUS_SYS_LOOKUP> DOCUS_SYS_LOOKUP { get; set; }
         public DbSet<FEE> FEEs { get; set; }
@@ -64,6 +71,8 @@ namespace CWAPI.DAL
         public DbSet<DOCUS_SUB_LOOKUP_STATUS> DOCUS_SUB_LOOKUP_STATUS { get; set; }
         public DbSet<DOCUS_SUB_OWNER> DOCUS_SUB_OWNER { get; set; }
         public DbSet<DOCUS_ASM_ASSIGNMENT_NOTES> DOCUS_ASM_ASSIGNMENT_NOTES { get; set; }
+        public DbSet<DOCUS_SYS_EMP_VALIDATION> DOCUS_SYS_EMP_VALIDATION { get; set; }
+        public DbSet<DOCUS_SUB_REQUEST> DOCUS_SUB_REQUEST { get; set; }
     
         public virtual ObjectResult<DOCUS_ASM_GET_GTA_FIELDS_Result> DOCUS_ASM_GET_GTA_FIELDS(Nullable<int> aCCOUNT_NUMBER)
         {
@@ -468,6 +477,120 @@ namespace CWAPI.DAL
                 new ObjectParameter("NOTE", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DOCUS_ASM_INSERT_ASSIGNMENT_NOTE", aSSIGNMENT_IDParameter, nOTEParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_COMPLETED_Result> DOCUS_ASM_RPT_COMPLETED(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_COMPLETED_Result>("DOCUS_ASM_RPT_COMPLETED", startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_DAILY_STATUS_Result> DOCUS_ASM_RPT_DAILY_STATUS()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_DAILY_STATUS_Result>("DOCUS_ASM_RPT_DAILY_STATUS");
+        }
+    
+        public virtual int DOCUS_SYS_DELETE_LOOKUP_SOFT(Nullable<int> lOOKUP_ID)
+        {
+            var lOOKUP_IDParameter = lOOKUP_ID.HasValue ?
+                new ObjectParameter("LOOKUP_ID", lOOKUP_ID) :
+                new ObjectParameter("LOOKUP_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DOCUS_SYS_DELETE_LOOKUP_SOFT", lOOKUP_IDParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_INCOMING_Result> DOCUS_ASM_RPT_INCOMING(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_INCOMING_Result>("DOCUS_ASM_RPT_INCOMING", startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_OUTSTANDING_Result> DOCUS_ASM_RPT_OUTSTANDING(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_OUTSTANDING_Result>("DOCUS_ASM_RPT_OUTSTANDING", startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_OUTSTANDING_BY_ASSIGNED_TO_Result> DOCUS_ASM_RPT_OUTSTANDING_BY_ASSIGNED_TO(string assignedTo)
+        {
+            var assignedToParameter = assignedTo != null ?
+                new ObjectParameter("AssignedTo", assignedTo) :
+                new ObjectParameter("AssignedTo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_OUTSTANDING_BY_ASSIGNED_TO_Result>("DOCUS_ASM_RPT_OUTSTANDING_BY_ASSIGNED_TO", assignedToParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_PENDING_Result> DOCUS_ASM_RPT_PENDING(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_PENDING_Result>("DOCUS_ASM_RPT_PENDING", startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_PREPARED_BY_IS_BLANK_Result> DOCUS_ASM_RPT_PREPARED_BY_IS_BLANK(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_PREPARED_BY_IS_BLANK_Result>("DOCUS_ASM_RPT_PREPARED_BY_IS_BLANK", startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_PROCESSED_Result> DOCUS_ASM_RPT_PROCESSED(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_PROCESSED_Result>("DOCUS_ASM_RPT_PROCESSED", startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<DOCUS_ASM_RPT_TOTAL_PENDING_ALL_MONTHS_Result> DOCUS_ASM_RPT_TOTAL_PENDING_ALL_MONTHS(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DOCUS_ASM_RPT_TOTAL_PENDING_ALL_MONTHS_Result>("DOCUS_ASM_RPT_TOTAL_PENDING_ALL_MONTHS", startDateParameter, endDateParameter);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace CDR.Web.Models
         {
             var url = Constants.GETNOTES + assignmentId;
             var notes = apiInstance.Get(url);
-            return notes;
+            return notes.OrderByDescending(x => x.ASSIGNMENT_NOTES_ID);
         }
 
         public bool SaveNotes(AssignmentNotes notes)

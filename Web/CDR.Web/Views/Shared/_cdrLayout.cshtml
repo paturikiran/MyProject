@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="no-cache">
     <title>@ViewBag.Title = CDR</title>
     <link href="~/App_Themes/bootstrap.css" rel="stylesheet" />
     <link href="~/App_Themes/bootstrap-theme.min.css" rel="stylesheet" />
@@ -59,11 +60,13 @@
                         </ul>
                     </li>
                 }
+                @if(User.IsInRole("IsAdmin") || User.IsInRole("IsAssignments")){
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assignments <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Search", "Search", "Assignments")</li>
                         <li>@Html.ActionLink("Enter New Request", "Create", "Assignments")</li>
+                       @if(User.IsInRole("IsAdmin")){
                          <li class="dropdown-submenu"> <a tabindex="-1" href="#">Reports</a> 
                               <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Daily Status Report", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.DailyStatusReport },null )</li>
@@ -76,13 +79,11 @@
                         <li>@Html.ActionLink("Prepared By Is Blank", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.PreparedByIsBlank }, null)</li>
                         <li>@Html.ActionLink("Processed", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.Processed }, null)</li>
                         <li>@Html.ActionLink("Total All Pending", "Index", "Reports", new { reportType = CDR.Web.Constants.ReportType.TotalPendingAllMonths }, null)</li>
-
-
                     </ul>
-                         </li>
+                         </li>}
                       
                     </ul>
-                </li>
+                </li>}
 
                
             </ul>

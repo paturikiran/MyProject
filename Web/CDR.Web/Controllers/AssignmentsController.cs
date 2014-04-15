@@ -13,9 +13,13 @@ using Microsoft.Ajax.Utilities;
 using StructureMap;
 using StructureMap.Query;
 using WebGrease.Css.Extensions;
+using CDR.Web.UI;
 
 namespace CDR.Web.Controllers
 {
+
+    // [CustomAuthorize(Roles = ("IsDataEntryOnly"))]
+    [Authorize(Roles = ("IsAdmin,IsAssignments"))]
     public class AssignmentsController : Controller
     {
         private IAssignments _assignment;
@@ -47,14 +51,7 @@ namespace CDR.Web.Controllers
         {
             var details = new DOCUS_ASM_ASSIGNMENTS();
             var results = new List<DOCUS_ASM_ASSIGNMENTS>();
-            if (TempData["Assignments"] != null)
-            {
-                results = TempData["Assignments"] as List<DOCUS_ASM_ASSIGNMENTS>;
-            }
-            else
-            {
-                results = _assignment.GetAssignments(accountNumber) as List<DOCUS_ASM_ASSIGNMENTS>;
-            }
+            results = _assignment.GetAssignments(accountNumber) as List<DOCUS_ASM_ASSIGNMENTS>;
             details = results.Where(x => x.ACCOUNT_NUMBER == accountNumber && x.ASSIGNMENT_ID == assignmentId).FirstOrDefault();
             ViewData["TransactionType"] = "Update";
             if (type == "recordedAssignments")

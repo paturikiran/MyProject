@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace CDR.Web.Controllers
 {
-    
+    [Authorize(Roles = ("IsDocus"))]
     public class HomeController : Controller
     {
         //
@@ -15,6 +15,11 @@ namespace CDR.Web.Controllers
         public ActionResult Index(int? id)
         {
            ViewData["AssignmentId"] = id;
+            return View();
+        }
+
+        public ActionResult AccessDenied()
+        {
             return View();
         }
 

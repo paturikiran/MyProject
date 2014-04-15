@@ -199,8 +199,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
-    <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Images\Helpers\Extensions.cs" />
+    <Compile Include="Images\Helpers\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\BootStrapper.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AssignmentsController.cs" />
@@ -419,6 +419,7 @@
     <Content Include="Views\Assignments\Reports.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Shared\_AssignmentsDailyStatus.cshtml" />
+    <Content Include="Views\Home\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

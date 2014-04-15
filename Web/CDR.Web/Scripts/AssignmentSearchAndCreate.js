@@ -83,8 +83,9 @@ var recordStatusBusinessRules = function () {
 };
 
 var setRecordStatusDate = function () {
-    if ($('#recordedDate').val() != '') {
-        var value = $('#recordedDate').val();
+    var value = $('#recordedDate').val();
+    if (value !== undefined && value !=='') {
+       
         value = value.replace(/\d{1,2}:\d{2}:\d{2} (AM|PM)/ig, '');
         $('#recordedDate').val(value);
     }
@@ -130,6 +131,7 @@ var getAssignments = function () {
         var url = "GetAssignmentsById/";
         $.ajax({
             url: url + id,
+            cache: false,
             //contentType: 'application/html;charset=utf-8',
             type: 'GET',
             //dataType: 'html'
@@ -335,6 +337,7 @@ var GetCustodianAndNotesDetails = function () {
         var url = "GetCustodianAndNotesDetails";
         $.ajax({
             url: url,
+            cache: false,
             datatype: "json",
             type: "POST",
             data: { accountNumber: accountNumber, assignmentId: assignmentId }
@@ -378,6 +381,7 @@ var getAssignmentDetails = function (id, type) {
     var url = "GetDetails?assignmentId=" + id + "&accountNumber=" + accountNumber + "&type=" + type;
     $.ajax({
         url: url,
+        cache: false,
         //  data: { id: id, loanNumber: loanNumber },
         //contentType: 'application/html;charset=utf-8',
         type: 'GET',
@@ -554,12 +558,13 @@ var submitAssignment = function (event) {
 
             $.ajax({
                 url: url,
+                cache:false,
                 type: "POST",
                 data: formData,
                 // dataType: "json",
                 success: function (result) {
                     showLoading(false);
-                    window.location.href = "/Home/?id=" + accountNumber;
+                    window.location.href = "Home/?id=" + accountNumber;
                     //$("#result").text(result.data);
                 },
                 error: function (result) {
